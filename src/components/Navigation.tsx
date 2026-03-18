@@ -34,7 +34,7 @@ export default function Navigation() {
     <>
       {/* Fixed Logo */}
       <div 
-        className={`fixed top-6 left-6 z-50 transition-all duration-300 ${
+        className={`fixed top-6 left-6 z-[200] transition-all duration-300 ${
           isScrolled ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
       >
@@ -46,7 +46,7 @@ export default function Navigation() {
       {/* Menu Button */}
       <button
         onClick={() => setIsOpen(true)}
-        className={`fixed top-6 right-6 z-50 flex items-center gap-2 transition-all duration-300 ${
+        className={`fixed top-6 right-6 z-[200] flex items-center gap-2 transition-all duration-300 ${
           isScrolled 
             ? 'bg-white text-cobalt px-4 py-2 rounded-full shadow-lg' 
             : 'text-white'
