@@ -1,0 +1,80 @@
+/* App-specific styles */
+
+/* Ensure smooth scrolling behavior */
+html {
+  scroll-behavior: auto;
+}
+
+/* Hide scrollbar for cleaner look while maintaining functionality */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1B45F4;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Selection color */
+::selection {
+  background-color: #C8FF2E;
+  color: #111111;
+}
+
+/* Focus styles for accessibility */
+*:focus-visible {
+  outline: 2px solid #C8FF2E;
+  outline-offset: 2px;
+}
+
+/* Button hover states */
+button {
+  cursor: pointer;
+}
+
+/* Image loading placeholder */
+img {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 768px) {
+  .section-pinned {
+    padding: 12px;
+  }
+  
+  .section-inner {
+    border-radius: 18px;
+  }
+  
+  .text-h1 {
+    font-size: clamp(28px, 8vw, 44px);
+  }
+  
+  .text-h2 {
+    font-size: clamp(24px, 7vw, 36px);
+  }
+  
+  .photo-block {
+    border-radius: 14px;
+  }
+}
+
+/* Tablet adjustments */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .text-h1 {
+    font-size: clamp(36px, 6vw, 56px);
+  }
+  
+  .text-h2 {
+    font-size: clamp(32px, 5vw, 48px);
+  }
+}
