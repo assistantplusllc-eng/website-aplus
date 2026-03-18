@@ -104,7 +104,7 @@ export default function HeroSection() {
           className="absolute text-micro text-white/80"
           style={{ left: '6vw', top: '7vh' }}
         >
-          ASSISTANT PLUS, LLC
+          Assistant Plus Staffing
         </div>
 
         {/* H1 Headlines */}
@@ -112,9 +112,9 @@ export default function HeroSection() {
           className="absolute"
           style={{ left: '6vw', top: '18vh', width: '52vw' }}
         >
-          <div ref={h1Line1Ref} className="text-h1 text-white">SCALABLE</div>
-          <div ref={h1Line2Ref} className="text-h1 text-white">ADMINISTRATIVE</div>
-          <div ref={h1Line3Ref} className="text-h1 text-white">SUPPORT</div>
+          <div ref={h1Line1Ref} className="text-h1 text-white">CUSTOMER SUPPORT</div>
+          <div ref={h1Line2Ref} className="text-h1 text-white">& ADMINISTRATIVE</div>
+          <div ref={h1Line3Ref} className="text-h1 text-white">STAFFING SOLUTIONS</div>
         </div>
 
         {/* Body copy */}
@@ -123,7 +123,7 @@ export default function HeroSection() {
           className="absolute text-body text-white/90"
           style={{ left: '6vw', top: '58vh', width: '34vw' }}
         >
-          Trained professionals for contact centers, back-office, and executive assistance.
+          Trained professionals supporting contact center operations, administrative workflows, and back-office functions for businesses and government organizations.
         </div>
 
         {/* CTA Row */}
@@ -138,7 +138,7 @@ export default function HeroSection() {
           </button>
           <button className="btn-secondary">
             <Download size={18} />
-            Download Capabilities
+            Download Capability Statement
           </button>
         </div>
 
