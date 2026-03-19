@@ -110,7 +110,7 @@ export default function HeroSection() {
         {/* H1 Headlines */}
         <div 
           className="absolute"
-          style={{ left: '6vw', top: '18vh', width: '52vw' }}
+          style={{ left: '6vw', top: '18vh', width: '46vw' }}
         >
           <div ref={h1Line1Ref} className="text-h1 text-white">CUSTOMER SUPPORT</div>
           <div ref={h1Line2Ref} className="text-h1 text-white">& ADMINISTRATIVE</div>
@@ -121,7 +121,7 @@ export default function HeroSection() {
         <div 
           ref={bodyRef}
           className="absolute text-body text-white/90"
-          style={{ left: '6vw', top: '58vh', width: '34vw' }}
+          style={{ left: '6vw', top: '60vh', width: '32vw' }}
         >
           Trained professionals supporting contact center operations, administrative workflows, and back-office functions for businesses and government organizations.
         </div>
