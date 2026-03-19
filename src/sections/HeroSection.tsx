@@ -104,7 +104,7 @@ export default function HeroSection() {
           className="absolute text-micro text-white/80"
           style={{ left: '6vw', top: '7vh' }}
         >
-          Assistant Plus Staffing
+          U.S.-BASED STAFFING PARTNER
         </div>
 
         {/* H1 Headlines */}
@@ -112,9 +112,9 @@ export default function HeroSection() {
           className="absolute"
           style={{ left: '6vw', top: '18vh', width: '52vw' }}
         >
-          <div ref={h1Line1Ref} className="text-h1 text-white">SCALABLE</div>
-          <div ref={h1Line2Ref} className="text-h1 text-white">ADMINISTRATIVE &</div>
-          <div ref={h1Line3Ref} className="text-h1 text-white">CUSTOMER SUPPORT</div>
+          <div ref={h1Line1Ref} className="text-h1 text-white">CUSTOMER SUPPORT</div>
+          <div ref={h1Line2Ref} className="text-h1 text-white">& ADMINISTRATIVE</div>
+          <div ref={h1Line3Ref} className="text-h1 text-white">STAFFING SOLUTIONS</div>
         </div>
 
         {/* Body copy */}
@@ -129,7 +129,7 @@ export default function HeroSection() {
         {/* CTA Row */}
         <div 
           ref={ctaRef}
-          className="absolute flex items-center gap-6"
+          className="absolute flex items-center gap-10"
           style={{ left: '6vw', top: '72vh' }}
         >
           <button className="btn-primary">
