@@ -110,7 +110,7 @@ export default function HeroSection() {
         {/* H1 Headlines */}
         <div 
           className="absolute"
-          style={{ left: '6vw', top: '18vh', width: '46vw' }}
+          style={{ left: '6vw', top: '18vh', width: '52vw' }}
         >
           <div ref={h1Line1Ref} className="text-h1 text-white">CUSTOMER SUPPORT</div>
           <div ref={h1Line2Ref} className="text-h1 text-white">& ADMINISTRATIVE</div>
