@@ -148,9 +148,9 @@ function App() {
             accentType="quarter-top-right"
             listItems={[
               'Government & Public Sector',
+              'Contact Center Operations',
               'Healthcare Administration',
-              'Legal & Professional Services',
-              'Logistics & Operations'
+              'Administrative & Back-Office Support'
             ]}
           />
         </div>
