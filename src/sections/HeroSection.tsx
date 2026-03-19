@@ -112,18 +112,18 @@ export default function HeroSection() {
           className="absolute"
           style={{ left: '6vw', top: '18vh', width: '52vw' }}
         >
-          <div ref={h1Line1Ref} className="text-h1 text-white">CUSTOMER SUPPORT</div>
-          <div ref={h1Line2Ref} className="text-h1 text-white">& ADMINISTRATIVE</div>
-          <div ref={h1Line3Ref} className="text-h1 text-white">STAFFING SOLUTIONS</div>
+          <div ref={h1Line1Ref} className="text-h1 text-white">SCALABLE</div>
+          <div ref={h1Line2Ref} className="text-h1 text-white">ADMINISTRATIVE &</div>
+          <div ref={h1Line3Ref} className="text-h1 text-white">CUSTOMER SUPPORT</div>
         </div>
 
         {/* Body copy */}
         <div 
           ref={bodyRef}
           className="absolute text-body text-white/90"
-          style={{ left: '6vw', top: '60vh', width: '32vw' }}
+          style={{ left: '6vw', top: '60vh', width: '34vw' }}
         >
-          Trained professionals supporting contact center operations, administrative workflows, and back-office functions for businesses and government organizations.
+          Trained professionals supporting contact center operations, administrative workflows, and back-office functions.
         </div>
 
         {/* CTA Row */}
