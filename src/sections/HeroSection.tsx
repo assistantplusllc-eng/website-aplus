@@ -112,9 +112,15 @@ export default function HeroSection() {
           className="absolute"
           style={{ left: '6vw', top: '18vh', width: '52vw' }}
         >
+<<<<<<< HEAD
           <div ref={h1Line1Ref} className="text-h1 text-white">RELIABLE</div>
           <div ref={h1Line2Ref} className="text-h1 text-white">CUSTOMER SUPPORT</div>
           <div ref={h1Line3Ref} className="text-h1 text-white">& ADMINISTRATIVE STAFFING</div>
+=======
+          <div ref={h1Line1Ref} className="text-h1 text-white">CUSTOMER SUPPORT</div>
+          <div ref={h1Line2Ref} className="text-h1 text-white">& ADMINISTRATIVE</div>
+          <div ref={h1Line3Ref} className="text-h1 text-white">STAFFING</div>
+>>>>>>> 4b9597d7b429b7d8d9cfa85f63addc9e31d18e47
         </div>
 
         {/* Body copy */}
@@ -123,8 +129,12 @@ export default function HeroSection() {
           className="absolute text-body text-white/90"
           style={{ left: '6vw', top: '60vh', width: '34vw' }}
         >
+<<<<<<< HEAD
           U.S.-based professionals ready to support your operations, improve response times, and reduce internal workload 
           — without the overhead.
+=======
+          Professionally trained staff to improve response times and reduce operational workload.
+>>>>>>> 4b9597d7b429b7d8d9cfa85f63addc9e31d18e47
         </div>
 
         {/* CTA Row */}
