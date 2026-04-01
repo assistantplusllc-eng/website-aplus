@@ -33,15 +33,19 @@ export default function Navigation() {
   return (
     <>
       {/* Fixed Logo */}
-      <div 
-        className={`fixed top-6 left-6 z-[200] transition-all duration-300 ${
-          isScrolled ? 'opacity-100' : 'opacity-0 pointer-events-none'
-        }`}
-      >
-        <div className="font-heading font-bold text-white text-lg bg-cobalt/80 backdrop-blur-sm px-4 py-2 rounded-full">
-          Assistant Plus
-        </div>
-      </div>
+<div 
+  className={`fixed top-6 left-6 z-[200] transition-all duration-300 ${
+    isScrolled ? 'opacity-100' : 'opacity-0 pointer-events-none'
+  }`}
+>
+  <div className="bg-white/90 backdrop-blur-sm px-1 py-0.5 rounded-md">
+  <img 
+    src="/logo-horizontal.png" 
+    alt="Assistant Plus" 
+    className="h-8 w-auto object-contain" 
+  />
+</div>
+</div>
 
       {/* Menu Button */}
       <button
