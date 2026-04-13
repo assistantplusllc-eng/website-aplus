@@ -8,7 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 interface ContentSectionProps {
   zIndex: number;
   headline: string[];
-  body: string;
+  body: string | string[];
   cta: string;
   imageSrc: string;
   imageAlt: string;
@@ -58,58 +58,18 @@ export default function ContentSection({
         }
       });
 
-      // ENTRANCE (0-30%)
       scrollTl
-        .fromTo(h2Ref.current, 
-          { x: '-55vw', opacity: 0 }, 
-          { x: 0, opacity: 1, ease: 'none' }, 
-          0
-        )
-        .fromTo(contentRef.current, 
-          { y: '16vh', opacity: 0 }, 
-          { y: 0, opacity: 1, ease: 'none' }, 
-          0.08
-        )
-        .fromTo(photoRef.current, 
-          { x: '55vw', scale: 0.98, opacity: 0 }, 
-          { x: 0, scale: 1, opacity: 1, ease: 'none' }, 
-          0
-        )
-        .fromTo(accent1Ref.current, 
-          { scale: 0.6, opacity: 0 }, 
-          { scale: 1, opacity: 1, ease: 'none' }, 
-          0.10
-        )
-        .fromTo(accent2Ref.current, 
-          { scale: 0.6, opacity: 0 }, 
-          { scale: 1, opacity: 1, ease: 'none' }, 
-          0.15
-        );
+        .fromTo(h2Ref.current, { x: '-55vw', opacity: 0 }, { x: 0, opacity: 1, ease: 'none' }, 0)
+        .fromTo(contentRef.current, { y: '16vh', opacity: 0 }, { y: 0, opacity: 1, ease: 'none' }, 0.08)
+        .fromTo(photoRef.current, { x: '55vw', scale: 0.98, opacity: 0 }, { x: 0, scale: 1, opacity: 1, ease: 'none' }, 0)
+        .fromTo(accent1Ref.current, { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, ease: 'none' }, 0.10)
+        .fromTo(accent2Ref.current, { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, ease: 'none' }, 0.15);
 
-      // SETTLE (30-70%): Hold positions
-
-      // EXIT (70-100%)
       scrollTl
-        .fromTo(h2Ref.current, 
-          { x: 0, opacity: 1 }, 
-          { x: '-35vw', opacity: 0, ease: 'power2.in' }, 
-          0.70
-        )
-        .fromTo(contentRef.current, 
-          { y: 0, opacity: 1 }, 
-          { y: '12vh', opacity: 0, ease: 'power2.in' }, 
-          0.72
-        )
-        .fromTo(photoRef.current, 
-          { x: 0, opacity: 1 }, 
-          { x: '-18vw', opacity: 0, ease: 'power2.in' }, 
-          0.70
-        )
-        .fromTo([accent1Ref.current, accent2Ref.current], 
-          { opacity: 1 }, 
-          { opacity: 0, ease: 'power2.in' }, 
-          0.75
-        );
+        .fromTo(h2Ref.current, { x: 0, opacity: 1 }, { x: '-35vw', opacity: 0, ease: 'power2.in' }, 0.70)
+        .fromTo(contentRef.current, { y: 0, opacity: 1 }, { y: '12vh', opacity: 0, ease: 'power2.in' }, 0.72)
+        .fromTo(photoRef.current, { x: 0, opacity: 1 }, { x: '-18vw', opacity: 0, ease: 'power2.in' }, 0.70)
+        .fromTo([accent1Ref.current, accent2Ref.current], { opacity: 1 }, { opacity: 0, ease: 'power2.in' }, 0.75);
 
     }, section);
 
@@ -121,85 +81,22 @@ export default function ContentSection({
       case 'quarter-top-right':
         return (
           <>
-            <div 
-              ref={accent1Ref}
-              className="absolute accent-lime"
-              style={{ 
-                left: '84vw', 
-                top: '10vh', 
-                width: '18vw', 
-                height: '18vw',
-                borderRadius: '0 0 0 100%'
-              }}
-            />
-            <div 
-              ref={accent2Ref}
-              className="absolute ring-white"
-              style={{ 
-                left: '48vw', 
-                top: '74vh', 
-                width: '8vw', 
-                height: '8vw',
-                background: 'transparent',
-                borderWidth: '8px'
-              }}
-            />
+            <div ref={accent1Ref} className="absolute accent-lime" style={{ left: '84vw', top: '10vh', width: '18vw', height: '18vw', borderRadius: '0 0 0 100%' }} />
+            <div ref={accent2Ref} className="absolute ring-white" style={{ left: '48vw', top: '74vh', width: '8vw', height: '8vw', background: 'transparent', borderWidth: '8px' }} />
           </>
         );
       case 'ring-bottom-left':
         return (
           <>
-            <div 
-              ref={accent1Ref}
-              className="absolute ring-lime"
-              style={{ 
-                left: '44vw', 
-                top: '74vh', 
-                width: '10vw', 
-                height: '10vw',
-                background: 'transparent'
-              }}
-            />
-            <div 
-              ref={accent2Ref}
-              className="absolute ring-white"
-              style={{ 
-                left: '90vw', 
-                top: '62vh', 
-                width: '6vw', 
-                height: '6vw',
-                background: 'transparent',
-                borderWidth: '8px'
-              }}
-            />
+            <div ref={accent1Ref} className="absolute ring-lime" style={{ left: '44vw', top: '74vh', width: '10vw', height: '10vw', background: 'transparent' }} />
+            <div ref={accent2Ref} className="absolute ring-white" style={{ left: '90vw', top: '62vh', width: '6vw', height: '6vw', background: 'transparent', borderWidth: '8px' }} />
           </>
         );
       case 'quarter-behind':
         return (
           <>
-            <div 
-              ref={accent1Ref}
-              className="absolute accent-lime"
-              style={{ 
-                left: '58vw', 
-                top: '12vh', 
-                width: '18vw', 
-                height: '18vw',
-                borderRadius: '0 0 100% 0'
-              }}
-            />
-            <div 
-              ref={accent2Ref}
-              className="absolute ring-white"
-              style={{ 
-                left: '90vw', 
-                top: '62vh', 
-                width: '6vw', 
-                height: '6vw',
-                background: 'transparent',
-                borderWidth: '8px'
-              }}
-            />
+            <div ref={accent1Ref} className="absolute accent-lime" style={{ left: '58vw', top: '12vh', width: '18vw', height: '18vw', borderRadius: '0 0 100% 0' }} />
+            <div ref={accent2Ref} className="absolute ring-white" style={{ left: '90vw', top: '62vh', width: '6vw', height: '6vw', background: 'transparent', borderWidth: '8px' }} />
           </>
         );
     }
@@ -209,45 +106,47 @@ export default function ContentSection({
     <section ref={sectionRef} className="section-pinned" style={{ zIndex }}>
       <div ref={panelRef} className="section-inner">
         {/* H2 Headline */}
-        <div 
-          ref={h2Ref}
-          className="absolute"
-          style={{ left: '6vw', top: '18vh', width: '44vw' }}
-        >
+        <div ref={h2Ref} className="absolute" style={{ left: '6vw', top: '18vh', width: '44vw' }}>
           {headline.map((line, i) => (
             <div key={i} className="text-h2 text-white">{line}</div>
           ))}
         </div>
 
         {/* Content Block */}
-        <div 
-          ref={contentRef}
-          className="absolute"
-          style={{ left: '6vw', top: '40vh', width: '32vw' }}
-        >
+        <div ref={contentRef} className="absolute" style={{ left: '6vw', top: '40vh', width: '32vw' }}>
           {/* Subheader */}
           {subheader ? (
-            <p className="text-body text-white/90 mb-4 font-medium">
-              {subheader}
-            </p>
+            <p className="text-body text-white/90 mb-4 font-medium">{subheader}</p>
           ) : null}
          
-          {/* Body text - NOW SHOWS ABOVE LIST ITEMS */}
-          {body ? (
-            <p className="text-sm text-white/80 mb-6 leading-relaxed">
-              {body}
-            </p>
-          ) : null}
+          {/* Body text - CHANGED: text-body instead of text-sm */}
+          {body && (
+            <div className="mb-6 space-y-4">
+              {Array.isArray(body) ? (
+                body.map((paragraph, i) => (
+                  <p key={i} className="text-body text-white/80 leading-relaxed">{paragraph}</p>
+                ))
+              ) : (
+                <p className="text-body text-white/80 leading-relaxed">{body}</p>
+              )}
+            </div>
+          )}
 
-          {/* List items if provided */}
+          {/* List items if provided - CHANGED: text-body for consistency */}
           {listItems && (
             <ul className="space-y-3 mb-6">
-              {listItems.map((item, i) => (
-                <li key={i} className="text-body text-white/90 flex items-start gap-3">
-                  <span className="w-1.5 h-1.5 rounded-full bg-lime mt-2 flex-shrink-0" />
-                  {item}
-                </li>
-              ))}
+              {listItems.map((item, i) => {
+                const firstSpace = item.indexOf(' ');
+                const firstWord = firstSpace > 0 ? item.substring(0, firstSpace) : item;
+                const rest = firstSpace > 0 ? item.substring(firstSpace) : '';
+                
+                return (
+                  <li key={i} className="text-body text-white/90 flex items-start gap-3">
+                    <span className="w-1.5 h-1.5 rounded-full bg-lime mt-2 flex-shrink-0" />
+                    <span><b>{firstWord}</b>{rest}</span>
+                  </li>
+                );
+              })}
             </ul>
           )}
 
@@ -271,11 +170,6 @@ export default function ContentSection({
             </div>
           )}
 
-          {/* Fallback body text when no listItems/stats/quote */}
-          {!listItems && !stats && !quote && !body && (
-            <p className="text-body text-white/90 mb-6">{body}</p>
-          )}
-
           {/* CTA */}
           <button className="btn-secondary">
             {cta}
@@ -284,24 +178,10 @@ export default function ContentSection({
         </div>
 
         {/* Photo Block */}
-        <div 
-          ref={photoRef}
-          className="absolute photo-block"
-          style={{ 
-            left: '56vw', 
-            top: '18vh', 
-            width: '38vw', 
-            height: '62vh' 
-          }}
-        >
-          <img 
-            src={imageSrc} 
-            alt={imageAlt} 
-            className="w-full h-full object-cover"
-          />
+        <div ref={photoRef} className="absolute photo-block" style={{ left: '56vw', top: '18vh', width: '38vw', height: '62vh' }}>
+          <img src={imageSrc} alt={imageAlt} className="w-full h-full object-cover" />
         </div>
 
-        {/* Accent Shapes */}
         {renderAccent()}
       </div>
     </section>

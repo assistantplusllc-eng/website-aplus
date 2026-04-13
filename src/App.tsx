@@ -59,12 +59,15 @@ function App() {
       <main className="relative">
         <HeroSection />
         
+        {/* Section 2: Who We Are */}
         <div id="about">
           <ContentSection
             zIndex={20}
             headline={['WHO', 'WE ARE']}
-            body="We are a U.S.-based service provider specializing in contact center and administrative support solutions for government agencies and growing organizations.
-                  Our approach is built on real-world experience in customer service operations, allowing us to deliver structured, reliable support without the complexity and overhead of traditional hiring models."
+            body={[
+              "We are a U.S.-based service provider specializing in contact center and administrative support solutions for government agencies and growing organizations.",
+              "Our approach is built on real-world experience in customer service operations, allowing us to deliver structured, reliable support without the complexity and overhead of traditional hiring models."
+            ]}
             cta="View Our Capabilities"
             imageSrc="/team_meeting.jpg"
             imageAlt="Team working in modern office"
@@ -72,6 +75,7 @@ function App() {
           />
         </div>
 
+        {/* Section 3: What We Do */}
         <div id="services">
           <ContentSection
             zIndex={30}
@@ -90,11 +94,12 @@ function App() {
           />
         </div>
 
+        {/* Section 4: Why Clients Choose Us */}
         <div id="why-us">
           <ContentSection
             zIndex={40}
             headline={['WHY CLIENTS', 'CHOOSE US']}
-            body="We deliver structured, dependable support with a focus on consistency, communication, and performance."
+            body="Fast onboarding, clear communication, and people who actually show up ready to work. We handle compliance, scheduling, and quality—so you don't have to."
             cta="Learn About Our Approach"
             imageSrc="/team_meeting.jpg"
             imageAlt="Team meeting around table"
@@ -102,6 +107,7 @@ function App() {
           />
         </div>
 
+        {/* Section 5: How We Work */}
         <div id="process">
           <ContentSection
             zIndex={50}
@@ -119,6 +125,7 @@ function App() {
           />
         </div>
 
+        {/* Section 6: Industries */}
         <div id="industries">
           <ContentSection
             zIndex={60}
@@ -137,6 +144,7 @@ function App() {
           />
         </div>
 
+        {/* Section 7: Results */}
         <div id="results">
           <ContentSection
             zIndex={70}
@@ -154,6 +162,7 @@ function App() {
           />
         </div>
 
+        {/* Section 8: Client Story */}
         <div id="testimonial">
           <ContentSection
             zIndex={80}
@@ -170,6 +179,7 @@ function App() {
           />
         </div>
 
+        {/* Section 9: Flexible Packages */}
         <div id="packages">
           <ContentSection
             zIndex={90}
@@ -187,6 +197,7 @@ function App() {
           />
         </div>
 
+        {/* Section 10: Contact */}
         <div id="contact">
           <ContactSection />
         </div>
