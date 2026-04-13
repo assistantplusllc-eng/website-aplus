@@ -26,7 +26,6 @@ export default function ContactSection() {
     if (!section || !card) return;
 
     const ctx = gsap.context(() => {
-      // Flowing section animation
       gsap.fromTo(card, 
         { y: '8vh', opacity: 0 }, 
         { 
@@ -110,35 +109,21 @@ export default function ContactSection() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
     alert('Thank you for your request! We will respond within one business day.');
   };
 
   return (
-    <section 
-      ref={sectionRef} 
-      className="relative w-full min-h-screen py-8 px-4"
-      style={{ zIndex: 100, backgroundColor: 'white' }}
-    >
-      <div 
-        ref={cardRef}
-        className="w-full min-h-[90vh] rounded-panel p-8 md:p-12"
-        style={{ backgroundColor: '#1B45F4' }}
-      >
+    <section ref={sectionRef} className="relative w-full min-h-screen py-8 px-4" style={{ zIndex: 100, backgroundColor: 'white' }}>
+      <div ref={cardRef} className="w-full min-h-[90vh] rounded-panel p-8 md:p-12" style={{ backgroundColor: '#1B45F4' }}>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 h-full">
-          {/* Left Column - Form */}
           <div className="flex flex-col justify-center">
-            {/* H2 Headline */}
             <div ref={h2Ref} className="mb-6">
               <div className="text-h2 text-white">REQUEST</div>
               <div className="text-h2 text-white">INFO</div>
             </div>
-
             <p className="text-body text-white/80 mb-8">
-              Tell us what you need. We'll respond within one business day.
+              Tell us what you need. We will respond within one business day.
             </p>
-
-            {/* Form */}
             <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <input
@@ -185,74 +170,40 @@ export default function ContactSection() {
               </button>
             </form>
           </div>
-
-          {/* Right Column - Contact Info + Photo */}
           <div className="flex flex-col justify-center relative">
-            {/* Contact Details */}
             <div className="space-y-4 mb-8">
               <div className="flex items-center gap-3 text-white/90">
                 <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
                   <Mail size={18} />
                 </div>
-                <span className="text-body">hello@assistantplus.com</span>
+                <span className="text-body">info@assistantplusworks.com</span>
               </div>
               <div className="flex items-center gap-3 text-white/90">
                 <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
                   <Phone size={18} />
                 </div>
-                <span className="text-body">1-800-555-0147</span>
+                <span className="text-body">(888) 652-6315</span>
               </div>
               <div className="flex items-center gap-3 text-white/90">
                 <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
                   <Clock size={18} />
                 </div>
-                <span className="text-body">Mon–Fri, 8am–6pm ET</span>
+                <span className="text-body">Mon-Fri, 9am-6pm ET</span>
               </div>
             </div>
-
-            {/* Photo Block */}
-            <div 
-              ref={photoRef}
-              className="relative rounded-photo overflow-hidden"
-              style={{ height: '40vh' }}
-            >
-              <img 
-                src="/contact_team.jpg" 
-                alt="Team collaboration" 
-                className="w-full h-full object-cover"
-              />
+            <div ref={photoRef} className="relative rounded-photo overflow-hidden" style={{ height: '40vh' }}>
+              <img src="/contact_team.jpg" alt="Team collaboration" className="w-full h-full object-cover" />
             </div>
-
-            {/* Accent Shape */}
-            <div 
-              ref={accentRef}
-              className="absolute accent-lime"
-              style={{ 
-                right: '-5vw', 
-                top: '5vh', 
-                width: '15vw', 
-                height: '15vw',
-                borderRadius: '0 0 0 100%',
-                zIndex: -1
-              }}
-            />
-
-            {/* Download Link */}
+            <div ref={accentRef} className="absolute accent-lime" style={{ right: '-5vw', top: '5vh', width: '15vw', height: '15vw', borderRadius: '0 0 0 100%', zIndex: -1 }} />
             <button className="btn-secondary mt-6">
               <Download size={18} />
               Download capabilities (PDF)
             </button>
           </div>
         </div>
-
-        {/* Footer */}
         <div className="mt-12 pt-8 border-t border-white/20 flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="text-white font-heading font-bold text-xl">
-            Assistant Plus
-          </div>
-          <div className="text-micro text-white/60">
-            © 2026 Assistant Plus, LLC. All rights reserved.
-          </div>
+          <div className="text-white font-heading font-bold text-xl">Assistant Plus</div>
+          <div className="text-micro text-white/60">© 2026 Assistant Plus, LLC. All rights reserved.</div>
           <div className="flex gap-6">
             <a href="#" className="text-micro text-white/60 hover:text-white transition-colors">Privacy</a>
             <a href="#" className="text-micro text-white/60 hover:text-white transition-colors">Terms</a>

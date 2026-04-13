@@ -12,40 +12,31 @@ gsap.registerPlugin(ScrollTrigger);
 
 function App() {
   useEffect(() => {
-    // Wait for all ScrollTriggers to be created
     const timer = setTimeout(() => {
       const pinned = ScrollTrigger.getAll()
         .filter(st => st.vars.pin)
         .sort((a, b) => a.start - b.start);
       
       const maxScroll = ScrollTrigger.maxScroll(window);
-      
       if (!maxScroll || pinned.length === 0) return;
 
-      // Build ranges and snap targets from pinned sections
       const pinnedRanges = pinned.map(st => ({
         start: st.start / maxScroll,
         end: (st.end ?? st.start) / maxScroll,
         center: (st.start + ((st.end ?? st.start) - st.start) * 0.5) / maxScroll,
       }));
 
-      // Global snap configuration
       ScrollTrigger.create({
         snap: {
           snapTo: (value: number) => {
-            // Check if within any pinned range (allow small buffer)
             const inPinned = pinnedRanges.some(
               r => value >= r.start - 0.02 && value <= r.end + 0.02
             );
-            
-            if (!inPinned) return value; // Flowing section: free scroll
-
-            // Find nearest pinned center
+            if (!inPinned) return value;
             const target = pinnedRanges.reduce((closest, r) =>
               Math.abs(r.center - value) < Math.abs(closest - value) ? r.center : closest,
               pinnedRanges[0]?.center ?? 0
             );
-            
             return target;
           },
           duration: { min: 0.15, max: 0.35 },
@@ -63,99 +54,89 @@ function App() {
 
   return (
     <div className="relative">
-      {/* Grain Overlay */}
       <div className="grain-overlay" />
-
-      {/* Navigation */}
       <Navigation />
-
-      {/* Main Content */}
       <main className="relative">
-        {/* Section 1: Hero */}
         <HeroSection />
-
-        {/* Section 2: Who We Are */}
+        
         <div id="about">
           <ContentSection
             zIndex={20}
             headline={['WHO', 'WE ARE']}
-            body="We're a U.S.-based operations partner that helps government agencies and growing companies build reliable support teams—without the overhead of traditional hiring."
-            cta="Meet the team"
-            imageSrc="/team_office.jpg"
+            body="We are a U.S.-based service provider specializing in contact center and administrative support solutions for government agencies and growing organizations.
+                  Our approach is built on real-world experience in customer service operations, allowing us to deliver structured, reliable support without the complexity and overhead of traditional hiring models."
+            cta="View Our Capabilities"
+            imageSrc="/team_meeting.jpg"
             imageAlt="Team working in modern office"
             accentType="quarter-top-right"
           />
         </div>
 
-        {/* Section 3: What We Do */}
         <div id="services">
           <ContentSection
             zIndex={30}
             headline={['WHAT', 'WE DO']}
-            body=""
-            cta="See all services"
+            subheader="Reliable Contact Center and Back-Office Support"
+            body="We provide dependable contact center, administrative, and back-office support services designed to help organizations improve operations, serve customers effectively, and stay focused on growth."
+            cta="Explore Our Services"
             imageSrc="/professional_call.jpg"
             imageAlt="Professional on a call"
             accentType="ring-bottom-left"
             listItems={[
-              'Contact Center Operations',
-              'Back-Office & Data Entry',
-              'Executive & Virtual Assistance'
+              'Inbound and Outbound Customer Support',
+              'Administrative and Back-Office Support',
+              'Data Entry, Documentation, and Coordination'
             ]}
           />
         </div>
 
-        {/* Section 4: Why Clients Choose Us */}
         <div id="why-us">
           <ContentSection
             zIndex={40}
             headline={['WHY CLIENTS', 'CHOOSE US']}
-            body="Fast onboarding, clear communication, and people who actually show up ready to work. We handle compliance, scheduling, and quality—so you don't have to."
-            cta="How we ensure quality"
+            body="We deliver structured, dependable support with a focus on consistency, communication, and performance."
+            cta="Learn About Our Approach"
             imageSrc="/team_meeting.jpg"
             imageAlt="Team meeting around table"
             accentType="quarter-top-right"
           />
         </div>
 
-        {/* Section 5: How We Work */}
         <div id="process">
           <ContentSection
             zIndex={50}
             headline={['HOW', 'WE WORK']}
             body=""
-            cta="Start a project"
+            cta="Start a Conversation"
             imageSrc="/collaboration_desk.jpg"
             imageAlt="Professionals collaborating"
             accentType="ring-bottom-left"
             listItems={[
-              'Discovery — understand your volume and goals.',
-              'Staffing — match trained candidates to your needs.',
-              'Launch — onboard quickly with ongoing oversight.'
+              'Discovery — We assess your operational needs, volume, and service goals to build the right support structure.',
+              'Staffing — We align trained professionals to your requirements, ensuring the right fit for your operations.',
+              'Launch — We implement quickly with structured onboarding, ongoing support, and performance oversight.'
             ]}
           />
         </div>
 
-        {/* Section 6: Industries */}
         <div id="industries">
           <ContentSection
             zIndex={60}
             headline={['INDUSTRIES', 'WE SERVE']}
-            body=""
-            cta="Request sector details"
+            body="We support a range of industries by providing structured contact center and administrative services tailored to each organization's needs."
+            cta="See How We Support Your Industry"
             imageSrc="/desk_work.jpg"
             imageAlt="Professional at desk"
             accentType="quarter-top-right"
             listItems={[
               'Government & Public Sector',
-              'Contact Center Operations',
-              'Healthcare Administration',
-              'Administrative & Back-Office Support'
+              'Small Business & Growing Organizations',
+              'Healthcare & Medical Administrative Support',
+              'Financial Services & Customer Support'
             ]}
           />
         </div>
 
-        {/* Section 7: Results */}
         <div id="results">
           <ContentSection
             zIndex={70}
@@ -173,7 +154,6 @@ function App() {
           />
         </div>
 
-        {/* Section 8: Client Story */}
         <div id="testimonial">
           <ContentSection
             zIndex={80}
@@ -190,7 +170,6 @@ function App() {
           />
         </div>
 
-        {/* Section 9: Flexible Packages */}
         <div id="packages">
           <ContentSection
             zIndex={90}
@@ -208,7 +187,6 @@ function App() {
           />
         </div>
 
-        {/* Section 10: Contact */}
         <div id="contact">
           <ContactSection />
         </div>

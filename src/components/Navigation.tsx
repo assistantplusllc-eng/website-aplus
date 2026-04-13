@@ -32,20 +32,19 @@ export default function Navigation() {
 
   return (
     <>
-      {/* Fixed Logo */}
-<div 
-  className={`fixed top-6 left-6 z-[200] transition-all duration-300 ${
-    isScrolled ? 'opacity-100' : 'opacity-0 pointer-events-none'
-  }`}
+      {/* Fixed Logo - Always visible, click to go home */}
+<button 
+  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+  className="fixed top-6 left-6 z-[200] cursor-pointer"
 >
-  <div className="bg-white/90 backdrop-blur-sm px-1 py-0.5 rounded-md">
-  <img 
-    src="/logo-horizontal.png" 
-    alt="Assistant Plus" 
-    className="h-8 w-auto object-contain" 
-  />
-</div>
-</div>
+  <div className="bg-white/90 backdrop-blur-sm px-1 py-0.5 rounded-md hover:bg-white transition-colors">
+    <img 
+      src="/logo-horizontal.png" 
+      alt="Assistant Plus" 
+      className="h-8 w-auto object-contain" 
+    />
+  </div>
+</button>
 
       {/* Menu Button */}
       <button

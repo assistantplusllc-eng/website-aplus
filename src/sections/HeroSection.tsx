@@ -112,7 +112,7 @@ export default function HeroSection() {
           className="absolute"
           style={{ left: '6vw', top: '18vh', width: '52vw' }}
         >
-          <div ref={h1Line1Ref} className="text-h1 text-white">RELIABLE</div>
+          <div ref={h1Line1Ref} className="text-h1 text-white">SCALABLE</div>
           <div ref={h1Line2Ref} className="text-h1 text-white">CUSTOMER SUPPORT</div>
           <div ref={h1Line3Ref} className="text-h1 text-white">& ADMINISTRATIVE STAFFING</div>
         </div>
@@ -123,7 +123,7 @@ export default function HeroSection() {
           className="absolute text-body text-white/90"
           style={{ left: '6vw', top: '60vh', width: '34vw' }}
         >
-          U.S.-based professionals ready to support your operations, improve response times, and reduce internal workload 
+          Experienced professionals ready to support your operations, improve response times, and reduce internal workload 
           — without the overhead.
         </div>
 
@@ -131,9 +131,11 @@ export default function HeroSection() {
         <div 
           ref={ctaRef}
           className="absolute flex items-center gap-10"
-          style={{ left: '6vw', top: '72vh' }}
+          style={{ left: '6vw', top: '78vh' }}
         >
-          <button className="btn-primary">
+          <button className="btn-primary"
+            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+>
             Request Staffing
             <ArrowRight size={18} />
           </button>

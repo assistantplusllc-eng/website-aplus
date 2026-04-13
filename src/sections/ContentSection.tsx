@@ -17,6 +17,7 @@ interface ContentSectionProps {
   stats?: { value: string; label: string }[];
   quote?: { text: string; attribution: string };
   endOffset?: string;
+  subheader?: string;
 }
 
 export default function ContentSection({
@@ -30,7 +31,8 @@ export default function ContentSection({
   listItems,
   stats,
   quote,
-  endOffset = '+=125%'
+  endOffset = '+=125%',
+  subheader,
 }: ContentSectionProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
@@ -221,8 +223,22 @@ export default function ContentSection({
         <div 
           ref={contentRef}
           className="absolute"
-          style={{ left: '6vw', top: '52vh', width: '32vw' }}
+          style={{ left: '6vw', top: '40vh', width: '32vw' }}
         >
+          {/* Subheader */}
+          {subheader ? (
+            <p className="text-body text-white/90 mb-4 font-medium">
+              {subheader}
+            </p>
+          ) : null}
+         
+          {/* Body text - NOW SHOWS ABOVE LIST ITEMS */}
+          {body ? (
+            <p className="text-sm text-white/80 mb-6 leading-relaxed">
+              {body}
+            </p>
+          ) : null}
+
           {/* List items if provided */}
           {listItems && (
             <ul className="space-y-3 mb-6">
@@ -255,8 +271,8 @@ export default function ContentSection({
             </div>
           )}
 
-          {/* Regular body text */}
-          {!listItems && !stats && !quote && (
+          {/* Fallback body text when no listItems/stats/quote */}
+          {!listItems && !stats && !quote && !body && (
             <p className="text-body text-white/90 mb-6">{body}</p>
           )}
 
