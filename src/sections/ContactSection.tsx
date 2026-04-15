@@ -2,10 +2,12 @@ import { useRef, useLayoutEffect, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Send, Mail, Phone, Clock, Download } from 'lucide-react';
+import { useNavigate } from 'react-router-dom'; // ← ADDED
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function ContactSection() {
+  const navigate = useNavigate(); // ← ADDED
   const sectionRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
   const h2Ref = useRef<HTMLDivElement>(null);
@@ -195,7 +197,12 @@ export default function ContactSection() {
               <img src="/contact_team.jpg" alt="Team collaboration" className="w-full h-full object-cover" />
             </div>
             <div ref={accentRef} className="absolute accent-lime" style={{ right: '-5vw', top: '5vh', width: '15vw', height: '15vw', borderRadius: '0 0 0 100%', zIndex: -1 }} />
-            <button className="btn-secondary mt-6">
+            
+            {/* UPDATED: Download capabilities button now navigates to capability statement page */}
+            <button 
+              className="btn-secondary mt-6"
+              onClick={() => navigate('/capability-statement')}
+            >
               <Download size={18} />
               Download capabilities (PDF)
             </button>

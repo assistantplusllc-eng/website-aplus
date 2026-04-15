@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './App.css';
@@ -7,10 +8,12 @@ import Navigation from './components/Navigation';
 import HeroSection from './sections/HeroSection';
 import ContentSection from './sections/ContentSection';
 import ContactSection from './sections/ContactSection';
+import CapabilityStatement from './pages/CapabilityStatement';
 
 gsap.registerPlugin(ScrollTrigger);
 
-function App() {
+// Main page component with all sections
+function MainPage() {
   useEffect(() => {
     const timer = setTimeout(() => {
       const pinned = ScrollTrigger.getAll()
@@ -59,7 +62,7 @@ function App() {
       <main className="relative">
         <HeroSection />
         
-        {/* Section 2: Who We Are */}
+        {/* Section 2: Who We Are - UPDATED with ctaLink */}
         <div id="about">
           <ContentSection
             zIndex={20}
@@ -69,6 +72,7 @@ function App() {
               "Our approach is built on real-world experience in customer service operations, allowing us to deliver structured, reliable support without the complexity and overhead of traditional hiring models."
             ]}
             cta="View Our Capabilities"
+            ctaLink="/capability-statement" // ← ADDED: Links to capability statement page
             imageSrc="/team_meeting.jpg"
             imageAlt="Team working in modern office"
             accentType="quarter-top-right"
@@ -117,10 +121,11 @@ function App() {
             imageSrc="/collaboration_desk.jpg"
             imageAlt="Professionals collaborating"
             accentType="ring-bottom-left"
+            boldListItems={true}
             listItems={[
-              'Discovery — We assess your operational needs, volume, and service goals to build the right support structure.',
-              'Staffing — We align trained professionals to your requirements, ensuring the right fit for your operations.',
-              'Launch — We implement quickly with structured onboarding, ongoing support, and performance oversight.'
+              'Discovery: We assess your operational needs, volume, and service goals to build the right support structure.',
+              'Staffing: We align trained professionals to your requirements, ensuring the right fit for your operations.',
+              'Launch: We implement quickly with structured onboarding, ongoing support, and performance oversight.'
             ]}
           />
         </div>
@@ -179,7 +184,7 @@ function App() {
           />
         </div>
 
-        {/* Section 9: Flexible Packages */}
+        {/* Section 9: Flexible Packages - accentType fixed in ContentSection */}
         <div id="packages">
           <ContentSection
             zIndex={90}
@@ -188,7 +193,7 @@ function App() {
             cta="Get a custom quote"
             imageSrc="/professional_call.jpg"
             imageAlt="Professional consultation"
-            accentType="quarter-behind"
+            accentType="quarter-behind" // Position fixed in ContentSection.tsx
             listItems={[
               'On-Demand Support',
               'Dedicated Teams',
@@ -203,6 +208,18 @@ function App() {
         </div>
       </main>
     </div>
+  );
+}
+
+// App with Router
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/capability-statement" element={<CapabilityStatement />} />
+      </Routes>
+    </Router>
   );
 }
 

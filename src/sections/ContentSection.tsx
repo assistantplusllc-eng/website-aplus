@@ -18,6 +18,8 @@ interface ContentSectionProps {
   quote?: { text: string; attribution: string };
   endOffset?: string;
   subheader?: string;
+  boldListItems?: boolean;
+  ctaLink?: string; // ← ADDED: Optional link for CTA button
 }
 
 export default function ContentSection({
@@ -33,6 +35,8 @@ export default function ContentSection({
   quote,
   endOffset = '+=125%',
   subheader,
+  boldListItems,
+  ctaLink, // ← ADDED
 }: ContentSectionProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
@@ -95,8 +99,31 @@ export default function ContentSection({
       case 'quarter-behind':
         return (
           <>
-            <div ref={accent1Ref} className="absolute accent-lime" style={{ left: '58vw', top: '12vh', width: '18vw', height: '18vw', borderRadius: '0 0 100% 0' }} />
-            <div ref={accent2Ref} className="absolute ring-white" style={{ left: '90vw', top: '62vh', width: '6vw', height: '6vw', background: 'transparent', borderWidth: '8px' }} />
+            {/* FIXED: Repositioned to not cover image - moved to top-right area */}
+            <div 
+              ref={accent1Ref}
+              className="absolute accent-lime"
+              style={{ 
+                left: '82vw',  // Moved further right (was 58vw)
+                top: '8vh',    // Moved up (was 12vh)
+                width: '16vw', // Slightly smaller
+                height: '16vw',
+                borderRadius: '0 0 0 100%', // Bottom-left quarter circle
+                zIndex: -1     // Behind content
+              }}
+            />
+            <div 
+              ref={accent2Ref}
+              className="absolute ring-white"
+              style={{ 
+                left: '90vw', 
+                top: '62vh', 
+                width: '6vw', 
+                height: '6vw',
+                background: 'transparent',
+                borderWidth: '8px'
+              }}
+            />
           </>
         );
     }
@@ -105,21 +132,17 @@ export default function ContentSection({
   return (
     <section ref={sectionRef} className="section-pinned" style={{ zIndex }}>
       <div ref={panelRef} className="section-inner">
-        {/* H2 Headline */}
         <div ref={h2Ref} className="absolute" style={{ left: '6vw', top: '18vh', width: '44vw' }}>
           {headline.map((line, i) => (
             <div key={i} className="text-h2 text-white">{line}</div>
           ))}
         </div>
 
-        {/* Content Block */}
         <div ref={contentRef} className="absolute" style={{ left: '6vw', top: '40vh', width: '32vw' }}>
-          {/* Subheader */}
           {subheader ? (
             <p className="text-body text-white/90 mb-4 font-medium">{subheader}</p>
           ) : null}
          
-          {/* Body text - CHANGED: text-body instead of text-sm */}
           {body && (
             <div className="mb-6 space-y-4">
               {Array.isArray(body) ? (
@@ -132,25 +155,32 @@ export default function ContentSection({
             </div>
           )}
 
-          {/* List items if provided - CHANGED: text-body for consistency */}
           {listItems && (
             <ul className="space-y-3 mb-6">
               {listItems.map((item, i) => {
-                const firstSpace = item.indexOf(' ');
-                const firstWord = firstSpace > 0 ? item.substring(0, firstSpace) : item;
-                const rest = firstSpace > 0 ? item.substring(firstSpace) : '';
-                
+                if (boldListItems) {
+                  const colonIndex = item.indexOf(':');
+                  if (colonIndex > 0) {
+                    const firstWord = item.substring(0, colonIndex);
+                    const rest = item.substring(colonIndex);
+                    return (
+                      <li key={i} className="text-body text-white/90 flex items-start gap-3">
+                        <span className="w-1.5 h-1.5 rounded-full bg-lime mt-2 flex-shrink-0" />
+                        <span><b>{firstWord}</b>{rest}</span>
+                      </li>
+                    );
+                  }
+                }
                 return (
                   <li key={i} className="text-body text-white/90 flex items-start gap-3">
                     <span className="w-1.5 h-1.5 rounded-full bg-lime mt-2 flex-shrink-0" />
-                    <span><b>{firstWord}</b>{rest}</span>
+                    <span>{item}</span>
                   </li>
                 );
               })}
             </ul>
           )}
 
-          {/* Stats if provided */}
           {stats && (
             <div className="flex gap-8 mb-6">
               {stats.map((stat, i) => (
@@ -162,7 +192,6 @@ export default function ContentSection({
             </div>
           )}
 
-          {/* Quote if provided */}
           {quote && (
             <div className="mb-6">
               <p className="text-body text-white/90 italic mb-3">"{quote.text}"</p>
@@ -170,14 +199,20 @@ export default function ContentSection({
             </div>
           )}
 
-          {/* CTA */}
-          <button className="btn-secondary">
-            {cta}
-            <ArrowRight size={18} />
-          </button>
+          {/* CTA - Updated to support link */}
+          {ctaLink ? (
+            <a href={ctaLink} className="btn-secondary inline-flex items-center gap-2">
+              {cta}
+              <ArrowRight size={18} />
+            </a>
+          ) : (
+            <button className="btn-secondary">
+              {cta}
+              <ArrowRight size={18} />
+            </button>
+          )}
         </div>
 
-        {/* Photo Block */}
         <div ref={photoRef} className="absolute photo-block" style={{ left: '56vw', top: '18vh', width: '38vw', height: '62vh' }}>
           <img src={imageSrc} alt={imageAlt} className="w-full h-full object-cover" />
         </div>

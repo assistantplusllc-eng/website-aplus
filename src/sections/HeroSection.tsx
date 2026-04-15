@@ -2,10 +2,12 @@ import { useRef, useLayoutEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight, Download } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function HeroSection() {
+  const navigate = useNavigate();
   const sectionRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const microRef = useRef<HTMLDivElement>(null);
@@ -25,7 +27,6 @@ export default function HeroSection() {
     if (!section || !panel) return;
 
     const ctx = gsap.context(() => {
-      // Auto-play entrance animation on load
       const loadTl = gsap.timeline({ defaults: { ease: 'power2.out' } });
       
       loadTl
@@ -43,7 +44,6 @@ export default function HeroSection() {
           0.65
         );
 
-      // Scroll-driven exit animation
       const scrollTl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
@@ -52,7 +52,6 @@ export default function HeroSection() {
           pin: true,
           scrub: 0.6,
           onLeaveBack: () => {
-            // Reset all elements to visible when scrolling back to top
             gsap.set([microRef.current, h1Line1Ref.current, h1Line2Ref.current, h1Line3Ref.current, bodyRef.current, ctaRef.current, photoRef.current], {
               opacity: 1, x: 0, y: 0, scale: 1
             });
@@ -60,30 +59,22 @@ export default function HeroSection() {
         }
       });
 
-      // ENTRANCE (0-30%): Hold - already visible from load animation
-      // SETTLE (30-70%): Static
-      // EXIT (70-100%): Elements exit
-      
       scrollTl
-        // H1 lines exit
         .fromTo([h1Line1Ref.current, h1Line2Ref.current, h1Line3Ref.current], 
           { x: 0, opacity: 1 }, 
           { x: '-40vw', opacity: 0, ease: 'power2.in' }, 
           0.70
         )
-        // Body + CTAs exit
         .fromTo([bodyRef.current, ctaRef.current], 
           { y: 0, opacity: 1 }, 
           { y: '18vh', opacity: 0, ease: 'power2.in' }, 
           0.72
         )
-        // Photo exits
         .fromTo(photoRef.current, 
           { x: 0, scale: 1, opacity: 1 }, 
           { x: '18vw', scale: 0.98, opacity: 0, ease: 'power2.in' }, 
           0.70
         )
-        // Accents drift out
         .fromTo([accent1Ref.current, accent2Ref.current, accent3Ref.current], 
           { opacity: 1 }, 
           { opacity: 0, ease: 'power2.in' }, 
@@ -133,15 +124,19 @@ export default function HeroSection() {
           className="absolute flex items-center gap-10"
           style={{ left: '6vw', top: '78vh' }}
         >
-          <button className="btn-primary"
+          <button 
+            className="btn-primary"
             onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
->
+          >
             Request Staffing
             <ArrowRight size={18} />
           </button>
-          <button className="btn-secondary">
+          <button 
+            className="btn-secondary"
+            onClick={() => navigate('/capability-statement')}
+          >
             <Download size={18} />
-            Download Capability Statement
+            View Capability Statement
           </button>
         </div>
 
@@ -164,7 +159,6 @@ export default function HeroSection() {
         </div>
 
         {/* Accent Shapes */}
-        {/* Lime quarter-circle behind photo */}
         <div 
           ref={accent1Ref}
           className="absolute accent-lime"
@@ -177,7 +171,6 @@ export default function HeroSection() {
           }}
         />
         
-        {/* Lime ring near lower-left */}
         <div 
           ref={accent2Ref}
           className="absolute ring-lime"
@@ -190,7 +183,6 @@ export default function HeroSection() {
           }}
         />
         
-        {/* White ring near mid-right */}
         <div 
           ref={accent3Ref}
           className="absolute ring-white"
