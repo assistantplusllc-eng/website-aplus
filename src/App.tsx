@@ -9,6 +9,7 @@ import HeroSection from './sections/HeroSection';
 import ContentSection from './sections/ContentSection';
 import ContactSection from './sections/ContactSection';
 import CapabilityStatement from './pages/CapabilityStatement';
+import Services from './pages/Services'; // ← ADD THIS IMPORT
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -62,7 +63,7 @@ function MainPage() {
       <main className="relative">
         <HeroSection />
         
-        {/* Section 2: Who We Are - UPDATED with ctaLink */}
+        {/* Section 2: Who We Are */}
         <div id="about">
           <ContentSection
             zIndex={20}
@@ -72,14 +73,14 @@ function MainPage() {
               "Our approach is built on real-world experience in customer service operations, allowing us to deliver structured, reliable support without the complexity and overhead of traditional hiring models."
             ]}
             cta="View Our Capabilities"
-            ctaLink="/capability-statement" // ← ADDED: Links to capability statement page
+            ctaLink="/capability-statement"
             imageSrc="/team_meeting.jpg"
             imageAlt="Team working in modern office"
             accentType="quarter-top-right"
           />
         </div>
 
-        {/* Section 3: What We Do */}
+        {/* Section 3: What We Do - UPDATED with ctaLink */}
         <div id="services">
           <ContentSection
             zIndex={30}
@@ -87,6 +88,7 @@ function MainPage() {
             subheader="Reliable Contact Center and Back-Office Support"
             body="We provide dependable contact center, administrative, and back-office support services designed to help organizations improve operations, serve customers effectively, and stay focused on growth."
             cta="Explore Our Services"
+            ctaLink="/services" // ← ADDED THIS
             imageSrc="/professional_call.jpg"
             imageAlt="Professional on a call"
             accentType="ring-bottom-left"
@@ -184,7 +186,7 @@ function MainPage() {
           />
         </div>
 
-        {/* Section 9: Flexible Packages - accentType fixed in ContentSection */}
+        {/* Section 9: Flexible Packages */}
         <div id="packages">
           <ContentSection
             zIndex={90}
@@ -193,7 +195,7 @@ function MainPage() {
             cta="Get a custom quote"
             imageSrc="/professional_call.jpg"
             imageAlt="Professional consultation"
-            accentType="quarter-behind" // Position fixed in ContentSection.tsx
+            accentType="quarter-behind"
             listItems={[
               'On-Demand Support',
               'Dedicated Teams',
@@ -218,6 +220,7 @@ function App() {
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/capability-statement" element={<CapabilityStatement />} />
+        <Route path="/services" element={<Services />} />
       </Routes>
     </Router>
   );

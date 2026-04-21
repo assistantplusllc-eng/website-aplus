@@ -1,9 +1,13 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, ArrowRight } from 'lucide-react';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,42 +19,59 @@ export default function Navigation() {
   }, []);
 
   const navLinks = [
-    { label: 'Services', href: '#services' },
-    { label: 'Industries', href: '#industries' },
-    { label: 'How We Work', href: '#process' },
-    { label: 'Results', href: '#results' },
-    { label: 'Contact', href: '#contact' },
+    { label: 'Services', href: '/services', isExternal: true }, // ← ADDED: Direct link to services page
+    { label: 'Industries', href: '#industries', isExternal: false },
+    { label: 'How We Work', href: '#process', isExternal: false },
+    { label: 'Results', href: '#results', isExternal: false },
+    { label: 'Contact', href: '#contact', isExternal: false },
   ];
 
-  const scrollToSection = (href: string) => {
-    setIsOpen(false);
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+  const handleNavClick = (href: string, isExternal: boolean) => {
+  setIsOpen(false);
+  
+  if (isExternal) {
+    // Navigate to different page and scroll to top
+    window.scrollTo(0, 0);
+    navigate(href);
+  } else {
+    // Scroll to section
+    if (!isHomePage) {
+      // If not on homepage, navigate home first then scroll
+      navigate('/' + href);
+    } else {
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
+  }
+};
+
+  const goHome = () => {
+    navigate('/');
   };
 
   return (
     <>
-      {/* Fixed Logo - Always visible, click to go home */}
-<button 
-  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-  className="fixed top-6 left-6 z-[200] cursor-pointer"
->
-  <div className="bg-white/90 backdrop-blur-sm px-1 py-0.5 rounded-md hover:bg-white transition-colors">
-    <img 
-      src="/logo-horizontal.png" 
-      alt="Assistant Plus" 
-      className="h-8 w-auto object-contain" 
-    />
-  </div>
-</button>
+      {/* Fixed Logo - Now navigates to homepage */}
+      <button 
+        onClick={goHome}
+        className="fixed top-6 left-6 z-[200] cursor-pointer"
+      >
+        <div className="bg-white/90 backdrop-blur-sm px-1 py-0.5 rounded-md hover:bg-white transition-colors shadow-md">
+          <img 
+            src="/logo-horizontal.png" 
+            alt="Assistant Plus" 
+            className="h-8 w-auto object-contain" 
+          />
+        </div>
+      </button>
 
       {/* Menu Button */}
       <button
         onClick={() => setIsOpen(true)}
         className={`fixed top-6 right-6 z-[200] flex items-center gap-2 transition-all duration-300 ${
-          isScrolled 
+          isScrolled || !isHomePage
             ? 'bg-white text-cobalt px-4 py-2 rounded-full shadow-lg' 
             : 'text-white'
         }`}
@@ -83,7 +104,7 @@ export default function Navigation() {
               {navLinks.map((link) => (
                 <button
                   key={link.href}
-                  onClick={() => scrollToSection(link.href)}
+                  onClick={() => handleNavClick(link.href, link.isExternal)}
                   className="block text-h2 text-text-primary hover:text-cobalt transition-colors text-left"
                 >
                   {link.label}
@@ -95,7 +116,7 @@ export default function Navigation() {
           {/* CTA */}
           <div className="pt-8 border-t border-gray-200">
             <button 
-              onClick={() => scrollToSection('#contact')}
+              onClick={() => handleNavClick('#contact', false)}
               className="btn-primary bg-cobalt text-white"
             >
               Request Staffing
