@@ -349,16 +349,56 @@ export default function CapabilityStatement() {
           </div>
 
           {/* Footer */}
-          <div className="p-6 text-center" style={{ backgroundColor: '#f3f4f6' }}>
-            <p className="text-sm text-gray-600">
-              Assistant Plus, LLC | SAM.GOV Registered | Small Business
-            </p>
-            <p className="text-xs text-gray-400 mt-1">
-              (888) 652-6315 | info@assistantplusworks.com | AssistantPlusWorks.com
-            </p>
-          </div>
+           </div>
+            </main>
+
+      {/* Footer - Full width */}
+<footer className="py-12 px-6" style={{ backgroundColor: '#1e3a8a' }}>
+  <div className="max-w-6xl mx-auto">
+    <div className="grid md:grid-cols-3 gap-8 mb-8">
+      {/* Company Info */}
+      <div className="mb-4">
+        <img 
+          src="/logo_white.png" 
+          alt="Assistant Plus" 
+          className="h-20 md:h-24 w-auto mb-5"
+          style={{ maxWidth: '260px' }}
+        />
+        <p className="text-white/70 text-sm leading-relaxed max-w-sm">
+          Professional contact center and administrative support services for government agencies and growing organizations.
+        </p>
+      </div>
+      
+      {/* Quick Links */}
+      <div>
+        <h3 className="text-white font-semibold mb-4">Quick Links</h3>
+        <nav className="space-y-2">
+          <button onClick={() => navigate('/')} className="block text-white/70 hover:text-lime-400 transition-colors text-sm">Home</button>
+          <button onClick={() => navigate('/services')} className="block text-white/70 hover:text-lime-400 transition-colors text-sm">Services</button>
+          <button onClick={() => navigate('/capability-statement')} className="block text-white/70 hover:text-lime-400 transition-colors text-sm">Capability Statement</button>
+          <button onClick={() => navigate('/#contact')} className="block text-white/70 hover:text-lime-400 transition-colors text-sm">Contact</button>
+        </nav>
+      </div>
+      
+      {/* Contact Info */}
+      <div>
+        <h3 className="text-white font-semibold mb-4">Contact Us</h3>
+        <div className="space-y-2 text-sm text-white/70">
+          <p>(888) 652-6315</p>
+          <p>info@assistantplusworks.com</p>
+          <p>Bergen County, New Jersey</p>
         </div>
-      </main>
+      </div>
+    </div>
+    
+    {/* Bottom bar */}
+    <div className="pt-8 border-t border-white/20 text-center">
+      <p className="text-white/50 text-sm">
+        © 2024 Assistant Plus, LLC. All rights reserved.
+      </p>
+    </div>
+  </div>
+</footer>
     </div>
   );
 }

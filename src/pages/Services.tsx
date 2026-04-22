@@ -201,7 +201,7 @@ export default function Services() {
       ],
       result:
         'Improved customer satisfaction and faster response times without expanding your internal team.',
-      imageSrc: '/services-customer-support.jpg',
+      imageSrc: '/services-customer-support.jpeg',
       imageAlt: 'Customer service agent handling calls professionally',
     },
     {
@@ -274,26 +274,26 @@ export default function Services() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Fixed Blue Header Bar with Logo and Menu inside */}
+            {/* Logo - Fixed top left, above everything */}
+      <button 
+        onClick={() => navigate('/')}
+        className="fixed top-4 left-4 z-[400] cursor-pointer"
+      >
+        <div className="bg-white px-1 py-0.5 rounded-md shadow-md hover:bg-white transition-colors">
+          <img 
+            src="/logo-horizontal.png" 
+            alt="Assistant Plus" 
+            className="h-8 w-auto object-contain" 
+          />
+        </div>
+      </button>
+
+      {/* Fixed Blue Header Bar - Menu only */}
       <header 
         className="fixed top-0 left-0 right-0 z-50 py-4 px-4 md:px-6"
         style={{ backgroundColor: '#2563eb' }}
       >
-        <div className="flex items-center justify-between">
-          {/* Logo - Top Left with minimal margin */}
-          <button 
-            onClick={() => navigate('/')}
-            className="z-[300] cursor-pointer"
-          >
-            <div className="bg-white px-1 py-0.5 rounded-md shadow-md hover:bg-white transition-colors">
-              <img 
-                src="/logo-horizontal.png" 
-                alt="Assistant Plus" 
-                className="h-8 w-auto object-contain" 
-              />
-            </div>
-          </button>
-
+        <div className="flex items-center justify-end">
           {/* Menu Button - Top Right with scroll behavior */}
           <button
             onClick={() => setMenuOpen(true)}
@@ -394,57 +394,76 @@ export default function Services() {
       {/* Hero Section - More spacious layout */}
       <div
         ref={heroRef}
-        className="pt-20 pb-32 px-6"
+        className="pt-20 pb-32 px-6 lg:px-8 relative"
         style={{ backgroundColor: '#2563eb' }}
       >
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-20 items-center">
-            <div>
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] gap-8 lg:gap-12 items-center">
+            <div className="relative max-w-xl">
               {/* Subheader - positioned up and left, smaller text */}
-              <p 
-                className="animate-in text-lime-400 font-semibold uppercase tracking-widest mb-6 -mt-2 -ml-24 text-sm"
-              >
-                Comprehensive Staffing Solutions
-              </p>
+              <p
+  className="animate-in absolute -left-6 md:-left-8 -top-2 text-white/90 font-bold uppercase tracking-[0.18em] text-sm"
+  >
+    Comprehensive Staffing Solutions
+  </p>
 
-              {/* Main headline - line height fixed */}
-              <h1 className="animate-in text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 leading-[1.15]">
-                Support Services Designed to Help Your Business Grow
-              </h1>
+  <h1 className="animate-in pt-16 text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 leading-tight md:leading-[1.2] lg:leading-[1.25]">
+    Support Services Designed to Help Your Business Grow
+  </h1>
 
-              {/* Body text - more margin below */}
-              <p className="animate-in text-xl text-white/90 leading-relaxed mb-10">
-                At Assistant Plus, we provide customer support and administrative
-                services designed to help businesses operate more efficiently
-                without the need to hire, train, or manage additional staff.
-              </p>
-            </div>
+  <p className="animate-in text-xl text-white/90 leading-relaxed mb-10">
+    At Assistant Plus, we provide customer support and administrative
+    services designed to help businesses operate more efficiently
+    without the need to hire, train, or manage additional staff.
+  </p>
+</div>
 
             {/* Image - right side, taller and positioned higher */}
-            <div className="animate-in relative -mt-8">
-              <div className="rounded-2xl overflow-hidden shadow-2xl">
+            <div className="animate-in relative">
+              <div className="group relative rounded-2xl overflow-hidden shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)] border-4 border-white/30">
                 <img
                   src="/services-hero.jpeg"
                   alt="Professional support team"
-                  className="w-full h-[520px] object-cover"
+                  className="w-full h-[420px] md:h-[460px] lg:h-[500px] object-cover object-center brightness-95 contrast-105 transition-transform duration-500 group-hover:scale-105"
                 />
+                {/* Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-blue-900/20 to-transparent pointer-events-none" />
               </div>
               {/* Decorative elements */}
               <div
-                className="absolute -top-4 -right-4 w-24 h-24 rounded-full"
+                className="absolute -top-6 -right-6 w-20 h-20 rounded-full pointer-events-none"
                 style={{ backgroundColor: '#84cc16', opacity: 0.8 }}
               />
               <div
-                className="absolute -bottom-4 -left-4 w-16 h-16 rounded-full border-4"
+                className="absolute -bottom-10 -left-20 w-16 h-16 rounded-full border-4"
                 style={{ borderColor: 'white', opacity: 0.5 }}
               />
             </div>
           </div>
         </div>
+
+        {/* Bouncing scroll indicator */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce cursor-pointer"
+             onClick={() => document.getElementById('services-list')?.scrollIntoView({ behavior: 'smooth' })}
+        >
+          <svg 
+            className="w-8 h-8 text-white/70 hover:text-white transition-colors" 
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+          >
+            <path 
+              strokeLinecap="round" 
+              strokeLinejoin="round" 
+              strokeWidth={2} 
+              d="M19 14l-7 7m0 0l-7-7m7 7V3" 
+            />
+          </svg>
+        </div>
       </div>
 
       {/* Services List - Full width white background */}
-      <div className="bg-white">
+      <div id="services-list" className="bg-white">
         <main className="max-w-6xl mx-auto px-6 py-8">
           {services.map((service, index) => (
             <ServiceCard
@@ -486,11 +505,52 @@ export default function Services() {
       </div>
 
       {/* Footer */}
-      <footer className="py-8 text-center" style={{ backgroundColor: '#f3f4f6' }}>
-        <p className="text-gray-600">
-          Assistant Plus, LLC | (888) 652-6315 | info@assistantplusworks.com
+      {/* Footer - Full width */}
+<footer className="py-12 px-6" style={{ backgroundColor: '#1e3a8a' }}>
+  <div className="max-w-6xl mx-auto">
+    <div className="grid md:grid-cols-3 gap-8 mb-8">
+      {/* Company Info */}
+      <div>
+        <img 
+          src="/logo_white.png" 
+          alt="Assistant Plus" 
+          className="h-10 w-auto mb-4"
+        />
+        <p className="text-white/70 text-sm leading-relaxed">
+          Professional contact center and administrative support services for government agencies and growing organizations.
         </p>
-      </footer>
+      </div>
+      
+      {/* Quick Links */}
+      <div>
+        <h3 className="text-white font-semibold mb-4">Quick Links</h3>
+        <nav className="space-y-2">
+          <button onClick={() => navigate('/')} className="block text-white/70 hover:text-lime-400 transition-colors text-sm">Home</button>
+          <button onClick={() => navigate('/services')} className="block text-white/70 hover:text-lime-400 transition-colors text-sm">Services</button>
+          <button onClick={() => navigate('/capability-statement')} className="block text-white/70 hover:text-lime-400 transition-colors text-sm">Capability Statement</button>
+          <button onClick={() => navigate('/#contact')} className="block text-white/70 hover:text-lime-400 transition-colors text-sm">Contact</button>
+        </nav>
+      </div>
+      
+      {/* Contact Info */}
+      <div>
+        <h3 className="text-white font-semibold mb-4">Contact Us</h3>
+        <div className="space-y-2 text-sm text-white/70">
+          <p>(888) 652-6315</p>
+          <p>info@assistantplusworks.com</p>
+          <p>Bergen County, New Jersey</p>
+        </div>
+      </div>
+    </div>
+    
+    {/* Bottom bar */}
+    <div className="pt-8 border-t border-white/20 text-center">
+      <p className="text-white/50 text-sm">
+        © 2024 Assistant Plus, LLC. All rights reserved.
+      </p>
+    </div>
+  </div>
+</footer>
     </div>
   );
 }

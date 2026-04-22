@@ -1,7 +1,8 @@
-import { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useEffect, useRef } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import './App.css';
 
 import Navigation from './components/Navigation';
@@ -9,18 +10,53 @@ import HeroSection from './sections/HeroSection';
 import ContentSection from './sections/ContentSection';
 import ContactSection from './sections/ContactSection';
 import CapabilityStatement from './pages/CapabilityStatement';
-import Services from './pages/Services'; // ← ADD THIS IMPORT
+import Services from './pages/Services';
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 // Main page component with all sections
 function MainPage() {
+  const location = useLocation();
+  const scrollTarget = useRef<string | null>(null);
+
+  // Store scroll target from navigation state
+  useEffect(() => {
+    if (location.state?.scrollTo) {
+      scrollTarget.current = location.state.scrollTo;
+    }
+  }, [location]);
+
+  // Handle scroll to section after GSAP initializes
+  useEffect(() => {
+    if (!scrollTarget.current) return;
+
+    const attemptScroll = () => {
+      const element = document.getElementById(scrollTarget.current!);
+      if (element) {
+        // Use GSAP for smoother scrolling with pinned sections
+        gsap.to(window, {
+          scrollTo: { y: element, offsetY: 0 },
+          duration: 1,
+          ease: 'power2.inOut'
+        });
+        scrollTarget.current = null;
+      } else {
+        // Retry if element not ready
+        setTimeout(attemptScroll, 200);
+      }
+    };
+
+    // Wait for everything to mount
+    const timer = setTimeout(attemptScroll, 800);
+    return () => clearTimeout(timer);
+  }, []);
+
   useEffect(() => {
     const timer = setTimeout(() => {
       const pinned = ScrollTrigger.getAll()
         .filter(st => st.vars.pin)
         .sort((a, b) => a.start - b.start);
-      
+
       const maxScroll = ScrollTrigger.maxScroll(window);
       if (!maxScroll || pinned.length === 0) return;
 
@@ -62,7 +98,7 @@ function MainPage() {
       <Navigation />
       <main className="relative">
         <HeroSection />
-        
+
         {/* Section 2: Who We Are */}
         <div id="about">
           <ContentSection
@@ -80,7 +116,7 @@ function MainPage() {
           />
         </div>
 
-        {/* Section 3: What We Do - UPDATED with ctaLink */}
+        {/* Section 3: What We Do */}
         <div id="services">
           <ContentSection
             zIndex={30}
@@ -88,7 +124,7 @@ function MainPage() {
             subheader="Reliable Contact Center and Back-Office Support"
             body="We provide dependable contact center, administrative, and back-office support services designed to help organizations improve operations, serve customers effectively, and stay focused on growth."
             cta="Explore Our Services"
-            ctaLink="/services" // ← ADDED THIS
+            ctaLink="/services"
             imageSrc="/professional_call.jpg"
             imageAlt="Professional on a call"
             accentType="ring-bottom-left"

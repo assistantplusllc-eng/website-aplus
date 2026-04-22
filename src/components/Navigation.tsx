@@ -19,7 +19,7 @@ export default function Navigation() {
   }, []);
 
   const navLinks = [
-    { label: 'Services', href: '/services', isExternal: true }, // ← ADDED: Direct link to services page
+    { label: 'What We Do', href: '#services', isExternal: false }, // ← CHANGED: Now scrolls to #services section
     { label: 'Industries', href: '#industries', isExternal: false },
     { label: 'How We Work', href: '#process', isExternal: false },
     { label: 'Results', href: '#results', isExternal: false },
@@ -27,28 +27,34 @@ export default function Navigation() {
   ];
 
   const handleNavClick = (href: string, isExternal: boolean) => {
-  setIsOpen(false);
-  
-  if (isExternal) {
-    // Navigate to different page and scroll to top
-    window.scrollTo(0, 0);
-    navigate(href);
-  } else {
-    // Scroll to section
-    if (!isHomePage) {
-      // If not on homepage, navigate home first then scroll
-      navigate('/' + href);
+    setIsOpen(false);
+
+    if (isExternal) {
+      // Navigate to different page and scroll to top
+      window.scrollTo(0, 0);
+      navigate(href);
     } else {
-      const element = document.querySelector(href);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+      // Scroll to section
+      if (!isHomePage) {
+        // If not on homepage, navigate home first then scroll
+        navigate('/', { state: { scrollTo: href.replace('#', '') } });
+      } else {
+        const element = document.querySelector(href);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
       }
     }
-  }
-};
+  };
 
   const goHome = () => {
-    navigate('/');
+    if (isHomePage) {
+      // If already on homepage, scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      // If on another page, navigate to homepage
+      navigate('/');
+    }
   };
 
   return (
