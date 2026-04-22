@@ -150,6 +150,11 @@ export default function Services() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
+  // Scroll to top when component mounts - FIX for scroll position issue
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 100);
@@ -335,14 +340,14 @@ export default function Services() {
                 Home
               </button>
               <button
-  onClick={() => { 
-    setMenuOpen(false); 
-    navigate('/', { state: { scrollTo: 'industries' } });
-  }}
-  className="block text-h2 text-text-primary hover:text-cobalt transition-colors text-left"
->
-  Industries
-</button>
+                onClick={() => { 
+                  setMenuOpen(false); 
+                  navigate('/', { state: { scrollTo: 'industries' } });
+                }}
+                className="block text-h2 text-text-primary hover:text-cobalt transition-colors text-left"
+              >
+                Industries
+              </button>
               <button
                 onClick={() => { 
                   setMenuOpen(false); 
@@ -386,41 +391,42 @@ export default function Services() {
         </div>
       </div>
 
-            {/* Hero Section */}
-      {/* Hero Section - pt-20 to move text up closer to logo */}
+      {/* Hero Section - More spacious layout */}
       <div
         ref={heroRef}
-        className="pt-20 pb-16 px-6"
+        className="pt-20 pb-32 px-6"
         style={{ backgroundColor: '#2563eb' }}
       >
         <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="grid md:grid-cols-2 gap-20 items-center">
             <div>
-              {/* Subheader - moved up with less margin below */}
-              <p className="animate-in text-lime-400 font-semibold uppercase tracking-wider mb-12 -mt-2 -ml-24 text-sm">
-  Comprehensive Staffing Solutions
-</p>
+              {/* Subheader - positioned up and left, smaller text */}
+              <p 
+                className="animate-in text-lime-400 font-semibold uppercase tracking-widest mb-6 -mt-2 -ml-24 text-sm"
+              >
+                Comprehensive Staffing Solutions
+              </p>
 
               {/* Main headline - line height fixed */}
-              <h1 className="animate-in text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-[1.15]">
+              <h1 className="animate-in text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 leading-[1.15]">
                 Support Services Designed to Help Your Business Grow
               </h1>
 
-              {/* Body text */}
-              <p className="animate-in text-xl text-white/90 leading-relaxed">
+              {/* Body text - more margin below */}
+              <p className="animate-in text-xl text-white/90 leading-relaxed mb-10">
                 At Assistant Plus, we provide customer support and administrative
                 services designed to help businesses operate more efficiently
                 without the need to hire, train, or manage additional staff.
               </p>
             </div>
 
-            {/* Image - right side */}
-            <div className="animate-in relative">
+            {/* Image - right side, taller and positioned higher */}
+            <div className="animate-in relative -mt-8">
               <div className="rounded-2xl overflow-hidden shadow-2xl">
                 <img
-                  src="/services-hero.jpg"
+                  src="/services-hero.jpeg"
                   alt="Professional support team"
-                  className="w-full h-[400px] object-cover"
+                  className="w-full h-[520px] object-cover"
                 />
               </div>
               {/* Decorative elements */}
