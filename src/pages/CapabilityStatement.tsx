@@ -361,7 +361,7 @@ export default function CapabilityStatement() {
         <img 
           src="/logo_white.png" 
           alt="Assistant Plus" 
-          className="h-20 md:h-24 w-auto mb-5"
+          className="h-20 md:h-24 w-auto mb-5 border border-red-500"
           style={{ maxWidth: '260px' }}
         />
         <p className="text-white/70 text-sm leading-relaxed max-w-sm">
