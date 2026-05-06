@@ -115,7 +115,7 @@ export default function ContactSection() {
   };
 
   return (
-    <section ref={sectionRef} className="relative w-full min-h-screen py-8 px-4" style={{ zIndex: 100, backgroundColor: 'white' }}>
+    <section ref={sectionRef} className="relative w-full min-h-screen py-8 px-4" style={{ zIndex: 90, backgroundColor: 'white' }}>
       <div ref={cardRef} className="w-full min-h-[90vh] rounded-panel p-8 md:p-12" style={{ backgroundColor: '#1B45F4' }}>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 h-full">
           <div className="flex flex-col justify-center">
@@ -204,12 +204,14 @@ export default function ContactSection() {
               onClick={() => navigate('/capability-statement')}
             >
               <Download size={18} />
-              Download capabilities (PDF)
+              Download Capability Statement (PDF)
             </button>
           </div>
         </div>
         <div className="mt-12 pt-8 border-t border-white/20 flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="text-white font-heading font-bold text-xl">Assistant Plus</div>
+          <div className="flex items-center !bg-transparent">
+           
+          </div>
           <div className="text-micro text-white/60">© 2026 Assistant Plus, LLC. All rights reserved.</div>
           <div className="flex gap-6">
             <a href="#" className="text-micro text-white/60 hover:text-white transition-colors">Privacy</a>

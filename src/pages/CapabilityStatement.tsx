@@ -1,8 +1,14 @@
 import { ArrowLeft, Download, Phone, Mail, MapPin, ExternalLink } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 export default function CapabilityStatement() {
   const navigate = useNavigate();
+
+  // Scroll to top when page loads
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handlePrint = () => {
     window.print();
@@ -55,14 +61,11 @@ export default function CapabilityStatement() {
             ></div>
             
             {/* Logo - White background box matching homepage style */}
-            <div className="relative z-10 mb-6 inline-block bg-white rounded-lg px-4 py-2 shadow-lg">
+            <div className="relative z-10 mb-6 inline-block bg-white rounded-lg shadow-lg overflow-hidden leading-none">
               <img 
                 src="/logo-horizontal.png" 
                 alt="Assistant Plus" 
-                className="h-10 w-auto"
-                onError={(e) => {
-                  e.currentTarget.style.display = 'none';
-                }}
+                className="h-8 w-auto"
               />
             </div>
             
@@ -361,8 +364,8 @@ export default function CapabilityStatement() {
         <img 
           src="/logo_white.png" 
           alt="Assistant Plus" 
-          className="h-20 md:h-24 w-auto mb-5 border border-red-500"
-          style={{ maxWidth: '260px' }}
+          className="h-8 w-auto mb-4 block"
+          style={{ maxWidth: '280px', background: 'none', backgroundColor: 'transparent' }}
         />
         <p className="text-white/70 text-sm leading-relaxed max-w-sm">
           Professional contact center and administrative support services for government agencies and growing organizations.
@@ -394,7 +397,7 @@ export default function CapabilityStatement() {
     {/* Bottom bar */}
     <div className="pt-8 border-t border-white/20 text-center">
       <p className="text-white/50 text-sm">
-        © 2024 Assistant Plus, LLC. All rights reserved.
+        © 2026 Assistant Plus, LLC. All rights reserved.
       </p>
     </div>
   </div>

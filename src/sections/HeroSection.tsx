@@ -1,7 +1,7 @@
 import { useRef, useLayoutEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ArrowRight, Download } from 'lucide-react';
+import { ArrowRight, Download, ChevronDown } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -152,7 +152,7 @@ export default function HeroSection() {
           }}
         >
           <img 
-            src="/hero_agent.jpg" 
+            src="/hero_agent.png" 
             alt="Professional customer service agent" 
             className="w-full h-full object-cover"
           />
@@ -195,6 +195,20 @@ export default function HeroSection() {
             borderWidth: '8px'
           }}
         />
+
+        {/* Bouncing scroll indicator */}
+        <button
+          onClick={() => {
+            const nextSection = document.getElementById('about');
+            if (nextSection) {
+              nextSection.scrollIntoView({ behavior: 'smooth' });
+            }
+          }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/70 hover:text-white transition-colors animate-bounce cursor-pointer"
+          aria-label="Scroll to next section"
+        >
+          <ChevronDown size={32} />
+        </button>
       </div>
     </section>
   );

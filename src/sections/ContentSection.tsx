@@ -59,6 +59,11 @@ export default function ContentSection({
           end: endOffset,
           pin: true,
           scrub: 0.6,
+          onLeaveBack: () => {
+            gsap.set([h2Ref.current, contentRef.current, photoRef.current, accent1Ref.current, accent2Ref.current], {
+              opacity: 1, x: 0, y: 0, scale: 1
+            });
+          }
         }
       });
 

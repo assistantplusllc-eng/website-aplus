@@ -60,7 +60,7 @@ function ServiceCard({
   return (
     <div
       ref={cardRef}
-      className={`grid md:grid-cols-2 gap-8 lg:gap-16 items-center py-16 border-b border-gray-200 ${
+      className={`grid md:grid-cols-[1fr_1.3fr] gap-8 lg:gap-16 items-center py-16 border-b border-gray-200 ${
         reverse ? 'md:grid-flow-dense' : ''
       }`}
     >
@@ -191,7 +191,7 @@ export default function Services() {
       title: 'Customer Support',
       subtitle: 'Professional Customer Interaction',
       description:
-        'We manage your customer interactions with professionalism and care, ensuring every call, message, and inquiry is handled efficiently.',
+        'We manage customer interactions with professionalism and efficiency, ensuring every call, message, and inquiry is handled with care and consistency.',
       services: [
         'Inbound call handling',
         'Outbound follow-ups',
@@ -401,17 +401,15 @@ export default function Services() {
           <div className="grid md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] gap-8 lg:gap-12 items-center">
             <div className="relative max-w-xl">
               {/* Subheader - positioned up and left, smaller text */}
-              <p
-  className="animate-in absolute -left-6 md:-left-8 -top-2 text-white/90 font-bold uppercase tracking-[0.18em] text-sm"
-  >
+              <p className="animate-in text-micro text-white/90 uppercase tracking-wider mb-4">
     Comprehensive Staffing Solutions
   </p>
 
-  <h1 className="animate-in pt-16 text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 leading-tight md:leading-[1.2] lg:leading-[1.25]">
+  <h1 className="animate-in pt-16 text-h1 text-white mb-8">
     Support Services Designed to Help Your Business Grow
   </h1>
 
-  <p className="animate-in text-xl text-white/90 leading-relaxed mb-10">
+  <p className="animate-in text-body text-white/90 mb-10">
     At Assistant Plus, we provide customer support and administrative
     services designed to help businesses operate more efficiently
     without the need to hire, train, or manage additional staff.

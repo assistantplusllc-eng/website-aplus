@@ -11,6 +11,7 @@ import ContentSection from './sections/ContentSection';
 import ContactSection from './sections/ContactSection';
 import CapabilityStatement from './pages/CapabilityStatement';
 import Services from './pages/Services';
+import About from './pages/About';
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
@@ -105,12 +106,13 @@ function MainPage() {
             zIndex={20}
             headline={['WHO', 'WE ARE']}
             body={[
-              "We are a U.S.-based service provider specializing in contact center and administrative support solutions for government agencies and growing organizations.",
-              "Our approach is built on real-world experience in customer service operations, allowing us to deliver structured, reliable support without the complexity and overhead of traditional hiring models."
+              "We specialize in contact center and administrative support solutions for government agencies and growing organizations.",
+              "",
+              "Our approach is built on real-world customer service experience, allowing us to deliver structured, reliable support without the complexity and overhead of traditional hiring models."
             ]}
-            cta="View Our Capabilities"
-            ctaLink="/capability-statement"
-            imageSrc="/team_meeting.jpg"
+            cta="Learn How We Work"
+            ctaLink="/about"
+            imageSrc="/team_meeting.png"
             imageAlt="Team working in modern office"
             accentType="quarter-top-right"
           />
@@ -122,15 +124,15 @@ function MainPage() {
             zIndex={30}
             headline={['WHAT', 'WE DO']}
             subheader="Reliable Contact Center and Back-Office Support"
-            body="We provide dependable contact center, administrative, and back-office support services designed to help organizations improve operations, serve customers effectively, and stay focused on growth."
+            body="We provide dependable contact center, administrative, and back-office support that helps organizations improve operations, enhance customer service, and stay focused on growth."
             cta="Explore Our Services"
             ctaLink="/services"
-            imageSrc="/professional_call.jpg"
+            imageSrc="/what-we-do.png"
             imageAlt="Professional on a call"
             accentType="ring-bottom-left"
             listItems={[
-              'Inbound and Outbound Customer Support',
-              'Administrative and Back-Office Support',
+              'Inbound & Outbound Customer Support',
+              'Administrative & Back-Office Support',
               'Data Entry, Documentation, and Coordination'
             ]}
           />
@@ -141,9 +143,10 @@ function MainPage() {
           <ContentSection
             zIndex={40}
             headline={['WHY CLIENTS', 'CHOOSE US']}
-            body="Fast onboarding, clear communication, and people who actually show up ready to work. We handle compliance, scheduling, and quality—so you don't have to."
+            body="Clients choose Assistant Plus for responsive communication, dependable support teams, and a streamlined onboarding process that makes integration simple and efficient."
             cta="Learn About Our Approach"
-            imageSrc="/team_meeting.jpg"
+            ctaLink="/about#how-we-work"
+            imageSrc="/team_meetings.png"
             imageAlt="Team meeting around table"
             accentType="quarter-top-right"
           />
@@ -161,8 +164,8 @@ function MainPage() {
             accentType="ring-bottom-left"
             boldListItems={true}
             listItems={[
-              'Discovery: We assess your operational needs, volume, and service goals to build the right support structure.',
-              'Staffing: We align trained professionals to your requirements, ensuring the right fit for your operations.',
+              'Discovery: We assess your operational needs, support volume, and service goals to build the right support structure.',
+              'Staffing: We align trained professionals to your operational needs, ensuring the right fit for your operations.',
               'Launch: We implement quickly with structured onboarding, ongoing support, and performance oversight.'
             ]}
           />
@@ -173,15 +176,15 @@ function MainPage() {
           <ContentSection
             zIndex={60}
             headline={['INDUSTRIES', 'WE SERVE']}
-            body="We support a range of industries by providing structured contact center and administrative services tailored to each organization's needs."
+            body="We provide structured contact center and administrative support solutions tailored to the operational needs of organizations across multiple industries."
             cta="See How We Support Your Industry"
-            imageSrc="/desk_work.jpg"
+            imageSrc="/desk_work.png"
             imageAlt="Professional at desk"
             accentType="quarter-top-right"
             listItems={[
               'Government & Public Sector',
-              'Small Business & Growing Organizations',
-              'Healthcare & Medical Administrative Support',
+              'Private Sector & Growing Organizations',
+              'Healthcare & Administrative Support',
               'Financial Services & Customer Support'
             ]}
           />
@@ -200,47 +203,12 @@ function MainPage() {
             stats={[
               { value: '48-72h', label: 'Average time-to-fill' },
               { value: '95%+', label: 'Attendance reliability' },
-              { value: '2x', label: 'Faster onboarding' }
+              { value: '24/7', label: 'Support Availability' }
             ]}
           />
         </div>
 
-        {/* Section 8: Client Story */}
-        <div id="testimonial">
-          <ContentSection
-            zIndex={80}
-            headline={['CLIENT', 'STORY']}
-            body=""
-            cta="Read more stories"
-            imageSrc="/document_review.jpg"
-            imageAlt="Colleagues reviewing documents"
-            accentType="quarter-top-right"
-            quote={{
-              text: "Assistant Plus scaled our intake team in 3 days. Quality stayed high, and our managers finally got time back.",
-              attribution: "— Operations Lead, Public Sector Agency"
-            }}
-          />
-        </div>
-
-        {/* Section 9: Flexible Packages */}
-        <div id="packages">
-          <ContentSection
-            zIndex={90}
-            headline={['FLEXIBLE', 'PACKAGES']}
-            body=""
-            cta="Get a custom quote"
-            imageSrc="/professional_call.jpg"
-            imageAlt="Professional consultation"
-            accentType="quarter-behind"
-            listItems={[
-              'On-Demand Support',
-              'Dedicated Teams',
-              'Full Program Management'
-            ]}
-          />
-        </div>
-
-        {/* Section 10: Contact */}
+{/* Section 8: Contact */}
         <div id="contact">
           <ContactSection />
         </div>
@@ -257,6 +225,7 @@ function App() {
         <Route path="/" element={<MainPage />} />
         <Route path="/capability-statement" element={<CapabilityStatement />} />
         <Route path="/services" element={<Services />} />
+        <Route path="/about" element={<About />} />
       </Routes>
     </Router>
   );

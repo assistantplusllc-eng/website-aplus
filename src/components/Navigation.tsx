@@ -19,7 +19,7 @@ export default function Navigation() {
   }, []);
 
   const navLinks = [
-    { label: 'What We Do', href: '#services', isExternal: false }, // ← CHANGED: Now scrolls to #services section
+    { label: 'Services', href: '#services', isExternal: false }, // ← CHANGED: Now scrolls to #services section
     { label: 'Industries', href: '#industries', isExternal: false },
     { label: 'How We Work', href: '#process', isExternal: false },
     { label: 'Results', href: '#results', isExternal: false },
@@ -62,9 +62,9 @@ export default function Navigation() {
       {/* Fixed Logo - Now navigates to homepage */}
       <button 
         onClick={goHome}
-        className="fixed top-6 left-6 z-[200] cursor-pointer"
+        className="fixed top-4 left-4 z-[200] cursor-pointer"
       >
-        <div className="bg-white/90 backdrop-blur-sm px-1 py-0.5 rounded-md hover:bg-white transition-colors shadow-md">
+        <div className="bg-white rounded-md hover:bg-white transition-colors shadow-md overflow-hidden leading-none">
           <img 
             src="/logo-horizontal.png" 
             alt="Assistant Plus" 
