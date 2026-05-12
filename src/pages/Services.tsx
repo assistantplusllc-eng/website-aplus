@@ -235,7 +235,7 @@ export default function Services() {
       ],
       result:
         'The ability to scale your support team without long-term hiring commitments.',
-      imageSrc: '/services-contact-center.jpg',
+      imageSrc: '/services-contact-center.png',
       imageAlt: 'Contact center team providing support',
     },
     {
@@ -394,7 +394,7 @@ export default function Services() {
       {/* Hero Section - More spacious layout */}
       <div
         ref={heroRef}
-        className="pt-20 pb-32 px-6 lg:px-8 relative"
+        className="pt-20 pb-24 px-6 lg:px-8 relative"
         style={{ backgroundColor: '#2563eb' }}
       >
         <div className="max-w-7xl mx-auto">
@@ -405,7 +405,7 @@ export default function Services() {
     Comprehensive Staffing Solutions
   </p>
 
-  <h1 className="animate-in pt-16 text-h1 text-white mb-8">
+  <h1 className="animate-in pt-4 text-h1 text-white mb-8">
     Support Services Designed to Help Your Business Grow
   </h1>
 
@@ -441,7 +441,7 @@ export default function Services() {
         </div>
 
         {/* Bouncing scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce cursor-pointer"
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce cursor-pointer z-10"
              onClick={() => document.getElementById('services-list')?.scrollIntoView({ behavior: 'smooth' })}
         >
           <svg 

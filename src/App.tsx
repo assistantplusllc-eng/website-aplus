@@ -145,7 +145,7 @@ function MainPage() {
             headline={['WHY CLIENTS', 'CHOOSE US']}
             body="Clients choose Assistant Plus for responsive communication, dependable support teams, and a streamlined onboarding process that makes integration simple and efficient."
             cta="Learn About Our Approach"
-            ctaLink="/about#how-we-work"
+            ctaLink="/about#different"
             imageSrc="/team_meetings.png"
             imageAlt="Team meeting around table"
             accentType="quarter-top-right"

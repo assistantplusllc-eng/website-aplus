@@ -2,7 +2,7 @@ import { useRef, useLayoutEffect, useState, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight, Menu, X, Check, MessageCircle } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -75,16 +75,29 @@ function ContentBlock({ headline, body, listItems, imageSrc, imageAlt, reverse =
 /* ─────────── Main About Page ─────────── */
 export default function About() {
   const navigate = useNavigate();
+  const location = useLocation();
   const heroRef = useRef<HTMLDivElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
+
+    // Handle hash-based scrolling (e.g., /about#different)
+    const hash = window.location.hash;
+    if (hash) {
+      const element = document.getElementById(hash.replace('#', ''));
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 300);
+      }
+    }
+
     const handleScroll = () => setIsScrolled(window.scrollY > 100);
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [location.hash]);
 
   useLayoutEffect(() => {
     const hero = heroRef.current;
@@ -156,7 +169,7 @@ export default function About() {
                 Built For Operational Support
               </p>
               <h1 className="animate-in pt-8 text-h1 text-white mb-8">
-                About Assistant Plus:
+                About Assistant Plus
               </h1>
               <p className="animate-in text-body text-white/90 mb-4">
   A support partner built on real operational experience in high-volume customer service environments.
@@ -214,6 +227,7 @@ export default function About() {
           />
 
           {/* What Makes Us Different */}
+          <div id="different">
           <ContentBlock
             headline={['What Makes Us', 'Different']}
             body={[
@@ -224,6 +238,7 @@ export default function About() {
             imageAlt="Professional support"
             reverse
           />
+          </div>
 
           {/* Experience */}
           <ContentBlock
@@ -256,7 +271,7 @@ export default function About() {
                 <div className="relative pl-6 border-l-4 border-[#2563eb]">
                   <h3 className="text-2xl font-bold text-[#1e3a8a] mb-3">Vision</h3>
                   <p className="text-body text-gray-600">
-                    Our vision is to build an environment where individuals are supported, accountable, and positioned for long-term success, creating a strong, reliable workforce that enables us to be a trusted partner for organizations seeking dependable, scalable support that drives operational excellence.
+                    Our vision is to build a reliable support organization where accountability, growth, and operational excellence create long-term value for both clients and team members.
                   </p>
                 </div>
 
@@ -264,7 +279,7 @@ export default function About() {
                 <div className="relative pl-6 border-l-4 border-[#84cc16]">
                   <h3 className="text-2xl font-bold text-[#1e3a8a] mb-3">Mission</h3>
                   <p className="text-body text-gray-600">
-                    To deliver structured, reliable support through trained professionals who integrate seamlessly into client operations, improving efficiency without the burden of internal hiring.
+                    To deliver structured, reliable support through trained professionals who integrate seamlessly into client operations, improving efficiency without the overhead of building internal teams.
                   </p>
                 </div>
               </div>
@@ -274,16 +289,16 @@ export default function About() {
                 {/* Blue ring accent — different from lime corners */}
                 <div className="absolute -top-4 -right-4 w-16 h-16 rounded-full border-4 border-[#2563eb] opacity-20 pointer-events-none" />
 
-                <h3 className="text-2xl font-bold text-[#1e3a8a] mb-6">Company Values</h3>
+                <h3 className="text-2xl font-bold text-[#1e3a8a] mb-6">Our Values</h3>
 
-                <div className="space-y-5">
+                <div className="space-y-6">
                   <div className="flex gap-4">
                     <div className="w-10 h-10 rounded-full bg-[#2563eb] flex items-center justify-center flex-shrink-0">
                       <span className="text-white font-bold text-sm">01</span>
                     </div>
                     <div>
-                      <h4 className="font-bold text-[#1e3a8a] mb-1">Consistency</h4>
-                      <p className="text-sm text-gray-600">We deliver the same level of quality and professionalism across every interaction, ensuring your customers always receive dependable service.</p>
+                      <h4 className="font-bold text-[#1e3a8a] mb-2">Accountability</h4>
+                      <p className="text-sm text-gray-600 leading-relaxed">We take ownership of our work, follow through on commitments, and maintain high standards across every interaction and operation.</p>
                     </div>
                   </div>
 
@@ -292,8 +307,8 @@ export default function About() {
                       <span className="text-white font-bold text-sm">02</span>
                     </div>
                     <div>
-                      <h4 className="font-bold text-[#1e3a8a] mb-1">Responsiveness</h4>
-                      <p className="text-sm text-gray-600">We adapt quickly to changing needs and priorities, keeping your operations agile and your customers satisfied with timely support.</p>
+                      <h4 className="font-bold text-[#1e3a8a] mb-2">Teamwork</h4>
+                      <p className="text-sm text-gray-600 leading-relaxed">We value collaboration, communication, and mutual respect, recognizing every employee and client as an important part of the team.</p>
                     </div>
                   </div>
 
@@ -302,8 +317,8 @@ export default function About() {
                       <span className="text-white font-bold text-sm">03</span>
                     </div>
                     <div>
-                      <h4 className="font-bold text-[#1e3a8a] mb-1">Professionalism</h4>
-                      <p className="text-sm text-gray-600">Our team represents your brand with integrity, maintaining high standards of conduct and communication in every engagement.</p>
+                      <h4 className="font-bold text-[#1e3a8a] mb-2">Growth Mindset</h4>
+                      <p className="text-sm text-gray-600 leading-relaxed">We foster continuous learning and development to strengthen our team, improve performance, and adapt to evolving client needs.</p>
                     </div>
                   </div>
 
@@ -312,8 +327,8 @@ export default function About() {
                       <span className="text-[#1e3a8a] font-bold text-sm">04</span>
                     </div>
                     <div>
-                      <h4 className="font-bold text-[#1e3a8a] mb-1">Reliability</h4>
-                      <p className="text-sm text-gray-600">You can count on us to show up, follow through, and maintain the operational stability your business depends on day after day.</p>
+                      <h4 className="font-bold text-[#1e3a8a] mb-2">Reliability</h4>
+                      <p className="text-sm text-gray-600 leading-relaxed">You can count on us to show up, follow through, and maintain the operational stability your business depends on day after day.</p>
                     </div>
                   </div>
                 </div>
