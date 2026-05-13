@@ -242,7 +242,7 @@ export default function CapabilityStatement() {
                 >
                   Assistant Plus, LLC – Subcontracted Contact Center Services
                 </h3>
-                <p className="text-sm text-gray-500 mb-4">January 2023 – April 2024</p>
+                <p className="text-sm text-gray-500 mb-4">January 2023 – April 2025</p>
                 
                 <ul className="space-y-2 mb-6">
                   {[

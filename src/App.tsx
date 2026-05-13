@@ -106,9 +106,9 @@ function MainPage() {
             zIndex={20}
             headline={['WHO', 'WE ARE']}
             body={[
-              "We specialize in contact center and administrative support solutions for government agencies and growing organizations.",
+              "Assistant Plus was built around the understanding that responsive support and operational consistency directly impact the customer experience.",
               "",
-              "Our approach is built on real-world customer service experience, allowing us to deliver structured, reliable support without the complexity and overhead of traditional hiring models."
+              "Our team-oriented approach emphasizes adaptability, communication, and dependable support across customer-facing and administrative functions."
             ]}
             cta="Learn How We Work"
             ctaLink="/about"
@@ -123,8 +123,8 @@ function MainPage() {
           <ContentSection
             zIndex={30}
             headline={['WHAT', 'WE DO']}
-            subheader="Reliable Contact Center and Back-Office Support"
-            body="We provide dependable contact center, administrative, and back-office support that helps organizations improve operations, enhance customer service, and stay focused on growth."
+            subheader="Customer Support & Operational Coordination"
+            body="We provide contact center, administrative, and workflow support services that help organizations maintain responsive operations and efficient service coordination."
             cta="Explore Our Services"
             ctaLink="/services"
             imageSrc="/what-we-do.png"
@@ -132,30 +132,16 @@ function MainPage() {
             accentType="ring-bottom-left"
             listItems={[
               'Inbound & Outbound Customer Support',
-              'Administrative & Back-Office Support',
-              'Data Entry, Documentation, and Coordination'
+              'Administrative Coordination & Workflow Support',
+              'Documentation, Data Entry, & Service Coordination'
             ]}
           />
         </div>
 
-        {/* Section 4: Why Clients Choose Us */}
-        <div id="why-us">
-          <ContentSection
-            zIndex={40}
-            headline={['WHY CLIENTS', 'CHOOSE US']}
-            body="Clients choose Assistant Plus for responsive communication, dependable support teams, and a streamlined onboarding process that makes integration simple and efficient."
-            cta="Learn About Our Approach"
-            ctaLink="/about#different"
-            imageSrc="/team_meetings.png"
-            imageAlt="Team meeting around table"
-            accentType="quarter-top-right"
-          />
-        </div>
-
-        {/* Section 5: How We Work */}
+        {/* Section 4: How We Work */}
         <div id="process">
           <ContentSection
-            zIndex={50}
+            zIndex={40}
             headline={['HOW', 'WE WORK']}
             body=""
             cta="Start a Conversation"
@@ -164,51 +150,51 @@ function MainPage() {
             accentType="ring-bottom-left"
             boldListItems={true}
             listItems={[
-              'Discovery: We assess your operational needs, support volume, and service goals to build the right support structure.',
-              'Staffing: We align trained professionals to your operational needs, ensuring the right fit for your operations.',
+              'Discovery: We assess your operational needs, support volume, and service goals to build the right operational support model.',
+              'Alignment: We align trained professionals to your service goals, ensuring responsive, dependable support across day-to-day functions.',
               'Launch: We implement quickly with structured onboarding, ongoing support, and performance oversight.'
             ]}
           />
         </div>
 
-        {/* Section 6: Industries */}
+        {/* Section 5: Industries */}
         <div id="industries">
           <ContentSection
-            zIndex={60}
+            zIndex={50}
             headline={['INDUSTRIES', 'WE SERVE']}
-            body="We provide structured contact center and administrative support solutions tailored to the operational needs of organizations across multiple industries."
+            body="Our support model is designed to adapt across industries, providing responsive customer support and operational coordination aligned with a wide range of organizational needs."
             cta="See How We Support Your Industry"
             imageSrc="/desk_work.png"
             imageAlt="Professional at desk"
             accentType="quarter-top-right"
             listItems={[
               'Government & Public Sector',
-              'Private Sector & Growing Organizations',
-              'Healthcare & Administrative Support',
-              'Financial Services & Customer Support'
+              'Private Sector & Operations',
+              'Healthcare Support Services',
+              'Financial Services Support'
             ]}
           />
         </div>
 
-        {/* Section 7: Results */}
+        {/* Section 6: Results */}
         <div id="results">
           <ContentSection
-            zIndex={70}
+            zIndex={60}
             headline={['RESULTS', 'THAT MATTER']}
             body=""
             cta="Talk to our team"
-            imageSrc="/agent_smile.jpg"
+            imageSrc="/agent_smile.png"
             imageAlt="Smiling support agent"
             accentType="ring-bottom-left"
             stats={[
-              { value: '48-72h', label: 'Average time-to-fill' },
-              { value: '95%+', label: 'Attendance reliability' },
-              { value: '24/7', label: 'Support Availability' }
+              { value: '48-72h', label: 'Average Deployment Timeline' },
+              { value: '1-day', label: 'Standard Response Time' },
+              { value: 'On-Demand', label: 'Support Models & Coverage' }
             ]}
           />
         </div>
 
-{/* Section 8: Contact */}
+        {/* Section 7: Contact */}
         <div id="contact">
           <ContactSection />
         </div>

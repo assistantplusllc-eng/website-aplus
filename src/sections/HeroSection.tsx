@@ -95,7 +95,7 @@ export default function HeroSection() {
           className="absolute text-micro text-white/80"
           style={{ left: '6vw', top: '7vh' }}
         >
-          U.S.-BASED STAFFING PARTNER
+          STRUCTURED SUPPORT SERVICES
         </div>
 
         {/* H1 Headlines */}
@@ -105,7 +105,7 @@ export default function HeroSection() {
         >
           <div ref={h1Line1Ref} className="text-h1 text-white">SCALABLE</div>
           <div ref={h1Line2Ref} className="text-h1 text-white">CUSTOMER SUPPORT</div>
-          <div ref={h1Line3Ref} className="text-h1 text-white">& ADMINISTRATIVE STAFFING</div>
+          <div ref={h1Line3Ref} className="text-h1 text-white">& OPERATIONAL SOLUTIONS</div>
         </div>
 
         {/* Body copy */}
@@ -114,8 +114,7 @@ export default function HeroSection() {
           className="absolute text-body text-white/90"
           style={{ left: '6vw', top: '60vh', width: '34vw' }}
         >
-          Experienced professionals ready to support your operations, improve response times, and reduce internal workload 
-          — without the overhead.
+          Reliable support teams that improve responsiveness and strengthen day-to-day operations.
         </div>
 
         {/* CTA Row */}
