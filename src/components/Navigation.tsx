@@ -19,9 +19,9 @@ export default function Navigation() {
   }, []);
 
   const navLinks = [
-    { label: 'Services', href: '#services', isExternal: false }, // ← CHANGED: Now scrolls to #services section
+    { label: 'Services', href: '/services', isExternal: true },
     { label: 'Industries', href: '#industries', isExternal: false },
-    { label: 'How We Work', href: '#process', isExternal: false },
+    { label: 'How We Work', href: '/about', isExternal: true },
     { label: 'Results', href: '#results', isExternal: false },
     { label: 'Contact', href: '#contact', isExternal: false },
   ];

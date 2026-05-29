@@ -114,7 +114,7 @@ export default function About() {
     <div className="min-h-screen bg-white">
       {/* Logo */}
       <button onClick={() => navigate('/')} className="fixed top-4 left-4 z-[400] cursor-pointer">
-        <div className="bg-white rounded-md shadow-md hover:bg-white transition-colors overflow-hidden leading-none">
+        <div className="bg-white px-1 py-0.5 rounded-md shadow-md hover:bg-white transition-colors">
           <img src="/logo-horizontal.png" alt="Assistant Plus" className="h-8 w-auto object-contain" />
         </div>
       </button>
@@ -165,17 +165,15 @@ export default function About() {
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div className="relative max-w-xl">
-              <p className="animate-in absolute -left-4 md:-left-6 -top-8 text-micro text-white/90 uppercase tracking-wider">
-                Built For Operational Support
-              </p>
-              <h1 className="animate-in pt-8 text-h1 text-white mb-8">
-                About Assistant Plus
+              
+              <h1 className="animate-in pt-8 text-h1 text-white mb-12">
+                Your Support<br />Partner
               </h1>
               <p className="animate-in text-body text-white/90 mb-4">
-  A support partner built on real operational experience in high-volume customer service environments.
+  Experience in high-volume customer service environments. Real operational knowledge, not theory.
 </p>
 <p className="animate-in text-body text-white/90">
-  We provide structured contact center and administrative support designed to integrate seamlessly into your operations and improve efficiency at scale.
+  Structured contact center and administrative support that integrates into your operations and improves efficiency.
 </p>
             </div>
             <div className="animate-in relative">
@@ -219,8 +217,8 @@ export default function About() {
           <ContentBlock
             headline={['How We Work']}
             body={[
-              "Assistant Plus is built to support organizations that need reliable, consistent reliable customer service and administrative support without the complexity of building internal teams.",
-              "We focus on structured support, clear processes, and seamless integration into existing workflows, allowing our clients to maintain service quality while improving efficiency."
+              "We support organizations that need reliable customer service and administrative help. No internal team required.",
+              "Structured support, clear processes, seamless integration. You maintain service quality while we handle the operations."
             ]}
             imageSrc="/work-team.png"
             imageAlt="Team collaboration"
@@ -231,8 +229,8 @@ export default function About() {
           <ContentBlock
             headline={['What Makes Us', 'Different']}
             body={[
-              "Our approach is grounded in real-world experience, not theory. With a background in high-volume support environments, we understand the operational demands that come with managing customer interactions at scale.",
-              "We prioritize consistency, responsiveness, and professionalism across every interaction, ensuring that support operations remain consistent, responsive, and dependable."
+              "Our approach comes from experience in high-volume support environments. We understand the operational demands of managing customer interactions at scale.",
+              "Consistency, professionalism, reliable communication. Every interaction. Steady, dependable, high-quality support."
             ]}
             imageSrc="/differences.png"
             imageAlt="Professional support"
@@ -244,14 +242,14 @@ export default function About() {
           <ContentBlock
             headline={['Experience', 'That Matters']}
             body={[
-              "Assistant Plus has supported customer service operations across industries including financial services, consumer support, and administrative service environments.",
-              "Our work includes managing inbound and outbound customer support operations, appointment scheduling, customer inquiries, and administrative support in fast-paced environments."
+              "We have managed customer service operations across financial services, consumer support, and administrative environments.",
+              "Omnichannel customer support, customer inquiries, telesales, and administrative operations in fast-paced environments."
             ]}
             listItems={[
-              'Financial services support',
               'High-volume customer service programs',
+              'Performance‑driven with defined metrics',
               'Administrative & back-office operations',
-              'Inbound & outbound customer communications'
+              'Omnichannel customer communications'
             ]}
             imageSrc="/contact-center.png"
             imageAlt="Team experience"
@@ -271,7 +269,7 @@ export default function About() {
                 <div className="relative pl-6 border-l-4 border-[#2563eb]">
                   <h3 className="text-2xl font-bold text-[#1e3a8a] mb-3">Vision</h3>
                   <p className="text-body text-gray-600">
-                    Our vision is to build a reliable support organization where accountability, growth, and operational excellence create long-term value for both clients and team members.
+                    A reliable support organization built on accountability, growth, and operational excellence. Long-term value for clients and team members.
                   </p>
                 </div>
 
@@ -279,7 +277,7 @@ export default function About() {
                 <div className="relative pl-6 border-l-4 border-[#84cc16]">
                   <h3 className="text-2xl font-bold text-[#1e3a8a] mb-3">Mission</h3>
                   <p className="text-body text-gray-600">
-                    To deliver structured, reliable support through trained professionals who integrate seamlessly into client operations, improving efficiency without the overhead of building internal teams.
+                    Deliver structured support through trained professionals who integrate into your operations. More capacity. Less overhead.
                   </p>
                 </div>
               </div>
@@ -308,7 +306,7 @@ export default function About() {
                     </div>
                     <div>
                       <h4 className="font-bold text-[#1e3a8a] mb-2">Teamwork</h4>
-                      <p className="text-sm text-gray-600 leading-relaxed">We value collaboration, communication, and mutual respect, recognizing every employee and client as an important part of the team.</p>
+                      <p className="text-sm text-gray-600 leading-relaxed">We value collaboration, communication, and mutual respect, recognizing every employee and client as an important part of our team.</p>
                     </div>
                   </div>
 
@@ -346,7 +344,7 @@ export default function About() {
             Ready to Work Together?
           </h2>
           <p className="text-xl text-white/90 mb-10 max-w-2xl mx-auto">
-            We are committed to providing dependable support that organizations can rely on to maintain service quality and operational efficiency.
+            Dependable support that maintains service quality and operational efficiency.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <button
@@ -386,7 +384,6 @@ export default function About() {
               <nav className="space-y-2">
                 <button onClick={() => navigate('/')} className="block text-white/70 hover:text-[#84cc16] transition-colors text-sm">Home</button>
                 <button onClick={() => navigate('/services')} className="block text-white/70 hover:text-[#84cc16] transition-colors text-sm">Services</button>
-                <button onClick={() => navigate('/capability-statement')} className="block text-white/70 hover:text-[#84cc16] transition-colors text-sm">Capability Statement</button>
                 <button onClick={() => navigate('/', { state: { scrollTo: 'contact' } })} className="block text-white/70 hover:text-[#84cc16] transition-colors text-sm">Contact</button>
               </nav>
             </div>
@@ -395,12 +392,21 @@ export default function About() {
               <div className="space-y-2 text-sm text-white/70">
                 <p>(888) 652-6315</p>
                 <p>info@assistantplusworks.com</p>
-                <p>Bergen County, New Jersey</p>
+                <p></p>
               </div>
             </div>
           </div>
-          <div className="pt-8 border-t border-white/20 text-center">
-            <p className="text-white/50 text-sm">© 2026 Assistant Plus, LLC. All rights reserved.</p>
+          <div className="pt-8 border-t border-white/20">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+              <div className="w-24 md:w-32" /> {/* Spacer for balance */}
+              <div className="text-micro text-white/60 tracking-wider text-center">
+                © 2026 ASSISTANT PLUS, LLC. ALL RIGHTS RESERVED.
+              </div>
+              <div className="flex gap-6 w-24 md:w-32 justify-end">
+                <a href="/privacy-policy" className="text-micro text-white/60 hover:text-white transition-colors tracking-wider uppercase">Privacy</a>
+                <a href="/terms-of-service" className="text-micro text-white/60 hover:text-white transition-colors tracking-wider uppercase">Terms</a>
+              </div>
+            </div>
           </div>
         </div>
       </footer>

@@ -2,7 +2,7 @@ import { useRef, useLayoutEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight, MessageCircle, Check, Menu, X } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -155,6 +155,23 @@ export default function Services() {
     window.scrollTo(0, 0);
   }, []);
 
+  // Handle scroll from navigation state
+  const location = useLocation();
+  const scrollTarget = useRef<string | null>(null);
+
+  useEffect(() => {
+    if (location.state?.scrollTo) {
+      scrollTarget.current = location.state.scrollTo;
+      // Give time for page to render
+      setTimeout(() => {
+        const element = document.getElementById(location.state.scrollTo);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 500);
+    }
+  }, [location]);
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 100);
@@ -189,18 +206,18 @@ export default function Services() {
     {
       number: '01',
       title: 'Customer Support',
-      subtitle: 'Professional Customer Interaction',
+      subtitle: 'Omnichannel Customer Interaction',
       description:
-        'We manage customer interactions with professionalism and efficiency, ensuring every call, message, and inquiry is handled with care and consistency.',
+        'Every call, message, and inquiry handled with consistency. Your customers get the same experience every time.',
       services: [
         'Inbound call handling',
         'Outbound follow-ups',
         'Email and chat support',
-        'Appointment scheduling',
+        'Ticket resolution',
         'Order status and general inquiries',
       ],
       result:
-        'Improved customer satisfaction and faster response times without expanding your internal team.',
+        'Consistent customer experience. Faster resolution. No added headcount.',
       imageSrc: '/services-customer-support.jpeg',
       imageAlt: 'Customer service agent handling calls professionally',
     },
@@ -209,15 +226,15 @@ export default function Services() {
       title: 'Administrative Support',
       subtitle: 'Back-Office Operations',
       description:
-        'We handle time-consuming back-office tasks so you can stay focused on running and growing your business.',
+        'Back-office tasks — data entry, CRM updates, reporting — off your plate. Your team focuses on what matters.',
       services: [
         'Data entry and database management',
         'CRM updates and maintenance',
         'Document processing',
-        'Email management',
+        'Human Resources support',
         'Reporting and basic administrative support',
       ],
-      result: 'Streamlined operations and reduced workload for your internal team.',
+      result: 'Less admin overhead. More focus on core operations.',
       imageSrc: '/services-administrative.jpg',
       imageAlt: 'Professional managing administrative tasks',
     },
@@ -226,15 +243,15 @@ export default function Services() {
       title: 'Contact Center',
       subtitle: 'Flexible Scaling Solutions',
       description:
-        'Flexible support solutions designed for businesses that need help managing call volume or scaling operations.',
+        'Overflow call handling, seasonal coverage, and dedicated agents. Scale up or down without long-term contracts.',
       services: [
-        'Dedicated support agents',
+        '24/7 Dedicated support agents',
         'Overflow call handling',
         'Seasonal or project-based support',
         'Program support for customer service operations',
       ],
       result:
-        'The ability to scale your support team without long-term hiring commitments.',
+        'Scale coverage on demand. No long-term hiring commitments.',
       imageSrc: '/services-contact-center.png',
       imageAlt: 'Contact center team providing support',
     },
@@ -243,14 +260,14 @@ export default function Services() {
       title: 'Specialized Support',
       subtitle: 'Industry-Aware & Compliance-Ready',
       description:
-        'Industry-aware support tailored to meet specific operational and compliance needs.',
+        'Healthcare, financial services, and government support with compliance built in. Agents trained to your standards.',
       services: [
-        'Healthcare support environments (HIPAA-aware)',
-        'Financial and member service support',
-        'High-volume customer service programs',
+        'Healthcare: health plan administration and patient intake',
+        'Financial Services: claim filing and fraud prevention support',
+        'Real Estate: lead nurturing and intake screening',
       ],
       result:
-        'Professional service delivered with an understanding of industry expectations and standards.',
+        'Industry-trained agents. Compliance-ready from day one.',
       imageSrc: '/services-specialized.jpg',
       imageAlt: 'Specialized professional support',
     },
@@ -259,14 +276,14 @@ export default function Services() {
       title: 'Custom Solutions',
       subtitle: 'Tailored to Your Operations',
       description:
-        "Don't see exactly what you need? We offer flexible service solutions tailored to your business operations.",
+        "Need something specific? We build support models around your workflow, not the other way around.",
       services: [
         'Hybrid service combinations',
         'Project-based engagements',
         'Dedicated team allocation',
         'Flexible scheduling options',
       ],
-      result: 'A support structure designed specifically for your unique business needs.',
+      result: 'Support that fits your operations. Not a template.',
       imageSrc: '/services-custom.jpg',
       imageAlt: 'Team collaborating on custom solutions',
     },
@@ -400,19 +417,17 @@ export default function Services() {
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] gap-8 lg:gap-12 items-center">
             <div className="relative max-w-xl">
-              {/* Subheader - positioned up and left, smaller text */}
-              <p className="animate-in text-micro text-white/90 uppercase tracking-wider mb-4">
-    Comprehensive Staffing Solutions
-  </p>
-
-  <h1 className="animate-in pt-4 text-h1 text-white mb-8">
-    Support Services Designed to Help Your Business Grow
+              
+  <h1 className="animate-in pt-4 text-h1 text-white mb-14">
+    Support<br />
+    That Scales<br />
+    With Your<br />
+    Operations
   </h1>
 
   <p className="animate-in text-body text-white/90 mb-10">
-    At Assistant Plus, we provide customer support and administrative
-    services designed to help businesses operate more efficiently
-    without the need to hire, train, or manage additional staff.
+    Customer support and administrative services that extend your team.
+    More capacity, same headcount. 
   </p>
 </div>
 
@@ -441,7 +456,7 @@ export default function Services() {
         </div>
 
         {/* Bouncing scroll indicator */}
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce cursor-pointer z-10"
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 animate-bounce cursor-pointer z-10"
              onClick={() => document.getElementById('services-list')?.scrollIntoView({ behavior: 'smooth' })}
         >
           <svg 
@@ -474,81 +489,79 @@ export default function Services() {
       </div>
 
       {/* CTA Section - Full width blue background */}
-      <div style={{ backgroundColor: '#2563eb' }}>
+      <div id="get-started" style={{ backgroundColor: '#2563eb' }}>
         <div className="max-w-6xl mx-auto px-6 py-20 text-center">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Ready to Get Started?
           </h2>
           <p className="text-xl text-white/90 mb-10 max-w-2xl mx-auto">
-            Whether you need consistent daily support or help managing increased
-            demand, our team is equipped to step in and deliver dependable,
-            professional service.
+            Daily support or surge coverage. Deployed fast, managed professionally.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a
-              href="/#contact"
+            <button
+              onClick={() => navigate('/', { state: { scrollTo: 'contact' } })}
               className="inline-flex items-center gap-2 px-8 py-4 rounded-lg font-medium bg-white text-blue-600 hover:bg-gray-100 transition-colors"
             >
               <MessageCircle size={20} />
               Request a Consultation
-            </a>
-            <button
-              onClick={() => navigate('/capability-statement')}
+            </button>
+            <a
+              href="/capability-statement.pdf"
+              download
               className="inline-flex items-center gap-2 px-8 py-4 rounded-lg font-medium border-2 border-white text-white hover:bg-white/10 transition-colors"
             >
-              View Capability Statement
-            </button>
+              Download Capability Statement
+            </a>
           </div>
         </div>
       </div>
 
       {/* Footer */}
-      {/* Footer - Full width */}
-<footer className="py-12 px-6" style={{ backgroundColor: '#1e3a8a' }}>
-  <div className="max-w-6xl mx-auto">
-    <div className="grid md:grid-cols-3 gap-8 mb-8">
-      {/* Company Info */}
-      <div>
-        <img 
-          src="/logo_white.png" 
-          alt="Assistant Plus" 
-          className="h-10 w-auto mb-4"
-        />
-        <p className="text-white/70 text-sm leading-relaxed">
-          Professional contact center and administrative support services for government agencies and growing organizations.
-        </p>
-      </div>
-      
-      {/* Quick Links */}
-      <div>
-        <h3 className="text-white font-semibold mb-4">Quick Links</h3>
-        <nav className="space-y-2">
-          <button onClick={() => navigate('/')} className="block text-white/70 hover:text-lime-400 transition-colors text-sm">Home</button>
-          <button onClick={() => navigate('/services')} className="block text-white/70 hover:text-lime-400 transition-colors text-sm">Services</button>
-          <button onClick={() => navigate('/capability-statement')} className="block text-white/70 hover:text-lime-400 transition-colors text-sm">Capability Statement</button>
-          <button onClick={() => navigate('/#contact')} className="block text-white/70 hover:text-lime-400 transition-colors text-sm">Contact</button>
-        </nav>
-      </div>
-      
-      {/* Contact Info */}
-      <div>
-        <h3 className="text-white font-semibold mb-4">Contact Us</h3>
-        <div className="space-y-2 text-sm text-white/70">
-          <p>(888) 652-6315</p>
-          <p>info@assistantplusworks.com</p>
-          <p>Bergen County, New Jersey</p>
+      <footer className="py-12 px-6" style={{ backgroundColor: '#1e3a8a' }}>
+        <div className="max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-8 mb-8">
+            <div>
+              <img
+                src="/logo_white.png"
+                alt="Assistant Plus"
+                className="h-8 w-auto mb-4 block"
+                style={{ background: 'none', backgroundColor: 'transparent' }}
+              />
+              <p className="text-white/70 text-sm leading-relaxed">
+                Professional contact center and administrative support services for government agencies and growing organizations.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-white font-semibold mb-4">Quick Links</h3>
+              <nav className="space-y-2">
+                <button onClick={() => navigate('/')} className="block text-white/70 hover:text-[#84cc16] transition-colors text-sm">Home</button>
+                <button onClick={() => navigate('/about')} className="block text-white/70 hover:text-[#84cc16] transition-colors text-sm">About</button>
+                <button onClick={() => navigate('/', { state: { scrollTo: 'contact' } })} className="block text-white/70 hover:text-[#84cc16] transition-colors text-sm">Contact</button>
+              </nav>
+            </div>
+            <div>
+              <h3 className="text-white font-semibold mb-4">Contact Us</h3>
+              <div className="space-y-2 text-sm text-white/70">
+                <p>(888) 652-6315</p>
+                <p>info@assistantplusworks.com</p>
+                <p></p>
+              </div>
+            </div>
+          </div>
+          <div className="pt-8 border-t border-white/20">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+              <div className="w-24 md:w-32" /> {/* Spacer for balance */}
+              <div className="text-micro text-white/60 tracking-wider text-center">
+                © 2026 ASSISTANT PLUS, LLC. ALL RIGHTS RESERVED.
+              </div>
+              <div className="flex gap-6 w-24 md:w-32 justify-end">
+                <a href="/privacy-policy" className="text-micro text-white/60 hover:text-white transition-colors tracking-wider uppercase">Privacy</a>
+                <a href="/terms-of-service" className="text-micro text-white/60 hover:text-white transition-colors tracking-wider uppercase">Terms</a>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-    
-    {/* Bottom bar */}
-    <div className="pt-8 border-t border-white/20 text-center">
-      <p className="text-white/50 text-sm">
-        © 2024 Assistant Plus, LLC. All rights reserved.
-      </p>
-    </div>
-  </div>
-</footer>
+      </footer>
     </div>
   );
 }

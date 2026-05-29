@@ -1,13 +1,11 @@
 import { useRef, useLayoutEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ArrowRight, Download, ChevronDown } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { ArrowRight, ChevronDown } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function HeroSection() {
-  const navigate = useNavigate();
   const sectionRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const microRef = useRef<HTMLDivElement>(null);
@@ -28,7 +26,7 @@ export default function HeroSection() {
 
     const ctx = gsap.context(() => {
       const loadTl = gsap.timeline({ defaults: { ease: 'power2.out' } });
-      
+
       loadTl
         .fromTo(panel, { opacity: 0 }, { opacity: 1, duration: 0.3 }, 0)
         .fromTo(microRef.current, { y: -12, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4 }, 0.15)
@@ -117,7 +115,7 @@ export default function HeroSection() {
           Reliable support teams that improve responsiveness and strengthen day-to-day operations.
         </div>
 
-        {/* CTA Row */}
+        {/* CTA Row - Single button now */}
         <div 
           ref={ctaRef}
           className="absolute flex items-center gap-10"
@@ -129,13 +127,6 @@ export default function HeroSection() {
           >
             Request Staffing
             <ArrowRight size={18} />
-          </button>
-          <button 
-            className="btn-secondary"
-            onClick={() => navigate('/capability-statement')}
-          >
-            <Download size={18} />
-            View Capability Statement
           </button>
         </div>
 
@@ -169,7 +160,7 @@ export default function HeroSection() {
             borderRadius: '0 0 100% 0'
           }}
         />
-        
+
         <div 
           ref={accent2Ref}
           className="absolute ring-lime"
@@ -181,7 +172,7 @@ export default function HeroSection() {
             background: 'transparent'
           }}
         />
-        
+
         <div 
           ref={accent3Ref}
           className="absolute ring-white"

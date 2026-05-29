@@ -9,9 +9,10 @@ import Navigation from './components/Navigation';
 import HeroSection from './sections/HeroSection';
 import ContentSection from './sections/ContentSection';
 import ContactSection from './sections/ContactSection';
-import CapabilityStatement from './pages/CapabilityStatement';
 import Services from './pages/Services';
 import About from './pages/About';
+import TermsOfService from './pages/TermsOfService';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
@@ -34,7 +35,6 @@ function MainPage() {
     const attemptScroll = () => {
       const element = document.getElementById(scrollTarget.current!);
       if (element) {
-        // Use GSAP for smoother scrolling with pinned sections
         gsap.to(window, {
           scrollTo: { y: element, offsetY: 0 },
           duration: 1,
@@ -42,12 +42,10 @@ function MainPage() {
         });
         scrollTarget.current = null;
       } else {
-        // Retry if element not ready
         setTimeout(attemptScroll, 200);
       }
     };
 
-    // Wait for everything to mount
     const timer = setTimeout(attemptScroll, 800);
     return () => clearTimeout(timer);
   }, []);
@@ -106,9 +104,9 @@ function MainPage() {
             zIndex={20}
             headline={['WHO', 'WE ARE']}
             body={[
-              "Assistant Plus was built around the understanding that responsive support and operational consistency directly impact the customer experience.",
+              "Assistant Plus delivers responsive support and operational consistency — because both directly shape the customer experience.",
               "",
-              "Our team-oriented approach emphasizes adaptability, communication, and dependable support across customer-facing and administrative functions."
+              "We prioritize adaptability, clear communication, and dependable execution across every customer-facing and administrative function."
             ]}
             cta="Learn How We Work"
             ctaLink="/about"
@@ -124,14 +122,14 @@ function MainPage() {
             zIndex={30}
             headline={['WHAT', 'WE DO']}
             subheader="Customer Support & Operational Coordination"
-            body="We provide contact center, administrative, and workflow support services that help organizations maintain responsive operations and efficient service coordination."
+            body="Contact center, administrative, and workflow support that keeps operations responsive and service coordination efficient."
             cta="Explore Our Services"
             ctaLink="/services"
             imageSrc="/what-we-do.png"
             imageAlt="Professional on a call"
             accentType="ring-bottom-left"
             listItems={[
-              'Inbound & Outbound Customer Support',
+              'Omnichannel Customer Support',
               'Administrative Coordination & Workflow Support',
               'Documentation, Data Entry, & Service Coordination'
             ]}
@@ -145,14 +143,14 @@ function MainPage() {
             headline={['HOW', 'WE WORK']}
             body=""
             cta="Start a Conversation"
+            ctaLink="/services#get-started"
             imageSrc="/collaboration_desk.jpg"
             imageAlt="Professionals collaborating"
             accentType="ring-bottom-left"
-            boldListItems={true}
-            listItems={[
-              'Discovery: We assess your operational needs, support volume, and service goals to build the right operational support model.',
-              'Alignment: We align trained professionals to your service goals, ensuring responsive, dependable support across day-to-day functions.',
-              'Launch: We implement quickly with structured onboarding, ongoing support, and performance oversight.'
+            timelineItems={[
+              'Discovery: We map your operational needs, support volume, and service goals — then design the support structure that fits.',
+              'Alignment: We match trained professionals to your environment, ensuring responsive coverage across day-to-day operations.',
+              'Launch: Fast, structured onboarding with ongoing oversight from day one.'
             ]}
           />
         </div>
@@ -162,17 +160,23 @@ function MainPage() {
           <ContentSection
             zIndex={50}
             headline={['INDUSTRIES', 'WE SERVE']}
-            body="Our support model is designed to adapt across industries, providing responsive customer support and operational coordination aligned with a wide range of organizational needs."
-            cta="See How We Support Your Industry"
+            body="Support that adapts to industry requirements — from public sector compliance to private-sector pace."
             imageSrc="/desk_work.png"
             imageAlt="Professional at desk"
             accentType="quarter-top-right"
-            listItems={[
-              'Government & Public Sector',
-              'Private Sector & Operations',
-              'Healthcare Support Services',
-              'Financial Services Support'
+            cardItems={[
+              'Government Agencies',
+              'Professional Services',
+              'Utilities & Consumer Services',
+              'Financial Services & Insurance',
+              'Travel & Hospitality',
+              'Healthcare & Wellness',
+              'E-Commerce'
             ]}
+            downloadCta={{
+              label: 'Download Capability Statement',
+              file: '/capability-statement.pdf'
+            }}
           />
         </div>
 
@@ -199,6 +203,7 @@ function MainPage() {
           <ContactSection />
         </div>
       </main>
+      {/* Footer is now inside ContactSection - no duplicate needed */}
     </div>
   );
 }
@@ -209,9 +214,10 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<MainPage />} />
-        <Route path="/capability-statement" element={<CapabilityStatement />} />
         <Route path="/services" element={<Services />} />
         <Route path="/about" element={<About />} />
+        <Route path="/terms-of-service" element={<TermsOfService />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
       </Routes>
     </Router>
   );
