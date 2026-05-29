@@ -139,55 +139,69 @@ export default function ContactSection() {
               Tell us what you need. We will respond within one business day.
             </p>
             <form 
-  ref={formRef} 
-  name="contact" 
-  method="POST" 
-  data-netlify="true" 
-  data-netlify-honeypot="bot-field"
-  onSubmit={handleSubmit}
-  className="space-y-4"
->
-  {/* Hidden honeypot field to prevent spam */}
-  <p className="hidden">
-    <label>
-      Don't fill this out if you're human: <input name="bot-field" />
-    </label>
-  </p>
+              ref={formRef} 
+              name="contact" 
+              method="POST" 
+              data-netlify="true" 
+              data-netlify-honeypot="bot-field"
+              onSubmit={handleSubmit}
+              className="space-y-4"
+            >
+              {/* Hidden honeypot field to prevent spam */}
+              <p className="hidden">
+                <label>
+                  Don't fill this out if you're human: <input name="bot-field" />
+                </label>
+              </p>
 
-  {/* Your existing inputs — just add name attributes */}
-  <input
-    type="text"
-    name="name"
-    placeholder="Name"
-    // ... rest of your props
-  />
-  
-  <input
-    type="email"
-    name="email"
-    placeholder="Email"
-    // ... rest of your props
-  />
-  
-  <input
-    type="text"
-    name="organization"
-    placeholder="Organization"
-    // ... rest of your props
-  />
-  
-  <textarea
-    name="message"
-    placeholder="Message"
-    rows={4}
-    // ... rest of your props
-  />
-  
-  <button type="submit" className="btn-primary w-full justify-center">
-    <Send size={18} />
-    Send Request
-  </button>
-</form>
+              <div>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Name"
+                  value={formData.name}
+                  onChange={(e) => setFormData({...formData, name: e.target.value})}
+                  className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:border-lime transition-colors"
+                  required
+                />
+              </div>
+              <div>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  value={formData.email}
+                  onChange={(e) => setFormData({...formData, email: e.target.value})}
+                  className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:border-lime transition-colors"
+                  required
+                />
+              </div>
+              <div>
+                <input
+                  type="text"
+                  name="organization"
+                  placeholder="Organization"
+                  value={formData.organization}
+                  onChange={(e) => setFormData({...formData, organization: e.target.value})}
+                  className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:border-lime transition-colors"
+                />
+              </div>
+              <div>
+                <textarea
+                  name="message"
+                  placeholder="Message"
+                  rows={4}
+                  value={formData.message}
+                  onChange={(e) => setFormData({...formData, message: e.target.value})}
+                  className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:border-lime transition-colors resize-none"
+                  required
+                />
+              </div>
+              <button type="submit" className="btn-primary w-full justify-center">
+                <Send size={18} />
+                Send Request
+              </button>
+            </form>
           </div>
           <div className="flex flex-col justify-center relative">
             <div className="space-y-4 mb-8">
@@ -210,10 +224,10 @@ export default function ContactSection() {
                 <span className="text-body">Mon-Fri | 9am-6pm ET</span>
               </div>
             </div>
-            <div ref={photoRef} className="relative rounded-photo overflow-hidden" style={{ height: '40vh' }}>
+            <div ref={photoRef} className="relative rounded-photo overflow-hidden" style={{ height: '40vh', zIndex: 1 }}>
               <img src="/contact_team.jpg" alt="Team collaboration" className="w-full h-full object-cover" />
             </div>
-            <div ref={accentRef} className="absolute accent-lime" style={{ right: '-5vw', top: '5vh', width: '15vw', height: '15vw', borderRadius: '0 0 0 100%', zIndex: -1 }} />
+            <div ref={accentRef} className="absolute accent-lime" style={{ right: '-5vw', top: '5vh', width: '15vw', height: '15vw', borderRadius: '0 0 0 100%', zIndex: 2 }} />
 
             {/* Download capability statement button */}
             <a 
