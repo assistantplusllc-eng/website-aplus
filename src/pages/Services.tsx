@@ -39,11 +39,11 @@ function ServiceCard({
     const ctx = gsap.context(() => {
       gsap.fromTo(
         card,
-        { y: 60, opacity: 0 },
+        { y: 40, opacity: 0.95 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.8,
+          duration: 0.6,
           ease: 'power2.out',
           scrollTrigger: {
             trigger: card,
@@ -150,7 +150,7 @@ export default function Services() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  // Scroll to top when component mounts - FIX for scroll position issue
+  // Scroll to top when component mounts
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -162,7 +162,6 @@ export default function Services() {
   useEffect(() => {
     if (location.state?.scrollTo) {
       scrollTarget.current = location.state.scrollTo;
-      // Give time for page to render
       setTimeout(() => {
         const element = document.getElementById(location.state.scrollTo);
         if (element) {
@@ -188,12 +187,12 @@ export default function Services() {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         hero.querySelectorAll('.animate-in'),
-        { y: 40, opacity: 0 },
+        { y: 30 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.8,
-          stagger: 0.15,
+          duration: 0.6,
+          stagger: 0.1,
           ease: 'power2.out',
         }
       );
@@ -291,7 +290,7 @@ export default function Services() {
 
   return (
     <div className="min-h-screen bg-white">
-            {/* Logo - Fixed top left, above everything */}
+      {/* Logo - Fixed top left, above everything */}
       <button 
         onClick={() => navigate('/')}
         className="fixed top-4 left-4 z-[400] cursor-pointer"
@@ -417,7 +416,7 @@ export default function Services() {
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] gap-8 lg:gap-12 items-center">
             <div className="relative max-w-xl">
-              
+
   <h1 className="animate-in pt-4 text-h1 text-white mb-14">
     Support<br />
     That Scales<br />
