@@ -367,7 +367,7 @@ export default function Services() {
               <button
                 onClick={() => { 
                   setMenuOpen(false); 
-                  navigate('/', { state: { scrollTo: 'process' } });
+                  navigate('/about');  {/* FIXED: Goes to About page instead of scrolling */}
                 }}
                 className="block text-h2 text-text-primary hover:text-cobalt transition-colors text-left"
               >

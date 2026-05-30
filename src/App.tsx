@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider, Outlet, useLocation } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, useLocation } from 'react-router-dom';
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -19,45 +19,48 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 // Main page component with all sections
 function MainPage() {
   const location = useLocation();
-  const scrollTarget = useRef<string | null>(null);
+  const hasScrolled = useRef(false);
 
+  // Handle scroll to section from navigation state
   useEffect(() => {
-    if (location.state?.scrollTo) {
-      scrollTarget.current = location.state.scrollTo;
-    }
+    if (!location.state?.scrollTo || hasScrolled.current) return;
+
+    const targetId = location.state.scrollTo;
+
+    // Wait for page to fully render and GSAP to initialize
+    const timer = setTimeout(() => {
+      const element = document.getElementById(targetId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        hasScrolled.current = true;
+        // Clear the state so refresh doesn't scroll again
+        window.history.replaceState({}, document.title);
+      }
+    }, 1200); // Longer delay to ensure everything renders
+
+    return () => clearTimeout(timer);
   }, [location]);
 
+  // Reset scroll flag when location changes
   useEffect(() => {
-    if (!scrollTarget.current) return;
-    const attemptScroll = () => {
-      const element = document.getElementById(scrollTarget.current!);
-      if (element) {
-        gsap.to(window, {
-          scrollTo: { y: element, offsetY: 0 },
-          duration: 1,
-          ease: 'power2.inOut'
-        });
-        scrollTarget.current = null;
-      } else {
-        setTimeout(attemptScroll, 200);
-      }
-    };
-    const timer = setTimeout(attemptScroll, 800);
-    return () => clearTimeout(timer);
-  }, []);
+    hasScrolled.current = false;
+  }, [location.pathname]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       const pinned = ScrollTrigger.getAll()
         .filter(st => st.vars.pin)
         .sort((a, b) => a.start - b.start);
+
       const maxScroll = ScrollTrigger.maxScroll(window);
       if (!maxScroll || pinned.length === 0) return;
+
       const pinnedRanges = pinned.map(st => ({
         start: st.start / maxScroll,
         end: (st.end ?? st.start) / maxScroll,
         center: (st.start + ((st.end ?? st.start) - st.start) * 0.5) / maxScroll,
       }));
+
       ScrollTrigger.create({
         snap: {
           snapTo: (value: number) => {
@@ -77,6 +80,7 @@ function MainPage() {
         }
       });
     }, 100);
+
     return () => {
       clearTimeout(timer);
       ScrollTrigger.getAll().forEach(st => st.kill());
@@ -89,6 +93,8 @@ function MainPage() {
       <Navigation />
       <main className="relative">
         <HeroSection />
+
+        {/* Section 2: Who We Are */}
         <div id="about">
           <ContentSection
             zIndex={20}
@@ -105,6 +111,8 @@ function MainPage() {
             accentType="quarter-top-right"
           />
         </div>
+
+        {/* Section 3: What We Do */}
         <div id="services">
           <ContentSection
             zIndex={30}
@@ -123,6 +131,8 @@ function MainPage() {
             ]}
           />
         </div>
+
+        {/* Section 4: How We Work */}
         <div id="process">
           <ContentSection
             zIndex={40}
@@ -140,6 +150,8 @@ function MainPage() {
             ]}
           />
         </div>
+
+        {/* Section 5: Industries */}
         <div id="industries">
           <ContentSection
             zIndex={50}
@@ -163,6 +175,8 @@ function MainPage() {
             }}
           />
         </div>
+
+        {/* Section 6: Results */}
         <div id="results">
           <ContentSection
             zIndex={60}
@@ -179,6 +193,8 @@ function MainPage() {
             ]}
           />
         </div>
+
+        {/* Section 7: Contact */}
         <div id="contact">
           <ContactSection />
         </div>
