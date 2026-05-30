@@ -1,34 +1,31 @@
-import { createBrowserRouter, RouterProvider, Outlet, useLocation } from 'react-router-dom';
 import { useEffect, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
-import './App.css';
 
 import Navigation from './components/Navigation';
 import HeroSection from './sections/HeroSection';
 import ContentSection from './sections/ContentSection';
 import ContactSection from './sections/ContactSection';
-import Services from './pages/Services';
-import About from './pages/About';
-import TermsOfService from './pages/TermsOfService';
-import PrivacyPolicy from './pages/PrivacyPolicy';
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-// Main page component with all sections
-function MainPage() {
+export default function MainPage() {
   const location = useLocation();
   const scrollTarget = useRef<string | null>(null);
 
+  // Store scroll target from navigation state
   useEffect(() => {
     if (location.state?.scrollTo) {
       scrollTarget.current = location.state.scrollTo;
     }
   }, [location]);
 
+  // Handle scroll to section after GSAP initializes
   useEffect(() => {
     if (!scrollTarget.current) return;
+
     const attemptScroll = () => {
       const element = document.getElementById(scrollTarget.current!);
       if (element) {
@@ -42,6 +39,7 @@ function MainPage() {
         setTimeout(attemptScroll, 200);
       }
     };
+
     const timer = setTimeout(attemptScroll, 800);
     return () => clearTimeout(timer);
   }, []);
@@ -51,13 +49,16 @@ function MainPage() {
       const pinned = ScrollTrigger.getAll()
         .filter(st => st.vars.pin)
         .sort((a, b) => a.start - b.start);
+
       const maxScroll = ScrollTrigger.maxScroll(window);
       if (!maxScroll || pinned.length === 0) return;
+
       const pinnedRanges = pinned.map(st => ({
         start: st.start / maxScroll,
         end: (st.end ?? st.start) / maxScroll,
         center: (st.start + ((st.end ?? st.start) - st.start) * 0.5) / maxScroll,
       }));
+
       ScrollTrigger.create({
         snap: {
           snapTo: (value: number) => {
@@ -77,6 +78,7 @@ function MainPage() {
         }
       });
     }, 100);
+
     return () => {
       clearTimeout(timer);
       ScrollTrigger.getAll().forEach(st => st.kill());
@@ -89,6 +91,8 @@ function MainPage() {
       <Navigation />
       <main className="relative">
         <HeroSection />
+
+        {/* Section 2: Who We Are */}
         <div id="about">
           <ContentSection
             zIndex={20}
@@ -105,6 +109,8 @@ function MainPage() {
             accentType="quarter-top-right"
           />
         </div>
+
+        {/* Section 3: What We Do */}
         <div id="services">
           <ContentSection
             zIndex={30}
@@ -123,6 +129,8 @@ function MainPage() {
             ]}
           />
         </div>
+
+        {/* Section 4: How We Work */}
         <div id="process">
           <ContentSection
             zIndex={40}
@@ -140,6 +148,8 @@ function MainPage() {
             ]}
           />
         </div>
+
+        {/* Section 5: Industries */}
         <div id="industries">
           <ContentSection
             zIndex={50}
@@ -163,6 +173,8 @@ function MainPage() {
             }}
           />
         </div>
+
+        {/* Section 6: Results */}
         <div id="results">
           <ContentSection
             zIndex={60}
@@ -179,6 +191,8 @@ function MainPage() {
             ]}
           />
         </div>
+
+        {/* Section 7: Contact */}
         <div id="contact">
           <ContactSection />
         </div>
@@ -186,17 +200,3 @@ function MainPage() {
     </div>
   );
 }
-
-const router = createBrowserRouter([
-  { path: '/', element: <MainPage /> },
-  { path: '/services', element: <Services /> },
-  { path: '/about', element: <About /> },
-  { path: '/terms-of-service', element: <TermsOfService /> },
-  { path: '/privacy-policy', element: <PrivacyPolicy /> },
-]);
-
-function App() {
-  return <RouterProvider router={router} />;
-}
-
-export default App;
