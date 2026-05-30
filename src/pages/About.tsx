@@ -390,7 +390,7 @@ export default function About() {
             <div>
               <h3 className="text-white font-semibold mb-4">Contact Us</h3>
               <div className="space-y-2 text-sm text-white/70">
-                <p>(888) 652-6315</p>
+                <p></p>
                 <p>info@assistantplusworks.com</p>
                 <p></p>
               </div>

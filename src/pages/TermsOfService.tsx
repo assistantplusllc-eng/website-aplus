@@ -189,7 +189,7 @@ export default function TermsOfService() {
               <div className="mt-4 p-6 bg-gray-50 rounded-lg">
                 <p className="font-semibold text-[#1e3a8a]">Assistant Plus, LLC</p>
                 <p className="mt-2">Email: info@assistantplusworks.com</p>
-                <p>Phone: (888) 652-6315</p>
+                <p>Phone: </p>
                 <p>Address: Bergen County, New Jersey</p>
               </div>
             </section>
