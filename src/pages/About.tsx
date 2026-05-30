@@ -147,7 +147,7 @@ export default function About() {
             <nav className="space-y-6">
               <button onClick={() => { setMenuOpen(false); navigate('/'); }} className="block text-h2 text-text-primary hover:text-cobalt transition-colors text-left">Home</button>
               <button onClick={() => { setMenuOpen(false); navigate('/', { state: { scrollTo: 'industries' } }); }} className="block text-h2 text-text-primary hover:text-cobalt transition-colors text-left">Industries</button>
-              <button onClick={() => { setMenuOpen(false); navigate('/services'); }} className="...">Services</button>
+              <button onClick={() => { setMenuOpen(false); navigate('/services'); }} className="block text-h2 text-text-primary hover:text-cobalt transition-colors text-left">Services</button>
               <button onClick={() => { setMenuOpen(false); navigate('/', { state: { scrollTo: 'results' } }); }} className="block text-h2 text-text-primary hover:text-cobalt transition-colors text-left">Results</button>
               <button onClick={() => { setMenuOpen(false); navigate('/', { state: { scrollTo: 'contact' } }); }} className="block text-h2 text-text-primary hover:text-cobalt transition-colors text-left">Contact</button>
             </nav>
