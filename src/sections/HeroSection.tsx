@@ -24,6 +24,8 @@ export default function HeroSection() {
     const panel = panelRef.current;
     if (!section || !panel) return;
 
+    const isMobile = window.innerWidth < 768;
+
     const ctx = gsap.context(() => {
       const loadTl = gsap.timeline({ defaults: { ease: 'power2.out' } });
 
@@ -35,50 +37,51 @@ export default function HeroSection() {
         .fromTo(h1Line3Ref.current, { x: -60, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5 }, 0.51)
         .fromTo(bodyRef.current, { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4 }, 0.75)
         .fromTo(ctaRef.current, { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4 }, 0.85)
-        .fromTo(photoRef.current, { x: '18vw', scale: 0.96, opacity: 0 }, { x: 0, scale: 1, opacity: 1, duration: 0.6 }, 0.45)
+        .fromTo(photoRef.current, { x: isMobile ? '8vw' : '18vw', scale: 0.96, opacity: 0 }, { x: 0, scale: 1, opacity: 1, duration: 0.6 }, 0.45)
         .fromTo([accent1Ref.current, accent2Ref.current, accent3Ref.current], 
           { scale: 0.7, opacity: 0 }, 
           { scale: 1, opacity: 1, duration: 0.5, stagger: 0.08 }, 
           0.65
         );
 
-      const scrollTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: 'top top',
-          end: '+=130%',
-          pin: true,
-          scrub: 0.6,
-          onLeaveBack: () => {
-            gsap.set([microRef.current, h1Line1Ref.current, h1Line2Ref.current, h1Line3Ref.current, bodyRef.current, ctaRef.current, photoRef.current], {
-              opacity: 1, x: 0, y: 0, scale: 1
-            });
+      if (!isMobile) {
+        const scrollTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: section,
+            start: 'top top',
+            end: '+=130%',
+            pin: true,
+            scrub: 0.6,
+            onLeaveBack: () => {
+              gsap.set([microRef.current, h1Line1Ref.current, h1Line2Ref.current, h1Line3Ref.current, bodyRef.current, ctaRef.current, photoRef.current], {
+                opacity: 1, x: 0, y: 0, scale: 1
+              });
+            }
           }
-        }
-      });
+        });
 
-      scrollTl
-        .fromTo([h1Line1Ref.current, h1Line2Ref.current, h1Line3Ref.current], 
-          { x: 0, opacity: 1 }, 
-          { x: '-40vw', opacity: 0, ease: 'power2.in' }, 
-          0.70
-        )
-        .fromTo([bodyRef.current, ctaRef.current], 
-          { y: 0, opacity: 1 }, 
-          { y: '18vh', opacity: 0, ease: 'power2.in' }, 
-          0.72
-        )
-        .fromTo(photoRef.current, 
-          { x: 0, scale: 1, opacity: 1 }, 
-          { x: '18vw', scale: 0.98, opacity: 0, ease: 'power2.in' }, 
-          0.70
-        )
-        .fromTo([accent1Ref.current, accent2Ref.current, accent3Ref.current], 
-          { opacity: 1 }, 
-          { opacity: 0, ease: 'power2.in' }, 
-          0.75
-        );
-
+        scrollTl
+          .fromTo([h1Line1Ref.current, h1Line2Ref.current, h1Line3Ref.current], 
+            { x: 0, opacity: 1 }, 
+            { x: '-40vw', opacity: 0, ease: 'power2.in' }, 
+            0.70
+          )
+          .fromTo([bodyRef.current, ctaRef.current], 
+            { y: 0, opacity: 1 }, 
+            { y: '18vh', opacity: 0, ease: 'power2.in' }, 
+            0.72
+          )
+          .fromTo(photoRef.current, 
+            { x: 0, scale: 1, opacity: 1 }, 
+            { x: '18vw', scale: 0.98, opacity: 0, ease: 'power2.in' }, 
+            0.70
+          )
+          .fromTo([accent1Ref.current, accent2Ref.current, accent3Ref.current], 
+            { opacity: 1 }, 
+            { opacity: 0, ease: 'power2.in' }, 
+            0.75
+          );
+      }
     }, section);
 
     return () => ctx.revert();
@@ -86,8 +89,47 @@ export default function HeroSection() {
 
   return (
     <section ref={sectionRef} className="section-pinned z-10">
-      <div ref={panelRef} className="section-inner">
-        {/* Micro label */}
+      {/* MOBILE LAYOUT - contained, no overflow */}
+      <div className="md:hidden relative overflow-hidden">
+        <div className="px-6 pt-24 pb-8">
+          <div ref={microRef} className="text-[11px] font-semibold tracking-[0.15em] text-white/80 uppercase mb-6">
+            STRUCTURED SUPPORT SERVICES
+          </div>
+
+          <div className="mb-5">
+            <div ref={h1Line1Ref} className="text-[2.5rem] font-black leading-[1.05] tracking-tight text-white">SCALABLE</div>
+            <div ref={h1Line2Ref} className="text-[2.5rem] font-black leading-[1.05] tracking-tight text-white">CUSTOMER</div>
+            <div className="text-[2.5rem] font-black leading-[1.05] tracking-tight text-white">SUPPORT</div>
+            <div ref={h1Line3Ref} className="text-[2.5rem] font-black leading-[1.05] tracking-tight text-white">& OPERATIONAL</div>
+            <div className="text-[2.5rem] font-black leading-[1.05] tracking-tight text-white">SOLUTIONS</div>
+          </div>
+
+          <div ref={bodyRef} className="text-base text-white/90 mb-6 leading-relaxed">
+            Reliable support teams that improve responsiveness and strengthen day-to-day operations.
+          </div>
+
+          <div ref={ctaRef} className="mb-6">
+            <button 
+              className="btn-primary w-full justify-center"
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              Request Staffing
+              <ArrowRight size={18} />
+            </button>
+          </div>
+        </div>
+
+        <div ref={photoRef} className="w-full h-[280px]">
+          <img 
+            src="/hero_agent.png" 
+            alt="Professional customer service agent" 
+            className="w-full h-full object-cover object-top"
+          />
+        </div>
+      </div>
+
+      {/* DESKTOP LAYOUT - exact original */}
+      <div ref={panelRef} className="hidden md:block section-inner">
         <div 
           ref={microRef}
           className="absolute text-micro text-white/80"
@@ -96,7 +138,6 @@ export default function HeroSection() {
           STRUCTURED SUPPORT SERVICES
         </div>
 
-        {/* H1 Headlines */}
         <div 
           className="absolute"
           style={{ left: '6vw', top: '18vh', width: '52vw' }}
@@ -106,7 +147,6 @@ export default function HeroSection() {
           <div ref={h1Line3Ref} className="text-h1 text-white">& OPERATIONAL SOLUTIONS</div>
         </div>
 
-        {/* Body copy */}
         <div 
           ref={bodyRef}
           className="absolute text-body text-white/90"
@@ -115,7 +155,6 @@ export default function HeroSection() {
           Reliable support teams that improve responsiveness and strengthen day-to-day operations.
         </div>
 
-        {/* CTA Row - Single button now */}
         <div 
           ref={ctaRef}
           className="absolute flex items-center gap-10"
@@ -130,7 +169,6 @@ export default function HeroSection() {
           </button>
         </div>
 
-        {/* Hero Photo Block */}
         <div 
           ref={photoRef}
           className="absolute photo-block"
@@ -148,7 +186,6 @@ export default function HeroSection() {
           />
         </div>
 
-        {/* Accent Shapes */}
         <div 
           ref={accent1Ref}
           className="absolute accent-lime"
@@ -186,7 +223,6 @@ export default function HeroSection() {
           }}
         />
 
-        {/* Bouncing scroll indicator */}
         <button
           onClick={() => {
             const nextSection = document.getElementById('about');

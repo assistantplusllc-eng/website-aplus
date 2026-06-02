@@ -1,5 +1,5 @@
-import { createBrowserRouter, RouterProvider, useLocation } from 'react-router-dom';
 import { useEffect, useRef } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
@@ -19,32 +19,36 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 // Main page component with all sections
 function MainPage() {
   const location = useLocation();
-  const hasScrolled = useRef(false);
+  const scrollTarget = useRef<string | null>(null);
 
-  // Handle scroll to section from navigation state
+  // Store scroll target from navigation state
   useEffect(() => {
-    if (!location.state?.scrollTo || hasScrolled.current) return;
-
-    const targetId = location.state.scrollTo;
-
-    // Wait for page to fully render and GSAP to initialize
-    const timer = setTimeout(() => {
-      const element = document.getElementById(targetId);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        hasScrolled.current = true;
-        // Clear the state so refresh doesn't scroll again
-        window.history.replaceState({}, document.title);
-      }
-    }, 1200); // Longer delay to ensure everything renders
-
-    return () => clearTimeout(timer);
+    if (location.state?.scrollTo) {
+      scrollTarget.current = location.state.scrollTo;
+    }
   }, [location]);
 
-  // Reset scroll flag when location changes
+  // Handle scroll to section after GSAP initializes
   useEffect(() => {
-    hasScrolled.current = false;
-  }, [location.pathname]);
+    if (!scrollTarget.current) return;
+
+    const attemptScroll = () => {
+      const element = document.getElementById(scrollTarget.current!);
+      if (element) {
+        gsap.to(window, {
+          scrollTo: { y: element, offsetY: 0 },
+          duration: 1,
+          ease: 'power2.inOut'
+        });
+        scrollTarget.current = null;
+      } else {
+        setTimeout(attemptScroll, 200);
+      }
+    };
+
+    const timer = setTimeout(attemptScroll, 800);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -199,20 +203,24 @@ function MainPage() {
           <ContactSection />
         </div>
       </main>
+      {/* Footer is now inside ContactSection - no duplicate needed */}
     </div>
   );
 }
 
-const router = createBrowserRouter([
-  { path: '/', element: <MainPage /> },
-  { path: '/services', element: <Services /> },
-  { path: '/about', element: <About /> },
-  { path: '/terms-of-service', element: <TermsOfService /> },
-  { path: '/privacy-policy', element: <PrivacyPolicy /> },
-]);
-
+// App with Router
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/terms-of-service" element={<TermsOfService />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;

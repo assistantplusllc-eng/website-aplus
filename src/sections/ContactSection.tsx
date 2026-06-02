@@ -215,7 +215,7 @@ export default function ContactSection() {
                 <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
                   <Phone size={18} />
                 </div>
-                <span className="text-body"></span>
+                <span className="text-body">(888) 652-6315</span>
               </div>
               <div className="flex items-center gap-3 text-white/90">
                 <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">

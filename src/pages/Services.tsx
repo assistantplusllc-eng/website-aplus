@@ -292,7 +292,7 @@ export default function Services() {
     <div className="min-h-screen bg-white">
       {/* Logo - Fixed top left, above everything */}
       <button 
-        onClick={() => navigate('/')}
+        onClick={() => { window.scrollTo(0, 0); navigate('/'); }}
         className="fixed top-4 left-4 z-[400] cursor-pointer"
       >
         <div className="bg-white px-1 py-0.5 rounded-md shadow-md hover:bg-white transition-colors">

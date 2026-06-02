@@ -64,35 +64,38 @@ export default function ContentSection({
     const panel = panelRef.current;
     if (!section || !panel) return;
 
+    const isMobile = window.innerWidth < 768;
+
     const ctx = gsap.context(() => {
-      const scrollTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: 'top top',
-          end: endOffset,
-          pin: true,
-          scrub: 0.6,
-          onLeaveBack: () => {
-            gsap.set([h2Ref.current, contentRef.current, photoRef.current, accent1Ref.current, accent2Ref.current], {
-              opacity: 1, x: 0, y: 0, scale: 1
-            });
+      if (!isMobile) {
+        const scrollTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: section,
+            start: 'top top',
+            end: endOffset,
+            pin: true,
+            scrub: 0.6,
+            onLeaveBack: () => {
+              gsap.set([h2Ref.current, contentRef.current, photoRef.current, accent1Ref.current, accent2Ref.current], {
+                opacity: 1, x: 0, y: 0, scale: 1
+              });
+            }
           }
-        }
-      });
+        });
 
-      scrollTl
-        .fromTo(h2Ref.current, { x: '-55vw', opacity: 0 }, { x: 0, opacity: 1, ease: 'none' }, 0)
-        .fromTo(contentRef.current, { y: '16vh', opacity: 0 }, { y: 0, opacity: 1, ease: 'none' }, 0.08)
-        .fromTo(photoRef.current, { x: '55vw', scale: 0.98, opacity: 0 }, { x: 0, scale: 1, opacity: 1, ease: 'none' }, 0)
-        .fromTo(accent1Ref.current, { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, ease: 'none' }, 0.10)
-        .fromTo(accent2Ref.current, { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, ease: 'none' }, 0.15);
+        scrollTl
+          .fromTo(h2Ref.current, { x: '-55vw', opacity: 0 }, { x: 0, opacity: 1, ease: 'none' }, 0)
+          .fromTo(contentRef.current, { y: '16vh', opacity: 0 }, { y: 0, opacity: 1, ease: 'none' }, 0.08)
+          .fromTo(photoRef.current, { x: '55vw', scale: 0.98, opacity: 0 }, { x: 0, scale: 1, opacity: 1, ease: 'none' }, 0)
+          .fromTo(accent1Ref.current, { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, ease: 'none' }, 0.10)
+          .fromTo(accent2Ref.current, { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, ease: 'none' }, 0.15);
 
-      scrollTl
-        .fromTo(h2Ref.current, { x: 0, opacity: 1 }, { x: '-35vw', opacity: 0, ease: 'power2.in' }, 0.70)
-        .fromTo(contentRef.current, { y: 0, opacity: 1 }, { y: '12vh', opacity: 0, ease: 'power2.in' }, 0.72)
-        .fromTo(photoRef.current, { x: 0, opacity: 1 }, { x: '-18vw', opacity: 0, ease: 'power2.in' }, 0.70)
-        .fromTo([accent1Ref.current, accent2Ref.current], { opacity: 1 }, { opacity: 0, ease: 'power2.in' }, 0.75);
-
+        scrollTl
+          .fromTo(h2Ref.current, { x: 0, opacity: 1 }, { x: '-35vw', opacity: 0, ease: 'power2.in' }, 0.70)
+          .fromTo(contentRef.current, { y: 0, opacity: 1 }, { y: '12vh', opacity: 0, ease: 'power2.in' }, 0.72)
+          .fromTo(photoRef.current, { x: 0, opacity: 1 }, { x: '-18vw', opacity: 0, ease: 'power2.in' }, 0.70)
+          .fromTo([accent1Ref.current, accent2Ref.current], { opacity: 1 }, { opacity: 0, ease: 'power2.in' }, 0.75);
+      }
     }, section);
 
     return () => ctx.revert();
@@ -117,38 +120,185 @@ export default function ContentSection({
       case 'quarter-behind':
         return (
           <>
-            <div 
-              ref={accent1Ref}
-              className="absolute accent-lime"
-              style={{ 
-                left: '82vw',
-                top: '8vh',
-                width: '16vw',
-                height: '16vw',
-                borderRadius: '0 0 0 100%',
-                zIndex: -1
-              }}
-            />
-            <div 
-              ref={accent2Ref}
-              className="absolute ring-white"
-              style={{ 
-                left: '90vw', 
-                top: '62vh', 
-                width: '6vw', 
-                height: '6vw',
-                background: 'transparent',
-                borderWidth: '8px'
-              }}
-            />
+            <div ref={accent1Ref} className="absolute accent-lime" style={{ left: '82vw', top: '8vh', width: '16vw', height: '16vw', borderRadius: '0 0 0 100%', zIndex: -1 }} />
+            <div ref={accent2Ref} className="absolute ring-white" style={{ left: '90vw', top: '62vh', width: '6vw', height: '6vw', background: 'transparent', borderWidth: '8px' }} />
           </>
         );
     }
   };
 
+  const renderContent = () => (
+    <>
+      {subheader ? (
+        <p className="text-base text-white/90 mb-3 font-medium md:text-body">{subheader}</p>
+      ) : null}
+
+      {body && (
+        <div className="mb-5 space-y-3 md:mb-6 md:space-y-4">
+          {Array.isArray(body) ? (
+            body.filter(p => p.trim() !== '').map((paragraph, i) => (
+              <p key={i} className="text-base text-white/80 leading-relaxed md:text-body">{paragraph}</p>
+            ))
+          ) : (
+            <p className="text-base text-white/80 leading-relaxed md:text-body">{body}</p>
+          )}
+        </div>
+      )}
+
+      {listItems && (
+        <ul className="space-y-2 mb-5 md:space-y-3 md:mb-6">
+          {listItems.map((item, i) => {
+            if (boldListItems) {
+              const colonIndex = item.indexOf(':');
+              if (colonIndex > 0) {
+                const firstWord = item.substring(0, colonIndex);
+                const rest = item.substring(colonIndex);
+                return (
+                  <li key={i} className="text-base text-white/90 flex items-start gap-3 md:text-body">
+                    <span className="w-1.5 h-1.5 rounded-full bg-lime mt-2 flex-shrink-0" />
+                    <span><b>{firstWord}</b>{rest}</span>
+                  </li>
+                );
+              }
+            }
+            return (
+              <li key={i} className="text-base text-white/90 flex items-start gap-3 md:text-body">
+                <span className="w-1.5 h-1.5 rounded-full bg-lime mt-2 flex-shrink-0" />
+                <span>{item}</span>
+              </li>
+            );
+          })}
+        </ul>
+      )}
+
+      {timelineItems && (
+        <div className="relative mb-5 md:mb-6">
+          <div className="absolute w-[2px] bg-lime/40" style={{ top: '24px', bottom: '24px', left: '19px' }} />
+          <div className="space-y-4 md:space-y-5">
+            {timelineItems.map((item, i) => {
+              const colonIndex = item.indexOf(':');
+              const hasColon = colonIndex > 0;
+              const firstWord = hasColon ? item.substring(0, colonIndex) : '';
+              const rest = hasColon ? item.substring(colonIndex) : item;
+              return (
+                <div key={i} className="flex items-start gap-4 relative">
+                  <div className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-lime flex items-center justify-center flex-shrink-0 z-10 shadow-lg">
+                    <span className="text-sm font-bold text-cobalt">{i + 1}</span>
+                  </div>
+                  <div className="pt-1.5 md:pt-2 text-base text-white/90 md:text-body">
+                    {hasColon ? <><b>{firstWord}</b>{rest}</> : item}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {cardItems && (
+        <div className="flex flex-wrap gap-2 mb-5 md:gap-3 md:mb-6">
+          {cardItems.map((item, i) => (
+            <div key={i} className="px-3 py-2 md:px-4 md:py-2.5 bg-white/15 backdrop-blur-sm border border-white/30 rounded-lg text-sm font-medium text-white hover:bg-white/25 hover:border-lime/60 transition-all duration-200 cursor-default">
+              {item}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {stats && (
+        <div className="flex flex-col gap-4 mb-5 md:flex-row md:gap-8 md:mb-6">
+          {stats.map((stat, i) => (
+            <div key={i}>
+              <div className="text-2xl font-black text-lime md:text-h2">{stat.value}</div>
+              <div className="text-xs text-white/70 mt-1 md:text-micro">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {quote && (
+        <div className="mb-5 md:mb-6">
+          <p className="text-base text-white/90 italic mb-2 md:text-body md:mb-3">"{quote.text}"</p>
+          <p className="text-xs text-white/60 md:text-micro">{quote.attribution}</p>
+        </div>
+      )}
+
+      <div className="flex flex-wrap items-center gap-3 md:gap-4">
+        {cta && !scrollArrowTarget && (
+          ctaLink ? (
+            (() => {
+              const hashMatch = ctaLink.match(/^(.+)#(.+)$/);
+              if (hashMatch) {
+                const [, path, hash] = hashMatch;
+                return (
+                  <button onClick={() => navigate(path, { state: { scrollTo: hash } })} className="btn-secondary inline-flex items-center gap-2 w-full md:w-auto justify-center">
+                    {cta}
+                    <ArrowRight size={18} />
+                  </button>
+                );
+              }
+              if (ctaLink.startsWith('/')) {
+                return (
+                  <button onClick={() => navigate(ctaLink)} className="btn-secondary inline-flex items-center gap-2 w-full md:w-auto justify-center">
+                    {cta}
+                    <ArrowRight size={18} />
+                  </button>
+                );
+              }
+              return (
+                <a href={ctaLink} className="btn-secondary inline-flex items-center gap-2 w-full md:w-auto justify-center">
+                  {cta}
+                  <ArrowRight size={18} />
+                </a>
+              );
+            })()
+          ) : (
+            <button onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })} className="btn-secondary w-full md:w-auto justify-center">
+              {cta}
+              <ArrowRight size={18} />
+            </button>
+          )
+        )}
+
+        {scrollArrowTarget && (
+          <button onClick={() => document.querySelector(scrollArrowTarget)?.scrollIntoView({ behavior: 'smooth' })} className="text-white/70 hover:text-white transition-colors animate-bounce cursor-pointer mt-4" aria-label="Scroll to next section">
+            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
+          </button>
+        )}
+
+        {downloadCta && (
+          <a href={downloadCta.file} download className="btn-secondary inline-flex items-center gap-2 w-full md:w-auto justify-center">
+            <Download size={18} />
+            {downloadCta.label}
+          </a>
+        )}
+      </div>
+    </>
+  );
+
   return (
     <section ref={sectionRef} className="section-pinned" style={{ zIndex }}>
-      <div ref={panelRef} className="section-inner">
+      {/* MOBILE LAYOUT - more top padding to clear nav, full-width image */}
+      <div className="md:hidden flex flex-col px-6 pt-20 pb-10">
+        <div className="mb-4">
+          {headline.map((line, i) => (
+            <div key={i} className="text-[1.75rem] font-black leading-[1.1] tracking-tight text-white md:text-h2">{line}</div>
+          ))}
+        </div>
+
+        <div className="mb-6">
+          {renderContent()}
+        </div>
+
+        <div className="w-full h-[200px] rounded-xl overflow-hidden -mx-6">
+          <img src={imageSrc} alt={imageAlt} className="w-full h-full object-cover object-top" />
+        </div>
+      </div>
+
+      {/* DESKTOP LAYOUT - exact original */}
+      <div ref={panelRef} className="hidden md:block section-inner">
         <div ref={h2Ref} className="absolute" style={{ left: '6vw', top: '18vh', width: '44vw' }}>
           {headline.map((line, i) => (
             <div key={i} className="text-h2 text-white">{line}</div>
@@ -156,216 +306,7 @@ export default function ContentSection({
         </div>
 
         <div ref={contentRef} className="absolute" style={{ left: '6vw', top: '40vh', width: '32vw' }}>
-          {subheader ? (
-            <p className="text-body text-white/90 mb-4 font-medium">{subheader}</p>
-          ) : null}
-
-          {body && (
-            <div className="mb-6 space-y-4">
-              {Array.isArray(body) ? (
-                body.map((paragraph, i) => (
-                  <p key={i} className="text-body text-white/80 leading-relaxed">{paragraph}</p>
-                ))
-              ) : (
-                <p className="text-body text-white/80 leading-relaxed">{body}</p>
-              )}
-            </div>
-          )}
-
-          {/* Regular bullet list (for What We Do, etc.) */}
-          {listItems && (
-            <ul className="space-y-3 mb-6">
-              {listItems.map((item, i) => {
-                if (boldListItems) {
-                  const colonIndex = item.indexOf(':');
-                  if (colonIndex > 0) {
-                    const firstWord = item.substring(0, colonIndex);
-                    const rest = item.substring(colonIndex);
-                    return (
-                      <li key={i} className="text-body text-white/90 flex items-start gap-3">
-                        <span className="w-1.5 h-1.5 rounded-full bg-lime mt-2 flex-shrink-0" />
-                        <span><b>{firstWord}</b>{rest}</span>
-                      </li>
-                    );
-                  }
-                }
-                return (
-                  <li key={i} className="text-body text-white/90 flex items-start gap-3">
-                    <span className="w-1.5 h-1.5 rounded-full bg-lime mt-2 flex-shrink-0" />
-                    <span>{item}</span>
-                  </li>
-                );
-              })}
-            </ul>
-          )}
-
-          {/* NEW: Connected Timeline (only for How We Work) */}
-          {timelineItems && (
-            <div className="relative mb-6">
-              {/* Vertical connecting line */}
-              <div 
-                className="absolute w-[2px] bg-lime/40"
-                style={{ 
-                  top: '24px', 
-                  bottom: '24px',
-                  left: '19px'
-                }}
-              />
-
-              <div className="space-y-5">
-                {timelineItems.map((item, i) => {
-                  const colonIndex = item.indexOf(':');
-                  const hasColon = colonIndex > 0;
-                  const firstWord = hasColon ? item.substring(0, colonIndex) : '';
-                  const rest = hasColon ? item.substring(colonIndex) : item;
-
-                  return (
-                    <div key={i} className="flex items-start gap-4 relative">
-                      {/* Numbered circle node */}
-                      <div className="w-10 h-10 rounded-full bg-lime flex items-center justify-center flex-shrink-0 z-10 shadow-lg">
-                        <span className="text-sm font-bold text-cobalt">{i + 1}</span>
-                      </div>
-                      <div className="pt-2 text-body text-white/90">
-                        {hasColon ? (
-                          <><b>{firstWord}</b>{rest}</>
-                        ) : (
-                          item
-                        )}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-
-          {/* Card Items (chips) */}
-          {cardItems && (
-            <div className="flex flex-wrap gap-3 mb-6">
-              {cardItems.map((item, i) => (
-                <div 
-                  key={i}
-                  className="px-4 py-2.5 bg-white/15 backdrop-blur-sm border border-white/30 rounded-lg 
-                             text-sm font-medium text-white hover:bg-white/25 hover:border-lime/60 
-                             transition-all duration-200 cursor-default"
-                >
-                  {item}
-                </div>
-              ))}
-            </div>
-          )}
-
-          {stats && (
-            <div className="flex gap-8 mb-6">
-              {stats.map((stat, i) => (
-                <div key={i}>
-                  <div className="text-h2 text-lime">{stat.value}</div>
-                  <div className="text-micro text-white/70 mt-1">{stat.label}</div>
-                </div>
-              ))}
-            </div>
-          )}
-
-          {quote && (
-            <div className="mb-6">
-              <p className="text-body text-white/90 italic mb-3">"{quote.text}"</p>
-              <p className="text-micro text-white/60">{quote.attribution}</p>
-            </div>
-          )}
-
-          {/* CTA Buttons or Scroll Arrow */}
-          <div className="flex flex-wrap items-center gap-4">
-            {cta && !scrollArrowTarget && (
-              ctaLink ? (
-                (() => {
-                  // Check if it's a hash link to another page (e.g., /services#get-started)
-                  const hashMatch = ctaLink.match(/^(.+)#(.+)$/);
-                  if (hashMatch) {
-                    const [, path, hash] = hashMatch;
-                    return (
-                      <button 
-                        onClick={() => navigate(path, { state: { scrollTo: hash } })}
-                        className="btn-secondary inline-flex items-center gap-2"
-                      >
-                        {cta}
-                        <ArrowRight size={18} />
-                      </button>
-                    );
-                  }
-                  // Regular link (starts with /)
-                  if (ctaLink.startsWith('/')) {
-                    return (
-                      <button 
-                        onClick={() => navigate(ctaLink)}
-                        className="btn-secondary inline-flex items-center gap-2"
-                      >
-                        {cta}
-                        <ArrowRight size={18} />
-                      </button>
-                    );
-                  }
-                  // External or anchor link
-                  return (
-                    <a href={ctaLink} className="btn-secondary inline-flex items-center gap-2">
-                      {cta}
-                      <ArrowRight size={18} />
-                    </a>
-                  );
-                })()
-              ) : (
-                <button 
-                  onClick={() => {
-                    const contactSection = document.getElementById('contact');
-                    if (contactSection) {
-                      contactSection.scrollIntoView({ behavior: 'smooth' });
-                    }
-                  }}
-                  className="btn-secondary"
-                >
-                  {cta}
-                  <ArrowRight size={18} />
-                </button>
-              )
-            )}
-
-            {scrollArrowTarget && (
-              <button
-                onClick={() => {
-                  const element = document.querySelector(scrollArrowTarget);
-                  if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
-                className="text-white/70 hover:text-white transition-colors animate-bounce cursor-pointer mt-4"
-                aria-label="Scroll to next section"
-              >
-                <svg 
-                  className="w-8 h-8" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  viewBox="0 0 24 24"
-                >
-                  <path 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round" 
-                    strokeWidth={2} 
-                    d="M19 14l-7 7m0 0l-7-7m7 7V3" 
-                  />
-                </svg>
-              </button>
-            )}
-
-            {downloadCta && (
-              <a 
-                href={downloadCta.file}
-                download
-                className="btn-secondary inline-flex items-center gap-2"
-              >
-                <Download size={18} />
-                {downloadCta.label}
-              </a>
-            )}
-          </div>
+          {renderContent()}
         </div>
 
         <div ref={photoRef} className="absolute photo-block" style={{ left: '56vw', top: '18vh', width: '38vw', height: '62vh' }}>
