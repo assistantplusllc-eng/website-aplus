@@ -31,7 +31,7 @@ export default function PrivacyPolicy() {
       <main className="pt-24 pb-16 px-6">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-4xl font-bold text-[#1e3a8a] mb-2">Privacy Policy</h1>
-          <p className="text-gray-500 mb-12">Assistant Plus, LLC | Last Updated: May 2026</p>
+          <p className="text-gray-500 mb-12">Assistant Plus, LLC | Last Updated: June 2026</p>
 
           <div className="prose prose-lg max-w-none text-gray-700 space-y-8">
 
@@ -75,7 +75,7 @@ export default function PrivacyPolicy() {
                 <li>Resume and employment history</li>
                 <li>Background check information (if applicable)</li>
               </ul>
-              <p className="mt-4">Such information is collected solely for legitimate business, contracting, payroll, compliance, or onboarding purposes.</p>
+              <p className="mt-4">Such information is collected solely for legitimate business, contracting, payroll, compliance, or onboarding purposes. Sensitive data such as Social Security Numbers and background check information is collected only when required by law or contract.</p>
             </section>
 
             <section>
@@ -95,7 +95,7 @@ export default function PrivacyPolicy() {
 
             <section>
               <h2 className="text-2xl font-bold text-[#1e3a8a] mb-4">4. How We Share Your Information</h2>
-              <p className="text-lg font-semibold text-[#1e3a8a] mb-4">Assistant Plus does not sell personal information. We do not sell personal information to third parties for monetary or other valuable consideration.</p>
+              <p className="text-lg font-semibold text-[#1e3a8a] mb-4">Assistant Plus does not sell personal information. We do not sell personal information to third parties for monetary or other valuable consideration. We do not share personal information for targeted advertising.</p>
               <p>We may share information only as necessary to operate our business, including with:</p>
               <ul className="list-disc pl-6 space-y-2">
                 <li>Payroll processors</li>
@@ -172,6 +172,7 @@ export default function PrivacyPolicy() {
                 <li>The right to correct inaccurate information</li>
                 <li>The right to request a copy of your personal information</li>
               </ul>
+              <p className="mt-4">We will not discriminate against you for exercising your privacy rights.</p>
               <p className="mt-4">To exercise your rights, contact us using the information in Section 10. We will respond within the timeframe required by applicable law.</p>
             </section>
 

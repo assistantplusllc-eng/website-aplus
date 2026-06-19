@@ -198,7 +198,7 @@ export default function ContentSection({
       {cardItems && (
         <div className="flex flex-wrap gap-2 mb-5 md:gap-3 md:mb-6">
           {cardItems.map((item, i) => (
-            <div key={i} className="px-3 py-2 md:px-4 md:py-2.5 bg-white/15 backdrop-blur-sm border border-white/30 rounded-lg text-sm font-medium text-white hover:bg-white/25 hover:border-lime/60 transition-all duration-200 cursor-default">
+            <div key={i} className="px-4 py-2.5 rounded-full bg-lime text-cobalt text-sm font-semibold hover:bg-white hover:scale-105 transition-all duration-200 cursor-default">
               {item}
             </div>
           ))}

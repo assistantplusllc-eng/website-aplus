@@ -1,13 +1,13 @@
-import { useRef, useLayoutEffect } from 'react';
+import { useRef, useLayoutEffect, useState, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ArrowRight, MessageCircle, Check, Menu, X } from 'lucide-react';
+import { ArrowRight, MessageCircle, Check, Menu, X, ArrowDown } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useState, useEffect } from 'react';
 
 gsap.registerPlugin(ScrollTrigger);
 
 interface ServiceCardProps {
+  id: string;
   number: string;
   title: string;
   subtitle: string;
@@ -20,6 +20,7 @@ interface ServiceCardProps {
 }
 
 function ServiceCard({
+  id,
   number,
   title,
   subtitle,
@@ -35,7 +36,6 @@ function ServiceCard({
   useLayoutEffect(() => {
     const card = cardRef.current;
     if (!card) return;
-
     const ctx = gsap.context(() => {
       gsap.fromTo(
         card,
@@ -53,12 +53,12 @@ function ServiceCard({
         }
       );
     }, card);
-
     return () => ctx.revert();
   }, []);
 
   return (
     <div
+      id={id}
       ref={cardRef}
       className={`grid md:grid-cols-[1fr_1.3fr] gap-8 lg:gap-16 items-center py-16 border-b border-gray-200 ${
         reverse ? 'md:grid-flow-dense' : ''
@@ -106,12 +106,9 @@ function ServiceCard({
           ))}
         </ul>
 
-        <div
-          className="p-4 rounded-lg border-l-4 mb-6"
-          style={{ backgroundColor: '#eff6ff', borderColor: '#84cc16' }}
-        >
-          <p className="text-gray-700 italic">
-            <span className="font-semibold">Result: </span>
+        <div className="flex items-start gap-3 p-4 rounded-lg" style={{ backgroundColor: '#f0fdf4' }}>
+          <Check size={18} className="text-[#84cc16] flex-shrink-0 mt-0.5" />
+          <p className="text-gray-700 font-medium">
             {result}
           </p>
         </div>
@@ -125,16 +122,11 @@ function ServiceCard({
             alt={imageAlt}
             className="w-full h-[400px] object-cover"
           />
-          {/* Accent corner */}
           <div
             className="absolute top-0 right-0 w-24 h-24 rounded-bl-full"
-            style={{
-              backgroundColor: '#84cc16',
-              opacity: 0.8,
-            }}
+            style={{ backgroundColor: '#84cc16', opacity: 0.8 }}
           />
         </div>
-        {/* Decorative ring */}
         <div
           className="absolute -bottom-6 -left-6 w-24 h-24 rounded-full border-4 pointer-events-none"
           style={{ borderColor: '#2563eb', opacity: 0.3 }}
@@ -150,18 +142,25 @@ export default function Services() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  // Scroll to top when component mounts
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  // Handle scroll from navigation state
-  const location = useLocation();
-  const scrollTarget = useRef<string | null>(null);
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash) {
+      const element = document.getElementById(hash.replace('#', ''));
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 600);
+      }
+    }
+  }, []);
 
+  const location = useLocation();
   useEffect(() => {
     if (location.state?.scrollTo) {
-      scrollTarget.current = location.state.scrollTo;
       setTimeout(() => {
         const element = document.getElementById(location.state.scrollTo);
         if (element) {
@@ -175,7 +174,6 @@ export default function Services() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 100);
     };
-
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -183,7 +181,6 @@ export default function Services() {
   useLayoutEffect(() => {
     const hero = heroRef.current;
     if (!hero) return;
-
     const ctx = gsap.context(() => {
       gsap.fromTo(
         hero.querySelectorAll('.animate-in'),
@@ -197,100 +194,85 @@ export default function Services() {
         }
       );
     }, hero);
-
     return () => ctx.revert();
   }, []);
 
   const services = [
     {
+      id: 'contact-center',
       number: '01',
-      title: 'Customer Support',
-      subtitle: 'Omnichannel Customer Interaction',
+      title: 'Contact Center Support',
+      subtitle: 'Customer-Facing Support',
       description:
-        'Every call, message, and inquiry handled with consistency. Your customers get the same experience every time.',
+        'Professional customer-facing support across phone, email, chat, and tickets.',
       services: [
-        'Inbound call handling',
-        'Outbound follow-ups',
-        'Email and chat support',
-        'Ticket resolution',
-        'Order status and general inquiries',
+        'Inbound & outbound call handling',
+        'Email, chat & ticket management',
+        'Omnichannel customer engagement',
+        'Help desk & technical support',
       ],
       result:
-        'Consistent customer experience. Faster resolution. No added headcount.',
-      imageSrc: '/services-customer-support.jpeg',
+        'Consistent customer experience across every channel. Faster resolution. No added headcount.',
+      imageSrc: '/services-contact-center.png',
       imageAlt: 'Customer service agent handling calls professionally',
     },
     {
+      id: 'back-office',
       number: '02',
-      title: 'Administrative Support',
-      subtitle: 'Back-Office Operations',
+      title: 'Back-Office Outsourcing',
+      subtitle: 'Operational & Administrative',
       description:
-        'Back-office tasks — data entry, CRM updates, reporting — off your plate. Your team focuses on what matters.',
+        'Operational support that keeps workflows, records, and processes running behind the scenes.',
       services: [
-        'Data entry and database management',
-        'CRM updates and maintenance',
-        'Document processing',
-        'Human Resources support',
-        'Reporting and basic administrative support',
+        'Data entry & database management',
+        'Document processing & records keeping',
+        'CRM updates & workflow coordination',
+        'Reporting & quality assurance',
       ],
-      result: 'Less admin overhead. More focus on core operations.',
+      result: 'Less admin overhead. More focus on core operations. Processes that run smoothly behind the scenes.',
       imageSrc: '/services-administrative.jpg',
       imageAlt: 'Professional managing administrative tasks',
     },
     {
+      id: 'lead-generation',
       number: '03',
-      title: 'Contact Center',
-      subtitle: 'Flexible Scaling Solutions',
+      title: 'Lead Generation & Customer Outreach',
+      subtitle: 'Engagement & Relationship Building',
       description:
-        'Overflow call handling, seasonal coverage, and dedicated agents. Scale up or down without long-term contracts.',
+        'Lead qualification, appointment setting, and outreach campaigns that keep your pipeline active.',
       services: [
-        '24/7 Dedicated support agents',
-        'Overflow call handling',
-        'Seasonal or project-based support',
-        'Program support for customer service operations',
+        'Lead qualification & intake screening',
+        'Appointment scheduling & confirmations',
+        'Follow-up campaigns & nurture sequences',
+        'Customer retention & win-back outreach',
       ],
       result:
-        'Scale coverage on demand. No long-term hiring commitments.',
-      imageSrc: '/services-contact-center.png',
-      imageAlt: 'Contact center team providing support',
+        'More qualified leads. Better appointment show rates. Stronger customer relationships.',
+      imageSrc: '/services-customer-support.jpeg',
+      imageAlt: 'Contact center team providing outreach support',
     },
     {
+      id: 'workforce',
       number: '04',
-      title: 'Specialized Support',
-      subtitle: 'Industry-Aware & Compliance-Ready',
+      title: 'Workforce Solutions',
+      subtitle: 'Flexible Staffing & Scaling',
       description:
-        'Healthcare, financial services, and government support with compliance built in. Agents trained to your standards.',
+        'Scale your team on demand without long-term hiring commitments.',
       services: [
-        'Healthcare: health plan administration and patient intake',
-        'Financial Services: claim filing and fraud prevention support',
-        'Real Estate: lead nurturing and intake screening',
-      ],
-      result:
-        'Industry-trained agents. Compliance-ready from day one.',
-      imageSrc: '/services-specialized.jpg',
-      imageAlt: 'Specialized professional support',
-    },
-    {
-      number: '05',
-      title: 'Custom Solutions',
-      subtitle: 'Tailored to Your Operations',
-      description:
-        "Need something specific? We build support models around your workflow, not the other way around.",
-      services: [
-        'Hybrid service combinations',
-        'Project-based engagements',
+        'Seasonal & surge capacity support',
         'Dedicated team allocation',
-        'Flexible scheduling options',
+        'Project-based staffing models',
+        'Flexible scheduling & coverage options',
       ],
-      result: 'Support that fits your operations. Not a template.',
+      result: 'Scale coverage on demand. No long-term hiring commitments. The right people when you need them.',
       imageSrc: '/services-custom.jpg',
-      imageAlt: 'Team collaborating on custom solutions',
+      imageAlt: 'Team collaborating on workforce solutions',
     },
   ];
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Logo - Fixed top left, above everything */}
+      {/* Logo */}
       <button 
         onClick={() => { window.scrollTo(0, 0); navigate('/'); }}
         className="fixed top-4 left-4 z-[400] cursor-pointer"
@@ -304,13 +286,12 @@ export default function Services() {
         </div>
       </button>
 
-      {/* Fixed Blue Header Bar - Menu only */}
+      {/* Fixed Blue Header */}
       <header 
         className="fixed top-0 left-0 right-0 z-50 py-4 px-4 md:px-6"
         style={{ backgroundColor: '#2563eb' }}
       >
         <div className="flex items-center justify-end">
-          {/* Menu Button - Top Right with scroll behavior */}
           <button
             onClick={() => setMenuOpen(true)}
             className={`z-[300] flex items-center gap-2 transition-all duration-300 ${
@@ -325,14 +306,13 @@ export default function Services() {
         </div>
       </header>
 
-      {/* Full Screen Menu Overlay - Behind logo/menu (z-[100]) */}
+      {/* Full Screen Menu */}
       <div 
         className={`fixed inset-0 z-[100] bg-white transition-transform duration-500 ease-out ${
           menuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
         <div className="h-full flex flex-col p-8 md:p-16">
-          {/* Close Button */}
           <div className="flex justify-end">
             <button
               onClick={() => setMenuOpen(false)}
@@ -342,144 +322,59 @@ export default function Services() {
               <X size={24} />
             </button>
           </div>
-
-          {/* Nav Links - Matches homepage Navigation */}
           <div className="flex-1 flex flex-col justify-center">
             <nav className="space-y-6">
-              <button
-                onClick={() => { 
-                  setMenuOpen(false); 
-                  navigate('/');
-                }}
-                className="block text-h2 text-text-primary hover:text-cobalt transition-colors text-left"
-              >
-                Home
-              </button>
-              <button
-                onClick={() => { 
-                  setMenuOpen(false); 
-                  navigate('/', { state: { scrollTo: 'industries' } });
-                }}
-                className="block text-h2 text-text-primary hover:text-cobalt transition-colors text-left"
-              >
-                Industries
-              </button>
-              <button
-                onClick={() => { 
-                  setMenuOpen(false); 
-                  navigate('/about');  {/* FIXED: Goes to About page instead of scrolling */}
-                }}
-                className="block text-h2 text-text-primary hover:text-cobalt transition-colors text-left"
-              >
-                How We Work
-              </button>
-              <button
-                onClick={() => { 
-                  setMenuOpen(false); 
-                  navigate('/', { state: { scrollTo: 'results' } });
-                }}
-                className="block text-h2 text-text-primary hover:text-cobalt transition-colors text-left"
-              >
-                Results
-              </button>
-              <button
-                onClick={() => { 
-                  setMenuOpen(false); 
-                  navigate('/', { state: { scrollTo: 'contact' } });
-                }}
-                className="block text-h2 text-text-primary hover:text-cobalt transition-colors text-left"
-              >
-                Contact
-              </button>
+              <button onClick={() => { setMenuOpen(false); navigate('/'); }} className="block text-h2 text-text-primary hover:text-cobalt transition-colors text-left">Home</button>
+              <button onClick={() => { setMenuOpen(false); navigate('/', { state: { scrollTo: 'industries' } }); }} className="block text-h2 text-text-primary hover:text-cobalt transition-colors text-left">Industries</button>
+              <button onClick={() => { setMenuOpen(false); navigate('/about'); }} className="block text-h2 text-text-primary hover:text-cobalt transition-colors text-left">How We Work</button>
+              <button onClick={() => { setMenuOpen(false); navigate('/', { state: { scrollTo: 'results' } }); }} className="block text-h2 text-text-primary hover:text-cobalt transition-colors text-left">Results</button>
+              <button onClick={() => { setMenuOpen(false); navigate('/', { state: { scrollTo: 'contact' } }); }} className="block text-h2 text-text-primary hover:text-cobalt transition-colors text-left">Contact</button>
             </nav>
           </div>
-
-          {/* CTA */}
           <div className="pt-8 border-t border-gray-200">
-            <button 
-              onClick={() => { setMenuOpen(false); navigate('/#contact'); }}
-              className="btn-primary bg-cobalt text-white"
-            >
-              Request Staffing
-              <ArrowRight size={18} />
+            <button onClick={() => { setMenuOpen(false); navigate('/#contact'); }} className="btn-primary bg-cobalt text-white">
+              Request Staffing <ArrowRight size={18} />
             </button>
           </div>
         </div>
       </div>
 
-      {/* Hero Section - More spacious layout */}
-      <div
-        ref={heroRef}
-        className="pt-20 pb-24 px-6 lg:px-8 relative"
-        style={{ backgroundColor: '#2563eb' }}
-      >
+      {/* Hero */}
+      <div ref={heroRef} className="pt-20 pb-24 px-6 lg:px-8 relative" style={{ backgroundColor: '#2563eb' }}>
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] gap-8 lg:gap-12 items-center">
             <div className="relative max-w-xl">
-
-  <h1 className="animate-in pt-4 text-h1 text-white mb-14">
-    Support<br />
-    That Scales<br />
-    With Your<br />
-    Operations
-  </h1>
-
-  <p className="animate-in text-body text-white/90 mb-10">
-    Customer support and administrative services that extend your team.
-    More capacity, same headcount. 
-  </p>
-</div>
-
-            {/* Image - right side, taller and positioned higher */}
+              <h1 className="animate-in pt-4 text-h1 text-white mb-14">
+                Support<br />That Scales<br />With Your<br />Operations
+              </h1>
+              <p className="animate-in text-body text-white/90 mb-10">
+                Business Process Outsourcing that extends your team. More capacity, same headcount. We manage the processes, you focus on growth.
+              </p>
+            </div>
             <div className="animate-in relative">
               <div className="group relative rounded-2xl overflow-hidden shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)] border-4 border-white/30">
-                <img
-                  src="/services-hero.jpeg"
-                  alt="Professional support team"
-                  className="w-full h-[420px] md:h-[460px] lg:h-[500px] object-cover object-center brightness-95 contrast-105 transition-transform duration-500 group-hover:scale-105"
-                />
-                {/* Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-blue-900/20 to-transparent pointer-events-none" />
+                <img src="/services-hero.jpeg" alt="Professional support team" className="w-full h-[420px] md:h-[460px] lg:h-[500px] object-cover object-center brightness-95 contrast-105 transition-transform duration-500 group-hover:scale-105" />
+                <div className="absolute inset-0 bg-gradient-to-t from-blue-900/20 to-transparent pointer-events-none" />
               </div>
-              {/* Decorative elements */}
-              <div
-                className="absolute -top-6 -right-6 w-20 h-20 rounded-full pointer-events-none"
-                style={{ backgroundColor: '#84cc16', opacity: 0.8 }}
-              />
-              <div
-                className="absolute -bottom-10 -left-20 w-16 h-16 rounded-full border-4"
-                style={{ borderColor: 'white', opacity: 0.5 }}
-              />
+              <div className="absolute -top-6 -right-6 w-20 h-20 rounded-full pointer-events-none" style={{ backgroundColor: '#84cc16', opacity: 0.8 }} />
+              <div className="absolute -bottom-10 -left-20 w-16 h-16 rounded-full border-4" style={{ borderColor: 'white', opacity: 0.5 }} />
             </div>
           </div>
         </div>
 
-        {/* Bouncing scroll indicator */}
         <div className="absolute bottom-6 left-1/2 -translate-x-1/2 animate-bounce cursor-pointer z-10"
              onClick={() => document.getElementById('services-list')?.scrollIntoView({ behavior: 'smooth' })}
         >
-          <svg 
-            className="w-8 h-8 text-white/70 hover:text-white transition-colors" 
-            fill="none" 
-            stroke="currentColor" 
-            viewBox="0 0 24 24"
-          >
-            <path 
-              strokeLinecap="round" 
-              strokeLinejoin="round" 
-              strokeWidth={2} 
-              d="M19 14l-7 7m0 0l-7-7m7 7V3" 
-            />
-          </svg>
+          <ArrowDown className="w-8 h-8 text-white/70 hover:text-white transition-colors" />
         </div>
       </div>
 
-      {/* Services List - Full width white background */}
+      {/* Services List */}
       <div id="services-list" className="bg-white">
         <main className="max-w-6xl mx-auto px-6 py-8">
           {services.map((service, index) => (
             <ServiceCard
-              key={service.number}
+              key={service.id}
               {...service}
               reverse={index % 2 === 1}
             />
@@ -487,28 +382,30 @@ export default function Services() {
         </main>
       </div>
 
-      {/* CTA Section - Full width blue background */}
+      {/* Client Path Strip */}
+      <div className="bg-gray-50 border-y border-gray-200">
+        <div className="max-w-6xl mx-auto px-6 py-10 text-center">
+          <p className="text-gray-600 text-lg">
+            Most clients start with <span className="font-semibold text-[#1e3a8a]">Contact Center Support</span> and expand into <span className="font-semibold text-[#1e3a8a]">Back-Office</span> as operations grow.
+          </p>
+        </div>
+      </div>
+
+      {/* CTA */}
       <div id="get-started" style={{ backgroundColor: '#2563eb' }}>
         <div className="max-w-6xl mx-auto px-6 py-20 text-center">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Ready to Get Started?
+            Not Sure Where to Start?
           </h2>
           <p className="text-xl text-white/90 mb-10 max-w-2xl mx-auto">
-            Daily support or surge coverage. Deployed fast, managed professionally.
+            Tell us what you're handling in-house. We'll show you what we can take on.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button
-              onClick={() => navigate('/', { state: { scrollTo: 'contact' } })}
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-lg font-medium bg-white text-blue-600 hover:bg-gray-100 transition-colors"
-            >
+            <button onClick={() => navigate('/', { state: { scrollTo: 'contact' } })} className="inline-flex items-center gap-2 px-8 py-4 rounded-lg font-medium bg-white text-blue-600 hover:bg-gray-100 transition-colors">
               <MessageCircle size={20} />
               Request a Consultation
             </button>
-            <a
-              href="/capability-statement.pdf"
-              download
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-lg font-medium border-2 border-white text-white hover:bg-white/10 transition-colors"
-            >
+            <a href="/capability-statement.pdf" download className="inline-flex items-center gap-2 px-8 py-4 rounded-lg font-medium border-2 border-white text-white hover:bg-white/10 transition-colors">
               Download Capability Statement
             </a>
           </div>
@@ -520,14 +417,9 @@ export default function Services() {
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-3 gap-8 mb-8">
             <div>
-              <img
-                src="/logo_white.png"
-                alt="Assistant Plus"
-                className="h-8 w-auto mb-4 block"
-                style={{ background: 'none', backgroundColor: 'transparent' }}
-              />
+              <img src="/logo_white.png" alt="Assistant Plus" className="h-8 w-auto mb-4 block" style={{ background: 'none', backgroundColor: 'transparent' }} />
               <p className="text-white/70 text-sm leading-relaxed">
-                Professional contact center and administrative support services for government agencies and growing organizations.
+                Professional BPO contact center and administrative support services for government agencies and growing organizations.
               </p>
             </div>
             <div>
@@ -541,15 +433,13 @@ export default function Services() {
             <div>
               <h3 className="text-white font-semibold mb-4">Contact Us</h3>
               <div className="space-y-2 text-sm text-white/70">
-                <p></p>
                 <p>info@assistantplusworks.com</p>
-                <p></p>
               </div>
             </div>
           </div>
           <div className="pt-8 border-t border-white/20">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-              <div className="w-24 md:w-32" /> {/* Spacer for balance */}
+              <div className="w-24 md:w-32" />
               <div className="text-micro text-white/60 tracking-wider text-center">
                 © 2026 ASSISTANT PLUS, LLC. ALL RIGHTS RESERVED.
               </div>

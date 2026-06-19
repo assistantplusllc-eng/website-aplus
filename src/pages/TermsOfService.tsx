@@ -31,165 +31,139 @@ export default function TermsOfService() {
       <main className="pt-24 pb-16 px-6">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-4xl font-bold text-[#1e3a8a] mb-2">Terms of Service</h1>
-          <p className="text-gray-500 mb-12">Assistant Plus, LLC | Last Updated: May 2026</p>
+          <p className="text-gray-500 mb-12">Assistant Plus, LLC | Last Updated: June 2026</p>
 
           <div className="prose prose-lg max-w-none text-gray-700 space-y-8">
 
             <section>
-              <h2 className="text-2xl font-bold text-[#1e3a8a] mb-4">1. Overview</h2>
-              <p>These Terms of Service ("Terms") govern the use of services provided by Assistant Plus, LLC ("Assistant Plus," "we," "our," or "us"). By engaging our services, signing a Service Agreement, or accessing any deliverables, the client ("Client," "you," or "your") agrees to be bound by these Terms.</p>
-              <p>These Terms apply to all service models, including hourly support, retainers, project‑based work, and staffing placements.</p>
+              <h2 className="text-2xl font-bold text-[#1e3a8a] mb-4">1. Acceptance of Terms</h2>
+              <p>These Website Terms of Service ("Terms") govern your access to and use of the Assistant Plus, LLC website, including all pages, forms, content, and features (collectively, the "Site"). By using this Site, you agree to these Terms. If you do not agree, please discontinue use immediately.</p>
+              <p>Use of this Site does not create a client relationship. A formal Service Agreement or Statement of Work is required before any services begin. Contacting us through the Site — including submitting forms, sending emails, or requesting information — does not constitute a binding engagement or obligation on either party.</p>
+              <p>You agree to use the Site only for lawful purposes and in a manner that does not harm, disable, or impair the Site or interfere with others' use.</p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-[#1e3a8a] mb-4">2. Services Provided</h2>
-              <p>Assistant Plus provides professional administrative, operational, and customer support services, including but not limited to:</p>
+              <h2 className="text-2xl font-bold text-[#1e3a8a] mb-4">2. No Professional Advice</h2>
+              <p>Content on this Site is provided for informational purposes only. Nothing on the Site should be interpreted as:</p>
               <ul className="list-disc pl-6 space-y-2">
-                <li><strong>Administrative Support:</strong> email management, scheduling, data entry, document preparation, CRM updates, workflow support.</li>
-                <li><strong>Customer Support:</strong> inbound/outbound calls, message handling, appointment setting, escalation management.</li>
-                <li><strong>Back‑Office Operations:</strong> research, reporting, file organization, process support.</li>
-                <li><strong>Staffing & Placement:</strong> sourcing, onboarding, and managing virtual assistants or customer service agents for Client use.</li>
-                <li><strong>Contact Center Support:</strong> small‑team call coverage, intake, and customer experience management.</li>
+                <li>legal advice</li>
+                <li>financial advice</li>
+                <li>employment guarantees</li>
+                <li>service guarantees</li>
+                <li>a binding offer</li>
               </ul>
-              <p>Services may be expanded or modified through a written Service Agreement or Statement of Work ("SOW").</p>
+              <p>Any reliance on Site content is at your own discretion. Assistant Plus is not responsible for any actions, decisions, or outcomes resulting from your use of Site content. You are solely responsible for how you apply or act upon any information obtained from this Site.</p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-[#1e3a8a] mb-4">3. Engagement Models</h2>
-              <p>Clients may engage Assistant Plus under one or more of the following models:</p>
+              <h2 className="text-2xl font-bold text-[#1e3a8a] mb-4">3. Intellectual Property</h2>
+              <p>All content on the Site — including text, graphics, logos, icons, images, videos, downloadable materials, and branding — is the property of Assistant Plus, LLC or its licensors.</p>
+              <p>You may not:</p>
               <ul className="list-disc pl-6 space-y-2">
-                <li><strong>Hourly Services:</strong> billed based on actual hours worked.</li>
-                <li><strong>Monthly Retainer:</strong> a fixed number of hours per month at a discounted rate.</li>
-                <li><strong>Project‑Based Engagements:</strong> fixed‑fee or milestone‑based pricing for defined deliverables.</li>
-                <li><strong>Staffing Placement:</strong> one‑time or recurring fees for sourcing and placing personnel.</li>
+                <li>copy, reproduce, or distribute Site content</li>
+                <li>use our branding or materials without permission</li>
+                <li>repurpose or resell any content</li>
+                <li>scrape or extract data from the Site</li>
+                <li>use our content for AI training, dataset creation, or automated extraction</li>
               </ul>
-              <p>The specific model, scope, and pricing will be outlined in the Client's Service Agreement or SOW.</p>
+              <p>Limited personal viewing is permitted.</p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-[#1e3a8a] mb-4">4. Payment Terms</h2>
-              <p>Unless otherwise stated in the SOW:</p>
+              <h2 className="text-2xl font-bold text-[#1e3a8a] mb-4">4. User Submissions</h2>
+              <p>If you submit information through forms, contact pages, or email:</p>
               <ul className="list-disc pl-6 space-y-2">
-                <li>First month is due upfront before services begin.</li>
-                <li>Ongoing invoices are Net 15 or Net 30, depending on the engagement.</li>
-                <li>Late payments may incur a 1.5% monthly late fee or the maximum allowed by law.</li>
-                <li>Retainer hours do not roll over unless explicitly stated.</li>
-                <li>Deposits for project‑based work are non‑refundable.</li>
-                <li>Assistant Plus may suspend services for nonpayment after 5 business days' notice.</li>
-              </ul>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-bold text-[#1e3a8a] mb-4">5. Client Responsibilities</h2>
-              <p>Clients agree to:</p>
-              <ul className="list-disc pl-6 space-y-2">
-                <li>Provide accurate information, timely feedback, and necessary access to systems.</li>
-                <li>Maintain secure login credentials and comply with data‑security best practices.</li>
-                <li>Use services only for lawful, ethical, and authorized purposes.</li>
-                <li>Not request tasks that violate privacy, compliance, or regulatory requirements.</li>
-                <li>Communicate respectfully with all Assistant Plus personnel.</li>
-              </ul>
-              <p>Clients acknowledge that Assistant Plus is not liable for delays, errors, or additional costs caused by incomplete, inaccurate, or untimely information provided by the Client.</p>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-bold text-[#1e3a8a] mb-4">6. Restrictions on Use</h2>
-              <p>Clients may not:</p>
-              <ul className="list-disc pl-6 space-y-2">
-                <li>Use services for illegal, fraudulent, harmful, or deceptive activities.</li>
-                <li>Request that staff perform tasks requiring professional licensure (legal, medical, financial, etc.).</li>
-                <li>Share Assistant Plus training materials, SOPs, or internal documents with third parties.</li>
-                <li>Directly hire, solicit, or contract with Assistant Plus staff for 12 months after engagement without paying a buyout fee equal to $5,000 or 50% of the staff member's annualized compensation, whichever is greater.</li>
-                <li>Provide unauthorized access to sensitive systems or data.</li>
-                <li>Use services to spam, harass, or mislead customers.</li>
-              </ul>
-              <p>Assistant Plus reserves the right to refuse or discontinue services that violate these restrictions.</p>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-bold text-[#1e3a8a] mb-4">7. Confidentiality & Data Security</h2>
-              <p>Both parties agree to maintain the confidentiality of all non‑public information shared during the engagement. Assistant Plus may sign a separate NDA upon request.</p>
-              <p>In the event of a data breach affecting Client information, Assistant Plus will notify the Client within 72 hours of discovery.</p>
-              <p>Upon termination, Assistant Plus will return or securely destroy all Client data and materials within 10 business days, unless otherwise directed by the Client in writing. Clients must revoke system access within 24 hours of termination.</p>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-bold text-[#1e3a8a] mb-4">8. Intellectual Property</h2>
-              <p>Unless otherwise stated:</p>
-              <ul className="list-disc pl-6 space-y-2">
-                <li>Assistant Plus retains ownership of internal tools, templates, SOPs, and training materials.</li>
-                <li>Client retains ownership of all data, documents, and materials created specifically for their business.</li>
-                <li>Deliverables may not be resold, redistributed, or repurposed without written consent.</li>
+                <li>You represent that the information is accurate and lawful.</li>
+                <li>You grant Assistant Plus permission to contact you regarding your inquiry.</li>
+                <li>Submission does not obligate Assistant Plus to provide services.</li>
+                <li>We reserve the right to decline inquiries at our discretion.</li>
               </ul>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-[#1e3a8a] mb-4">9. Liability Limitations</h2>
-              <p>To the fullest extent permitted by law:</p>
+              <h2 className="text-2xl font-bold text-[#1e3a8a] mb-4">5. Privacy</h2>
+              <p>Your use of the Site is also governed by our <a href="/privacy-policy" className="text-[#2563eb] hover:underline font-medium">Privacy Policy</a>, which explains how we collect, use, and protect information submitted through the Site.</p>
+              <p>By using the Site, you consent to the practices described in the Privacy Policy.</p>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-bold text-[#1e3a8a] mb-4">6. Third-Party Links and Platforms</h2>
+              <p>The Site may contain links to third-party websites, tools, or integrated platforms (e.g., scheduling widgets, contact forms, CRM systems).</p>
+              <p>Assistant Plus is not responsible for:</p>
               <ul className="list-disc pl-6 space-y-2">
-                <li>Assistant Plus's total liability is capped at the amount paid by the Client in the 30 days preceding the claim.</li>
-                <li>Assistant Plus is not liable for indirect or consequential damages, lost profits or business interruption, errors caused by third‑party platforms or software, Client misuse of deliverables, or delays caused by incomplete or inaccurate Client information.</li>
+                <li>the content of third-party sites</li>
+                <li>their privacy practices</li>
+                <li>their accuracy or reliability</li>
+                <li>the performance, availability, or security of third-party platforms integrated with the Site</li>
               </ul>
-              <p>These limitations apply regardless of the legal theory asserted.</p>
+              <p>Accessing third-party links is at your own risk.</p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-[#1e3a8a] mb-4">10. Termination & Cancellation</h2>
-              <p>Unless otherwise stated in the SOW:</p>
+              <h2 className="text-2xl font-bold text-[#1e3a8a] mb-4">7. Acceptable Use Restrictions</h2>
+              <p>You agree not to:</p>
               <ul className="list-disc pl-6 space-y-2">
-                <li><strong>Hourly & Retainer Engagements:</strong> Either party may terminate with 14 days written notice.</li>
-                <li><strong>Project‑Based Engagements:</strong> Either party may terminate with 30 days written notice. Deposits are non‑refundable.</li>
-                <li><strong>Staffing Placements:</strong> Either party may terminate with 30 days written notice. Placements may require a minimum 90‑day commitment or an early termination fee equal to one month's placement fee.</li>
+                <li>use the Site for fraudulent or harmful purposes</li>
+                <li>attempt to gain unauthorized access to any systems</li>
+                <li>upload malicious code, bots, or automated scripts</li>
+                <li>interfere with Site functionality</li>
+                <li>impersonate another person or entity</li>
               </ul>
-              <p>Assistant Plus may terminate immediately for nonpayment, abusive behavior, or illegal activity.</p>
-              <p>Upon termination:</p>
+              <p>Violations may result in restricted access or legal action.</p>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-bold text-[#1e3a8a] mb-4">8. Disclaimer of Warranties</h2>
+              <p>The Site is provided "as is" and "as available." Assistant Plus makes no warranties — express or implied — regarding:</p>
               <ul className="list-disc pl-6 space-y-2">
-                <li>All outstanding invoices become due immediately.</li>
-                <li>No refunds are issued for unused retainer hours or deposits.</li>
-                <li>Access to systems and shared platforms must be revoked within 24 hours.</li>
-                <li>Assistant Plus will provide reasonable transition support for up to 5 business days at standard hourly rates to ensure continuity of critical operations.</li>
+                <li>accuracy or completeness of content</li>
+                <li>uninterrupted or error-free operation</li>
+                <li>suitability of the Site for any purpose</li>
               </ul>
+              <p>Use of the Site is at your own risk.</p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-[#1e3a8a] mb-4">11. Service Modifications</h2>
-              <p>Assistant Plus may update or modify these Terms at any time. Clients will be notified of material changes via email or client portal.</p>
-              <p>Continued use of services constitutes acceptance of updated Terms.</p>
+              <h2 className="text-2xl font-bold text-[#1e3a8a] mb-4">9. Limitation of Liability</h2>
+              <p>To the fullest extent permitted by law, Assistant Plus, LLC is not liable for:</p>
+              <ul className="list-disc pl-6 space-y-2">
+                <li>any direct, indirect, incidental, or consequential damages</li>
+                <li>loss of data, revenue, or business</li>
+                <li>issues arising from third-party platforms or links</li>
+                <li>unauthorized access to your submissions</li>
+              </ul>
+              <p>This limitation applies even if we have been advised of the possibility of such damages.</p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-[#1e3a8a] mb-4">12. Force Majeure</h2>
-              <p>Neither party shall be liable for failures or delays caused by events beyond their reasonable control, including but not limited to: acts of God, natural disasters, pandemics, government restrictions, internet outages, or third‑party platform failures. Affected obligations will be suspended for the duration of the event, and both parties will work in good faith to resume services promptly.</p>
+              <h2 className="text-2xl font-bold text-[#1e3a8a] mb-4">10. Changes to the Site or Terms</h2>
+              <p>We may update the Site or modify these Terms at any time. Continued use of the Site after changes are posted constitutes acceptance of the updated Terms.</p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-[#1e3a8a] mb-4">13. Dispute Resolution</h2>
-              <p>Any dispute arising from these Terms shall first be submitted to non‑binding mediation. If mediation fails within 30 days, either party may pursue litigation. Mediation costs shall be split equally between both parties.</p>
+              <h2 className="text-2xl font-bold text-[#1e3a8a] mb-4">11. DMCA / Copyright Complaints</h2>
+              <p>If you believe that any content on the Site infringes your copyright, please contact us with the following information:</p>
+              <ul className="list-disc pl-6 space-y-2">
+                <li>A description of the copyrighted work you claim has been infringed</li>
+                <li>A description of where the allegedly infringing material is located on the Site</li>
+                <li>Your contact information</li>
+                <li>A statement that you have a good-faith belief that the use is not authorized</li>
+                <li>A statement that the information in your notice is accurate, and under penalty of perjury, that you are the copyright owner or authorized to act on their behalf</li>
+              </ul>
+              <p>Upon receipt of a valid notice, we will investigate and take appropriate action, including removing the content if necessary.</p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-[#1e3a8a] mb-4">14. Governing Law</h2>
-              <p>These Terms are governed by the laws of the State of New York, without regard to conflict‑of‑law principles.</p>
-              <p>Any disputes shall be resolved in the state or federal courts located in New York.</p>
+              <h2 className="text-2xl font-bold text-[#1e3a8a] mb-4">12. Governing Law</h2>
+              <p>These Terms are governed by the laws of the State of New York, without regard to conflict-of-law principles. Any disputes related to Site use shall be resolved in the state or federal courts located in New York.</p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-[#1e3a8a] mb-4">15. Insurance</h2>
-              <p>Assistant Plus maintains general liability insurance and errors & omissions (E&O) insurance appropriate to the nature and scope of services provided. Certificates of insurance are available upon request.</p>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-bold text-[#1e3a8a] mb-4">16. Entire Agreement</h2>
-              <p>These Terms, together with the Service Agreement and any SOWs, constitute the entire agreement between the parties and supersede all prior discussions or understandings.</p>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-bold text-[#1e3a8a] mb-4">17. Contact Information</h2>
-              <p>For questions regarding these Terms:</p>
+              <h2 className="text-2xl font-bold text-[#1e3a8a] mb-4">13. Contact Information</h2>
+              <p>For questions about these Terms or the Site:</p>
               <div className="mt-4 p-6 bg-gray-50 rounded-lg">
                 <p className="font-semibold text-[#1e3a8a]">Assistant Plus, LLC</p>
                 <p className="mt-2">Email: info@assistantplusworks.com</p>
-                <p>Phone: </p>
                 <p>Address: Bergen County, New Jersey</p>
               </div>
             </section>

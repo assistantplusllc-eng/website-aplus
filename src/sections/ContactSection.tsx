@@ -206,20 +206,20 @@ export default function ContactSection() {
           <div className="flex flex-col justify-center relative">
             <div className="space-y-4 mb-8">
               <div className="flex items-center gap-3 text-white/90">
-                <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
-                  <Mail size={18} />
+                <div className="w-10 h-10 rounded-full bg-lime flex items-center justify-center flex-shrink-0">
+                  <Mail size={18} className="text-cobalt" />
                 </div>
                 <span className="text-body">info@assistantplusworks.com</span>
               </div>
               <div className="flex items-center gap-3 text-white/90">
-                <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
-                  <Phone size={18} />
+                <div className="w-10 h-10 rounded-full bg-lime flex items-center justify-center flex-shrink-0">
+                  <Phone size={18} className="text-cobalt" />
                 </div>
                 <span className="text-body">(888) 652-6315</span>
               </div>
               <div className="flex items-center gap-3 text-white/90">
-                <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
-                  <Clock size={18} />
+                <div className="w-10 h-10 rounded-full bg-lime flex items-center justify-center flex-shrink-0">
+                  <Clock size={18} className="text-cobalt" />
                 </div>
                 <span className="text-body">Mon-Fri | 9am-6pm ET</span>
               </div>
