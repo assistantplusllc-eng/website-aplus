@@ -112,6 +112,11 @@ img {
   body {
     overflow-x: hidden;
   }
+
+  /* Mobile image positioning - show top of images to avoid cutting off faces/subjects */
+  img {
+    object-position: center top !important;
+  }
 }
 
 /* Tablet adjustments */
@@ -127,5 +132,10 @@ img {
   .photo-block {
     width: 40vw !important;
     height: 50vh !important;
+  }
+
+  /* Tablet image positioning */
+  img {
+    object-position: center top !important;
   }
 }

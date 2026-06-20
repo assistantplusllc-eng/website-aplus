@@ -63,6 +63,7 @@ function ServiceCard({
       className={`grid md:grid-cols-[1fr_1.3fr] gap-8 lg:gap-16 items-center py-16 border-b border-gray-200 ${
         reverse ? 'md:grid-flow-dense' : ''
       }`}
+      style={{ scrollMarginTop: '120px' }}
     >
       {/* Content */}
       <div className={reverse ? 'md:col-start-2' : ''}>
@@ -120,7 +121,7 @@ function ServiceCard({
           <img
             src={imageSrc}
             alt={imageAlt}
-            className="w-full h-[400px] object-cover"
+            className="w-full h-[400px] object-cover object-top"
           />
           <div
             className="absolute top-0 right-0 w-24 h-24 rounded-bl-full"
@@ -206,10 +207,10 @@ export default function Services() {
       description:
         'Professional customer-facing support across phone, email, chat, and tickets.',
       services: [
-        'Inbound & outbound call handling',
-        'Email, chat & ticket management',
+        'Retention Services',
+        'Telemarketing & appointment setting',
+        'Market research & follow up ',
         'Omnichannel customer engagement',
-        'Help desk & technical support',
       ],
       result:
         'Consistent customer experience across every channel. Faster resolution. No added headcount.',
@@ -224,10 +225,10 @@ export default function Services() {
       description:
         'Operational support that keeps workflows, records, and processes running behind the scenes.',
       services: [
-        'Data entry & database management',
-        'Document processing & records keeping',
-        'CRM updates & workflow coordination',
-        'Reporting & quality assurance',
+        'HR and payroll administration',
+        'Customer record maintenance',
+        'Ordering and fulfillment',
+        'Administrative support',
       ],
       result: 'Less admin overhead. More focus on core operations. Processes that run smoothly behind the scenes.',
       imageSrc: '/services-administrative.jpg',
@@ -241,10 +242,10 @@ export default function Services() {
       description:
         'Lead qualification, appointment setting, and outreach campaigns that keep your pipeline active.',
       services: [
-        'Lead qualification & intake screening',
-        'Appointment scheduling & confirmations',
-        'Follow-up campaigns & nurture sequences',
-        'Customer retention & win-back outreach',
+        'Inbound lead response & qualification',
+        'Outbound prospecting & cold outreach',
+        'Pipeline management & CRM updates',
+        'Campaign performance tracking & reporting',
       ],
       result:
         'More qualified leads. Better appointment show rates. Stronger customer relationships.',
@@ -353,7 +354,7 @@ export default function Services() {
             </div>
             <div className="animate-in relative">
               <div className="group relative rounded-2xl overflow-hidden shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)] border-4 border-white/30">
-                <img src="/services-hero.jpeg" alt="Professional support team" className="w-full h-[420px] md:h-[460px] lg:h-[500px] object-cover object-center brightness-95 contrast-105 transition-transform duration-500 group-hover:scale-105" />
+                <img src="/services-hero.jpeg" alt="Professional support team" className="w-full h-[420px] md:h-[460px] lg:h-[500px] object-cover object-top brightness-95 contrast-105 transition-transform duration-500 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-gradient-to-t from-blue-900/20 to-transparent pointer-events-none" />
               </div>
               <div className="absolute -top-6 -right-6 w-20 h-20 rounded-full pointer-events-none" style={{ backgroundColor: '#84cc16', opacity: 0.8 }} />

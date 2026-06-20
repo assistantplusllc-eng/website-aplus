@@ -23,11 +23,10 @@ const servicePillars = [
     id: 'contact-center',
     icon: Phone,
     title: 'Contact Center Support',
-    description: 'Customer-facing support services that help organizations deliver responsive, professional experiences across phone, email, chat, and other communication channels.',
+    description: 'Customer-facing support services that help organizations deliver responsive, professional experiences across phone, email, chat, sms, and other communication channels.',
     examples: [
       'Inbound & outbound call handling',
       'Email, chat & ticket management',
-      'Omnichannel customer engagement',
       'Help desk & technical support'
     ]
   },
@@ -38,9 +37,8 @@ const servicePillars = [
     description: 'Operational and administrative support services that streamline workflows, maintain records, manage documentation, and keep business processes running efficiently.',
     examples: [
       'Data entry & database management',
-      'Document processing & records keeping',
-      'CRM updates & workflow coordination',
-      'Reporting & quality assurance'
+      'Accounting & financial processing',
+      'Document management & records keeping'
     ]
   },
   {

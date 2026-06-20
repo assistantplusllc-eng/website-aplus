@@ -292,7 +292,7 @@ export default function ContentSection({
           {renderContent()}
         </div>
 
-        <div className="w-full h-[200px] rounded-xl overflow-hidden -mx-6">
+        <div className="hidden w-full h-[200px] rounded-xl overflow-hidden -mx-6">
           <img src={imageSrc} alt={imageAlt} className="w-full h-full object-cover object-top" />
         </div>
       </div>
