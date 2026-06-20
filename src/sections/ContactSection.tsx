@@ -227,8 +227,7 @@ export default function ContactSection() {
             <div ref={photoRef} className="relative rounded-photo overflow-hidden" style={{ height: '40vh', zIndex: 1 }}>
               <img src="/contact_team.jpg" alt="Team collaboration" className="w-full h-full object-cover" />
             </div>
-            <div ref={accentRef} className="absolute accent-lime" style={{ right: '-1vw', top: '26vh', width: '15vw', height: '15vw', borderRadius: '0 0 0 100%', zIndex: 2 }} />
-
+            
             {/* Download capability statement button */}
             <a 
               href="/capability-statement.pdf"
