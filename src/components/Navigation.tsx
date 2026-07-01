@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, ArrowRight } from 'lucide-react';
+import { Menu, X, ArrowRight, Phone } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 export default function Navigation() {
@@ -30,13 +30,10 @@ export default function Navigation() {
     setIsOpen(false);
 
     if (isExternal) {
-      // Navigate to different page and scroll to top
       window.scrollTo(0, 0);
       navigate(href);
     } else {
-      // Scroll to section
       if (!isHomePage) {
-        // If not on homepage, navigate home first then scroll
         navigate('/', { state: { scrollTo: href.replace('#', '') } });
       } else {
         const element = document.querySelector(href);
@@ -49,10 +46,8 @@ export default function Navigation() {
 
   const goHome = () => {
     if (isHomePage) {
-      // If already on homepage, scroll to top
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
-      // If on another page, navigate to homepage
       navigate('/');
     }
   };
@@ -119,8 +114,8 @@ export default function Navigation() {
             </nav>
           </div>
 
-          {/* CTA */}
-          <div className="pt-8 border-t border-gray-200">
+          {/* Bottom Row: CTA + Phone Number */}
+          <div className="pt-8 border-t border-gray-200 flex items-center justify-between">
             <button 
               onClick={() => handleNavClick('#contact', false)}
               className="btn-primary bg-cobalt text-white"
@@ -128,6 +123,14 @@ export default function Navigation() {
               Request Staffing
               <ArrowRight size={18} />
             </button>
+
+            <a 
+              href="tel:+15551234567" 
+              className="flex items-center gap-2 text-h2 text-text-primary hover:text-cobalt transition-colors"
+            >
+              <Phone size={24} />
+              <span>(888) 652-6315</span>
+            </a>
           </div>
         </div>
       </div>

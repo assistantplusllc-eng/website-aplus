@@ -187,7 +187,7 @@ export default function PrivacyPolicy() {
               <div className="mt-4 p-6 bg-gray-50 rounded-lg">
                 <p className="font-semibold text-[#1e3a8a]">Assistant Plus, LLC</p>
                 <p className="mt-2">Email: privacy@assistantplusworks.com</p>
-                <p>Alternative: info@assistantplusworks.com</p>
+                <p>Phone: (888) 652-6315 ext. 545</p>
                 <p className="mt-4">New York, United States</p>
               </div>
             </section>

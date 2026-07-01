@@ -1,7 +1,7 @@
 import { useRef, useLayoutEffect, useState, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ArrowRight, MessageCircle, Check, Menu, X, ArrowDown } from 'lucide-react';
+import { ArrowRight, MessageCircle, Check, Menu, X, ArrowDown, Phone } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -309,36 +309,45 @@ export default function Services() {
 
       {/* Full Screen Menu */}
       <div 
-        className={`fixed inset-0 z-[100] bg-white transition-transform duration-500 ease-out ${
-          menuOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}
+  className={`fixed inset-0 z-[100] bg-white transition-transform duration-500 ease-out ${
+    menuOpen ? 'translate-x-0' : 'translate-x-full'
+  }`}
+>
+  <div className="h-full flex flex-col p-8 md:p-16">
+    <div className="flex justify-end">
+      <button
+        onClick={() => setMenuOpen(false)}
+        className="flex items-center gap-2 text-text-primary hover:text-cobalt transition-colors"
       >
-        <div className="h-full flex flex-col p-8 md:p-16">
-          <div className="flex justify-end">
-            <button
-              onClick={() => setMenuOpen(false)}
-              className="flex items-center gap-2 text-text-primary hover:text-cobalt transition-colors"
-            >
-              <span className="text-sm font-medium">Close</span>
-              <X size={24} />
-            </button>
-          </div>
-          <div className="flex-1 flex flex-col justify-center">
-            <nav className="space-y-6">
-              <button onClick={() => { setMenuOpen(false); navigate('/'); }} className="block text-h2 text-text-primary hover:text-cobalt transition-colors text-left">Home</button>
-              <button onClick={() => { setMenuOpen(false); navigate('/', { state: { scrollTo: 'industries' } }); }} className="block text-h2 text-text-primary hover:text-cobalt transition-colors text-left">Industries</button>
-              <button onClick={() => { setMenuOpen(false); navigate('/about'); }} className="block text-h2 text-text-primary hover:text-cobalt transition-colors text-left">How We Work</button>
-              <button onClick={() => { setMenuOpen(false); navigate('/', { state: { scrollTo: 'results' } }); }} className="block text-h2 text-text-primary hover:text-cobalt transition-colors text-left">Results</button>
-              <button onClick={() => { setMenuOpen(false); navigate('/', { state: { scrollTo: 'contact' } }); }} className="block text-h2 text-text-primary hover:text-cobalt transition-colors text-left">Contact</button>
-            </nav>
-          </div>
-          <div className="pt-8 border-t border-gray-200">
-            <button onClick={() => { setMenuOpen(false); navigate('/#contact'); }} className="btn-primary bg-cobalt text-white">
-              Request Staffing <ArrowRight size={18} />
-            </button>
-          </div>
-        </div>
-      </div>
+        <span className="text-sm font-medium">Close</span>
+        <X size={24} />
+      </button>
+    </div>
+    <div className="flex-1 flex flex-col justify-center">
+      <nav className="space-y-6">
+        <button onClick={() => { setMenuOpen(false); navigate('/'); }} className="block text-h2 text-text-primary hover:text-cobalt transition-colors text-left">Home</button>
+        <button onClick={() => { setMenuOpen(false); navigate('/', { state: { scrollTo: 'industries' } }); }} className="block text-h2 text-text-primary hover:text-cobalt transition-colors text-left">Industries</button>
+        <button onClick={() => { setMenuOpen(false); navigate('/about'); }} className="block text-h2 text-text-primary hover:text-cobalt transition-colors text-left">How We Work</button>
+        <button onClick={() => { setMenuOpen(false); navigate('/', { state: { scrollTo: 'results' } }); }} className="block text-h2 text-text-primary hover:text-cobalt transition-colors text-left">Results</button>
+        <button onClick={() => { setMenuOpen(false); navigate('/', { state: { scrollTo: 'contact' } }); }} className="block text-h2 text-text-primary hover:text-cobalt transition-colors text-left">Contact</button>
+      </nav>
+    </div>
+    
+    {/* Bottom Row: CTA + Phone Number */}
+    <div className="pt-8 border-t border-gray-200 flex items-center justify-between">
+      <button onClick={() => { setMenuOpen(false); navigate('/#contact'); }} className="btn-primary bg-cobalt text-white">
+        Request Staffing <ArrowRight size={18} />
+      </button>
+      <a 
+        href="tel:+18886526315" 
+        className="flex items-center gap-2 text-h2 text-text-primary hover:text-cobalt transition-colors"
+      >
+        <Phone size={24} />
+        <span>(888) 652-6315</span>
+      </a>
+    </div>
+  </div>
+</div>
 
       {/* Hero */}
       <div ref={heroRef} className="pt-20 pb-24 px-6 lg:px-8 relative" style={{ backgroundColor: '#2563eb' }}>
@@ -435,6 +444,7 @@ export default function Services() {
               <h3 className="text-white font-semibold mb-4">Contact Us</h3>
               <div className="space-y-2 text-sm text-white/70">
                 <p>info@assistantplusworks.com</p>
+                <p>(888) 652-6315</p>
               </div>
             </div>
           </div>
