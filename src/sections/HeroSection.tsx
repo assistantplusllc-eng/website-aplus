@@ -93,7 +93,7 @@ export default function HeroSection() {
       <div className="md:hidden relative overflow-hidden">
         <div className="px-6 pt-24 pb-8">
           <div ref={microRef} className="text-[11px] font-semibold tracking-[0.15em] text-white/80 uppercase mb-6">
-            CALL CENTER BPO SERVICES
+            CUSTOMER OPERATIONS SOLUTIONS
           </div>
 
           <div className="mb-5">
@@ -113,7 +113,7 @@ export default function HeroSection() {
               className="btn-primary w-full justify-center"
               onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
             >
-              Request Staffing
+              Start a Conversation
               <ArrowRight size={18} />
             </button>
           </div>
@@ -135,7 +135,7 @@ export default function HeroSection() {
           className="absolute text-micro text-white/80"
           style={{ left: '6vw', top: '7vh' }}
         >
-          CALL CENTER BPO SERVICES
+          CUSTOMER OPERATIONS SOLUTIONS
         </div>
 
         <div 
@@ -164,7 +164,7 @@ export default function HeroSection() {
             className="btn-primary"
             onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
           >
-            Request Staffing
+            Start a Conversation
             <ArrowRight size={18} />
           </button>
         </div>

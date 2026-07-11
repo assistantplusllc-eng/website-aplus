@@ -22,6 +22,7 @@ interface ContentSectionProps {
   boldListItems?: boolean;
   ctaLink?: string;
   cardItems?: string[];
+  cardFooter?: string;
   downloadCta?: {
     label: string;
     file: string;
@@ -46,6 +47,7 @@ export default function ContentSection({
   boldListItems,
   ctaLink,
   cardItems,
+  cardFooter,
   downloadCta,
   timelineItems,
   scrollArrowTarget,
@@ -196,13 +198,17 @@ export default function ContentSection({
       )}
 
       {cardItems && (
-        <div className="flex flex-wrap gap-2 mb-5 md:gap-3 md:mb-6">
+        <div className="flex flex-wrap gap-2 mb-3 md:gap-3 md:mb-4">
           {cardItems.map((item, i) => (
             <div key={i} className="px-4 py-2.5 rounded-full bg-lime text-cobalt text-sm font-semibold hover:bg-white hover:scale-105 transition-all duration-200 cursor-default">
               {item}
             </div>
           ))}
         </div>
+      )}
+
+      {cardFooter && (
+        <p className="text-sm text-white/60 italic mb-5 md:mb-6">{cardFooter}</p>
       )}
 
       {stats && (
@@ -292,7 +298,7 @@ export default function ContentSection({
           {renderContent()}
         </div>
 
-        <div className="w-full h-[200px] rounded-xl overflow-hidden -mx-6">
+        <div className="hidden w-full h-[200px] rounded-xl overflow-hidden -mx-6">
           <img src={imageSrc} alt={imageAlt} className="w-full h-full object-cover object-top" />
         </div>
       </div>

@@ -20,56 +20,44 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 // ─── Service Data for What We Do section ───
 const servicePillars = [
   {
-    id: 'contact-center',
+    id: 'customer-support',
     icon: Phone,
-    title: 'Contact Center Support',
-    description: 'Customer-facing support services that help organizations deliver responsive, professional experiences across phone, email, chat, and other communication channels.',
+    title: 'Customer Support',
+    description: 'Deliver exceptional customer experiences through responsive inbound and outbound support across phone, email, chat, SMS, and other communication channels.',
     examples: [
-      'Inbound & outbound call handling',
-      'Email, chat & ticket management',
-      'Omnichannel customer engagement',
-      'Help desk & technical support'
+      'Live Answering Services',
+      'Help Desk (Tier 1)',
+      'Chat & Email Support',
+      'Overflow Call Handling'
     ]
   },
   {
-    id: 'back-office',
-    icon: FileText,
-    title: 'Back-Office Outsourcing',
-    description: 'Operational and administrative support services that streamline workflows, maintain records, manage documentation, and keep business processes running efficiently.',
-    examples: [
-      'Data entry & database management',
-      'Document processing & records keeping',
-      'CRM updates & workflow coordination',
-      'Reporting & quality assurance'
-    ]
-  },
-  {
-    id: 'lead-generation',
+    id: 'customer-outreach',
     icon: Users2,
-    title: 'Lead Generation & Customer Outreach',
-    description: 'Engagement services designed to support lead qualification, appointment scheduling, follow-up communications, customer outreach campaigns, and relationship-building initiatives.',
+    title: 'Customer Outreach',
+    description: 'Build relationships, generate opportunities, and keep customers engaged through strategic outbound communications and follow-up campaigns.',
     examples: [
-      'Lead qualification & intake screening',
-      'Appointment scheduling & confirmations',
-      'Follow-up campaigns & nurture sequences',
-      'Customer retention & win-back outreach'
+      'Lead Generation',
+      'Lead Qualification',
+      'Customer Follow-Up',
+      'Appointment Setting'
     ]
   },
   {
-    id: 'workforce',
-    icon: Briefcase,
-    title: 'Workforce Solutions',
-    description: 'Flexible staffing and support models that help organizations scale operations, manage workload demands, and supplement internal teams with qualified professionals.',
+    id: 'customer-operations',
+    icon: Settings,
+    title: 'Customer Operations',
+    description: 'Coordinate the workflows that keep customer interactions moving. From intake and scheduling to CRM updates, documentation, dispatch support, and workflow management.',
     examples: [
-      'Seasonal & surge capacity support',
-      'Dedicated team allocation',
-      'Project-based staffing models',
-      'Flexible scheduling & coverage options'
+      'Intake Coordination',
+      'CRM Management',
+      'Dispatch Support',
+      'Workflow Coordination'
     ]
   }
 ];
 
-// ─── Inline What We Do Section with 4-card grid ───
+// ─── Inline What We Do Section with 3-card grid ───
 function WhatWeDoSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
@@ -131,7 +119,7 @@ function WhatWeDoSection() {
           <div className="text-[1.75rem] font-black leading-[1.1] tracking-tight text-white">WE DO</div>
         </div>
         <p className="text-base text-white/90 mb-5 leading-relaxed">
-          Four service pillars designed to extend your team, streamline operations, and deliver consistent results.
+          Assistant Plus is a Business Process Outsourcing (BPO) company specializing in customer support and operational services. Through Customer Support, Customer Outreach, and Customer Operations, we help organizations strengthen customer experiences, improve responsiveness, and scale with confidence.
         </p>
         <div className="space-y-3">
           {servicePillars.map((service) => {
@@ -174,9 +162,9 @@ function WhatWeDoSection() {
 
         <div ref={introRef} className="absolute" style={{ left: '6vw', top: '32vh', width: '88vw' }}>
           <p className="text-body text-white/90 mb-4">
-            Assistant Plus is a Business Process Outsourcing (BPO) company specializing in Contact Center Operations and Back-Office Support Services. We provide scalable solutions that keep organizations responsive, efficient, and focused on growth.
+            Assistant Plus is a Business Process Outsourcing (BPO) company specializing in customer support and operational services. Through Customer Support, Customer Outreach, and Customer Operations, we help organizations strengthen customer experiences, improve responsiveness, and scale with confidence.
           </p>
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-3 justify-center">
             {servicePillars.map((service) => {
               const Icon = service.icon;
               return (
@@ -194,24 +182,24 @@ function WhatWeDoSection() {
         </div>
 
         <div ref={cardsRef} className="absolute" style={{ left: '6vw', top: '52vh', width: '88vw' }}>
-          <div className="grid grid-cols-2 gap-8">
-            {servicePillars.slice(0, 2).map((service) => {
+          <div className="grid grid-cols-3 gap-6">
+            {servicePillars.map((service) => {
               const Icon = service.icon;
               return (
                 <button
                   key={service.id}
                   onClick={() => navigate(`/services#${service.id}`)}
-                  className="text-left bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-8 hover:bg-white/20 hover:border-lime/50 transition-all duration-300 cursor-pointer group"
+                  className="text-left bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6 hover:bg-white/20 hover:border-lime/50 transition-all duration-300 cursor-pointer group"
                 >
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="w-12 h-12 rounded-full bg-lime flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                      <Icon size={20} className="text-cobalt" />
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-10 h-10 rounded-full bg-lime flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                      <Icon size={18} className="text-cobalt" />
                     </div>
-                    <h3 className="text-xl font-bold text-white group-hover:text-lime transition-colors duration-300">{service.title}</h3>
+                    <h3 className="text-lg font-bold text-white group-hover:text-lime transition-colors duration-300">{service.title}</h3>
                   </div>
-                  <p className="text-base text-white/80 mb-5 leading-relaxed">{service.description}</p>
+                  <p className="text-sm text-white/80 mb-3 leading-relaxed">{service.description}</p>
                   <span className="text-sm font-medium text-lime group-hover:text-white transition-colors duration-300 flex items-center gap-1">
-                    Explore <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform duration-300" />
+                    View Service <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform duration-300" />
                   </span>
                 </button>
               );
@@ -291,7 +279,7 @@ function WhyOutsourceSection() {
           <div className="text-[1.75rem] font-black leading-[1.1] tracking-tight text-white">WITH US</div>
         </div>
         <p className="text-base text-white/90 mb-5 leading-relaxed">
-          Partnering with Assistant Plus means more than extra hands — it means operational leverage without the overhead.
+          Partnering with Assistant Plus means gaining a trusted operational partner. We help organizations improve customer experiences, streamline workflows, and scale confidently without the cost and complexity of expanding internal teams.
         </p>
         <div className="space-y-4">
           <div className="flex items-start gap-3">
@@ -299,8 +287,8 @@ function WhyOutsourceSection() {
               <TrendingUp size={16} className="text-cobalt" />
             </div>
             <div>
-              <h3 className="text-base font-bold text-white mb-1">Cost Efficiency</h3>
-              <p className="text-sm text-white/80">Reduce overhead without sacrificing quality. Pay for output, not idle time.</p>
+              <h3 className="text-base font-bold text-white mb-1">Reliable Support</h3>
+              <p className="text-sm text-white/80">Consistent, professional customer interactions that strengthen your brand and improve customer satisfaction.</p>
             </div>
           </div>
           <div className="flex items-start gap-3">
@@ -308,8 +296,8 @@ function WhyOutsourceSection() {
               <Users size={16} className="text-cobalt" />
             </div>
             <div>
-              <h3 className="text-base font-bold text-white mb-1">Scalability</h3>
-              <p className="text-sm text-white/80">Scale teams up or down based on demand. No long-term hiring commitments.</p>
+              <h3 className="text-base font-bold text-white mb-1">Flexible Scaling</h3>
+              <p className="text-sm text-white/80">Increase or reduce support as demand changes without the expense of hiring and training internal staff.</p>
             </div>
           </div>
           <div className="flex items-start gap-3">
@@ -317,8 +305,8 @@ function WhyOutsourceSection() {
               <Settings size={16} className="text-cobalt" />
             </div>
             <div>
-              <h3 className="text-base font-bold text-white mb-1">Process Expertise</h3>
-              <p className="text-sm text-white/80">We manage the workflow, not just the workforce. Structured, measurable, and consistent.</p>
+              <h3 className="text-base font-bold text-white mb-1">Operational Excellence</h3>
+              <p className="text-sm text-white/80">Structured workflows, documented processes, and dependable execution that keep customer operations running smoothly.</p>
             </div>
           </div>
         </div>
@@ -326,27 +314,27 @@ function WhyOutsourceSection() {
 
       {/* DESKTOP */}
       <div ref={panelRef} className="hidden md:block section-inner">
-        <div ref={h2Ref} className="absolute" style={{ left: '6vw', top: '18vh', width: '44vw' }}>
+        <div ref={h2Ref} className="absolute" style={{ left: '6vw', top: '12vh', width: '44vw' }}>
           <div className="text-h2 text-white">WHY</div>
           <div className="text-h2 text-white">OUTSOURCE</div>
           <div className="text-h2 text-white">WITH US</div>
         </div>
 
-        <div ref={introRef} className="absolute" style={{ left: '6vw', top: '48vh', width: '32vw' }}>
+        <div ref={introRef} className="absolute" style={{ left: '6vw', top: '40vh', width: '40vw' }}>
           <p className="text-body text-white/90">
-            Partnering with Assistant Plus means more than extra hands — it means operational leverage without the overhead.
+            Partnering with Assistant Plus means gaining a trusted operational partner. We help organizations improve customer experiences, streamline workflows, and scale confidently without the cost and complexity of expanding internal teams.
           </p>
         </div>
 
-        <div ref={itemsRef} className="absolute" style={{ left: '6vw', top: '58vh', width: '36vw' }}>
-          <div className="space-y-4">
+        <div ref={itemsRef} className="absolute" style={{ left: '6vw', top: '56vh', width: '40vw' }}>
+          <div className="space-y-5">
             <div className="flex items-start gap-4">
               <div className="w-10 h-10 rounded-full bg-lime flex items-center justify-center flex-shrink-0">
                 <TrendingUp size={18} className="text-cobalt" />
               </div>
               <div>
-                <h3 className="text-lg font-bold text-white mb-1">Cost Efficiency</h3>
-                <p className="text-sm text-white/80">Reduce overhead without sacrificing quality. Pay for output, not idle time.</p>
+                <h3 className="text-lg font-bold text-white mb-1">Reliable Support</h3>
+                <p className="text-sm text-white/80">Consistent, professional customer interactions that strengthen your brand and improve customer satisfaction.</p>
               </div>
             </div>
             <div className="flex items-start gap-4">
@@ -354,8 +342,8 @@ function WhyOutsourceSection() {
                 <Users size={18} className="text-cobalt" />
               </div>
               <div>
-                <h3 className="text-lg font-bold text-white mb-1">Scalability</h3>
-                <p className="text-sm text-white/80">Scale teams up or down based on demand. No long-term hiring commitments.</p>
+                <h3 className="text-lg font-bold text-white mb-1">Flexible Scaling</h3>
+                <p className="text-sm text-white/80">Increase or reduce support as demand changes without the expense of hiring and training internal staff.</p>
               </div>
             </div>
             <div className="flex items-start gap-4">
@@ -363,14 +351,14 @@ function WhyOutsourceSection() {
                 <Settings size={18} className="text-cobalt" />
               </div>
               <div>
-                <h3 className="text-lg font-bold text-white mb-1">Process Expertise</h3>
-                <p className="text-sm text-white/80">We manage the workflow, not just the workforce. Structured, measurable, and consistent.</p>
+                <h3 className="text-lg font-bold text-white mb-1">Operational Excellence</h3>
+                <p className="text-sm text-white/80">Structured workflows, documented processes, and dependable execution that keep customer operations running smoothly.</p>
               </div>
             </div>
           </div>
         </div>
 
-        <div ref={photoRef} className="absolute photo-block" style={{ left: '56vw', top: '18vh', width: '38vw', height: '62vh' }}>
+        <div ref={photoRef} className="absolute photo-block" style={{ left: '56vw', top: '14vh', width: '38vw', height: '62vh' }}>
           <img src="/team_meetingss.png" alt="Team collaboration" className="w-full h-full object-cover" />
         </div>
 
@@ -481,52 +469,53 @@ function MainPage() {
             imageAlt="Professionals collaborating"
             accentType="ring-bottom-left"
             timelineItems={[
-              'Discovery: We map your operational needs, support volume, and service goals — then design the support structure that fits.',
-              'Alignment: We match trained professionals to your environment, ensuring responsive coverage across day-to-day operations.',
-              'Launch: Fast, structured onboarding with ongoing oversight from day one.'
+              'Discovery: We learn about your customer support needs, service volume, workflows, and goals. Then design a support solution that fits your organization.',
+              'Alignment: We align experienced support professionals with your environment, processes, and service expectations to ensure seamless day-to-day operations.',
+              'Launch: We launch with structured onboarding, ongoing communication, and continuous oversight to keep your operations running smoothly from day one.'
             ]}
           />
         </div>
 
         {/* Section 5: Industries */}
         <div id="industries">
-          <ContentSection
-            zIndex={50}
-            headline={['INDUSTRIES', 'WE SERVE']}
-            body="Support that adapts to industry requirements — from public sector compliance to private-sector pace."
-            imageSrc="/desk_work.png"
-            imageAlt="Professional at desk"
-            accentType="quarter-top-right"
-            cardItems={[
-              'Government Agencies',
-              'Professional Services',
-              'Utilities & Consumer Services',
-              'Financial Services & Insurance',
-              'Travel & Hospitality',
-              'Healthcare & Wellness',
-              'E-Commerce'
-            ]}
-            downloadCta={{
-              label: 'Download Capability Statement',
-              file: '/capability-statement.pdf'
-            }}
-          />
-        </div>
+  <ContentSection
+    zIndex={50}
+    headline={['INDUSTRIES', 'WE SERVE']}
+    body="Support that adapts to industry requirements—from public sector compliance to the fast-moving demands of private organizations."
+    imageSrc="/desk_work.png"
+    imageAlt="Professional at desk"
+    accentType="quarter-top-right"
+    cardItems={[
+      'Government Agencies',
+      'Professional Services',
+      'Utilities & Essential Services',
+      'Financial Services & Insurance',
+      'Travel & Hospitality',
+      'Healthcare',
+      'Retail & E-Commerce'
+    ]}
+    cardFooter="Don't see your industry? Our support model is designed to adapt across a wide range of customer-facing environments."
+    downloadCta={{
+      label: 'Download Capability Statement',
+      file: '/capability-statement.pdf'
+    }}
+  />
+</div>
 
         {/* Section 6: Results */}
         <div id="results">
           <ContentSection
             zIndex={60}
-            headline={['RESULTS', 'THAT MATTER']}
+            headline={['RESPONSIVE', 'BY DESIGN']}
             body=""
             cta="Talk to our team"
             imageSrc="/agent_smile.png"
             imageAlt="Smiling support agent"
             accentType="ring-bottom-left"
             stats={[
-              { value: '48-72h', label: 'Average Deployment Timeline' },
-              { value: '1-day', label: 'Standard Response Time' },
-              { value: 'On-Demand', label: 'Support Models & Coverage' }
+              { value: '48-72h', label: 'Target Deployment Timeline' },
+              { value: '1-day', label: 'Inquiry Response Commitment' },
+              { value: 'Flexible Support', label: 'Program-Based Support' }
             ]}
           />
         </div>

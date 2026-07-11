@@ -1,7 +1,7 @@
 import { useRef, useLayoutEffect, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Send, Mail, Phone, Clock, Download } from 'lucide-react';
+import { Send, Mail, Phone, Clock, Download, ChevronDown } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -16,7 +16,9 @@ export default function ContactSection() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
     organization: '',
+    service: '',
     message: ''
   });
 
@@ -108,23 +110,31 @@ export default function ContactSection() {
   }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
-  e.preventDefault();
-  
-  const form = e.target as HTMLFormElement;
-  
-  fetch('/', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: new URLSearchParams(new FormData(form) as any).toString()
-  })
-    .then(() => {
-      alert('Thank you! We will respond within one business day.');
-      setFormData({ name: '', email: '', organization: '', message: '' });
+    e.preventDefault();
+
+    const form = e.target as HTMLFormElement;
+
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(new FormData(form) as any).toString()
     })
-    .catch((error) => {
-      alert('Something went wrong. Please try again or call us at (888) 652-6315.');
-    });
-};
+      .then(() => {
+        alert('Thank you! We will respond within one business day.');
+        setFormData({ name: '', email: '', phone: '', organization: '', service: '', message: '' });
+      })
+      .catch((error) => {
+        alert('Something went wrong. Please try again or call us at (888) 652-6315.');
+      });
+  };
+
+  const serviceOptions = [
+    { value: '', label: 'Service Needed' },
+    { value: 'customer-support', label: 'Customer Support' },
+    { value: 'customer-outreach', label: 'Customer Outreach' },
+    { value: 'customer-operations', label: 'Customer Operations' },
+    { value: 'general-inquiry', label: 'General Inquiry' },
+  ];
 
   return (
     <section ref={sectionRef} className="relative w-full min-h-screen py-8 px-4" style={{ zIndex: 90, backgroundColor: 'white' }}>
@@ -132,11 +142,11 @@ export default function ContactSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 h-full">
           <div className="flex flex-col justify-center">
             <div ref={h2Ref} className="mb-6">
-              <div className="text-h2 text-white">REQUEST</div>
-              <div className="text-h2 text-white">INFO</div>
+              <div className="text-h2 text-white">START A</div>
+              <div className="text-h2 text-white">CONVERSATION</div>
             </div>
             <p className="text-body text-white/80 mb-8">
-              Tell us what you need. We will respond within one business day.
+              Tell us about your customer support or operational needs. Our team will respond within one business day.
             </p>
             <form 
               ref={formRef} 
@@ -158,7 +168,7 @@ export default function ContactSection() {
                 <input
                   type="text"
                   name="name"
-                  placeholder="Name"
+                  placeholder="Name *"
                   value={formData.name}
                   onChange={(e) => setFormData({...formData, name: e.target.value})}
                   className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:border-lime transition-colors"
@@ -169,11 +179,21 @@ export default function ContactSection() {
                 <input
                   type="email"
                   name="email"
-                  placeholder="Email"
+                  placeholder="Email *"
                   value={formData.email}
                   onChange={(e) => setFormData({...formData, email: e.target.value})}
                   className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:border-lime transition-colors"
                   required
+                />
+              </div>
+              <div>
+                <input
+                  type="tel"
+                  name="phone"
+                  placeholder="Phone (optional)"
+                  value={formData.phone}
+                  onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                  className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:border-lime transition-colors"
                 />
               </div>
               <div>
@@ -186,10 +206,30 @@ export default function ContactSection() {
                   className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:border-lime transition-colors"
                 />
               </div>
+              <div className="relative">
+                <select
+                  name="service"
+                  value={formData.service}
+                  onChange={(e) => setFormData({...formData, service: e.target.value})}
+                  className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white appearance-none focus:outline-none focus:border-lime transition-colors cursor-pointer"
+                  style={{ color: formData.service ? 'white' : 'rgba(255,255,255,0.5)' }}
+                >
+                  {serviceOptions.map((option) => (
+                    <option 
+                      key={option.value} 
+                      value={option.value}
+                      style={{ backgroundColor: '#1B45F4', color: 'white' }}
+                    >
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+                <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-white/50 pointer-events-none" />
+              </div>
               <div>
                 <textarea
                   name="message"
-                  placeholder="Message"
+                  placeholder="Message *"
                   rows={4}
                   value={formData.message}
                   onChange={(e) => setFormData({...formData, message: e.target.value})}
@@ -199,7 +239,7 @@ export default function ContactSection() {
               </div>
               <button type="submit" className="btn-primary w-full justify-center">
                 <Send size={18} />
-                Send Request
+                Submit Inquiry
               </button>
             </form>
           </div>
@@ -227,7 +267,6 @@ export default function ContactSection() {
             <div ref={photoRef} className="relative rounded-photo overflow-hidden" style={{ height: '40vh', zIndex: 1 }}>
               <img src="/contact_team.jpg" alt="Team collaboration" className="w-full h-full object-cover" />
             </div>
-            <div ref={accentRef} className="absolute accent-lime" style={{ right: '-5vw', top: '5vh', width: '15vw', height: '15vw', borderRadius: '0 0 0 100%', zIndex: 2 }} />
 
             {/* Download capability statement button */}
             <a 
@@ -236,7 +275,7 @@ export default function ContactSection() {
               className="btn-secondary mt-6 inline-flex items-center gap-2"
             >
               <Download size={18} />
-              Download Capability Statement (PDF)
+              Government buyer? Download our Capability Statement
             </a>
           </div>
         </div>
