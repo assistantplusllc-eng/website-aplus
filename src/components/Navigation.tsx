@@ -23,7 +23,7 @@ export default function Navigation() {
     { label: 'Industries', href: '#industries', isExternal: false },
     { label: 'How We Work', href: '/about', isExternal: true },
     { label: 'Results', href: '#results', isExternal: false },
-    { label: 'Contact', href: '#contact', isExternal: false },
+    { label: 'Start a Conversation', href: '#contact', isExternal: false },
   ];
 
   const handleNavClick = (href: string, isExternal: boolean) => {
@@ -120,7 +120,7 @@ export default function Navigation() {
               onClick={() => handleNavClick('#contact', false)}
               className="btn-primary bg-cobalt text-white"
             >
-              Request Staffing
+              Submit Inquiry
               <ArrowRight size={18} />
             </button>
 

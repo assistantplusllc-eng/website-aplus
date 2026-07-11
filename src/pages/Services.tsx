@@ -6,17 +6,24 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 gsap.registerPlugin(ScrollTrigger);
 
+interface ServiceGroup {
+  header: string;
+  items: string[];
+}
+
 interface ServiceCardProps {
   id: string;
   number: string;
   title: string;
   subtitle: string;
   description: string;
-  services: string[];
+  serviceGroups: ServiceGroup[];
   result: string;
   imageSrc: string;
   imageAlt: string;
   reverse?: boolean;
+  wideImage?: boolean;
+  imagePosition?: string;
 }
 
 function ServiceCard({
@@ -25,11 +32,13 @@ function ServiceCard({
   title,
   subtitle,
   description,
-  services,
+  serviceGroups,
   result,
   imageSrc,
   imageAlt,
   reverse = false,
+  wideImage = false,
+  imagePosition,
 }: ServiceCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
 
@@ -56,11 +65,16 @@ function ServiceCard({
     return () => ctx.revert();
   }, []);
 
+  // FIX: Flip grid ratio when reversed so image always gets the wider column
+  const gridCols = wideImage
+    ? (reverse ? 'md:grid-cols-[1.6fr_1fr]' : 'md:grid-cols-[1fr_1.6fr]')
+    : (reverse ? 'md:grid-cols-[1.3fr_1fr]' : 'md:grid-cols-[1fr_1.3fr]');
+
   return (
     <div
       id={id}
       ref={cardRef}
-      className={`grid md:grid-cols-[1fr_1.3fr] gap-8 lg:gap-16 items-center py-16 border-b border-gray-200 ${
+      className={`grid ${gridCols} gap-8 lg:gap-16 items-center py-16 border-b border-gray-200 ${
         reverse ? 'md:grid-flow-dense' : ''
       }`}
       style={{ scrollMarginTop: '120px' }}
@@ -93,19 +107,27 @@ function ServiceCard({
           {description}
         </p>
 
-        <ul className="space-y-3 mb-6">
-          {services.map((item, i) => (
-            <li key={i} className="flex items-start gap-3 text-gray-700">
-              <span
-                className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
-                style={{ backgroundColor: '#84cc16' }}
-              >
-                <Check size={12} className="text-white" />
-              </span>
-              <span>{item}</span>
-            </li>
+        {/* Grouped list */}
+        <div className="space-y-6 mb-6">
+          {serviceGroups.map((group, gi) => (
+            <div key={gi}>
+              <h4 className="font-bold text-gray-800 mb-2">{group.header}</h4>
+              <ul className="space-y-2">
+                {group.items.map((item, i) => (
+                  <li key={i} className="flex items-start gap-3 text-gray-700">
+                    <span
+                      className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
+                      style={{ backgroundColor: '#84cc16' }}
+                    >
+                      <Check size={12} className="text-white" />
+                    </span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           ))}
-        </ul>
+        </div>
 
         <div className="flex items-start gap-3 p-4 rounded-lg" style={{ backgroundColor: '#f0fdf4' }}>
           <Check size={18} className="text-[#84cc16] flex-shrink-0 mt-0.5" />
@@ -116,12 +138,13 @@ function ServiceCard({
       </div>
 
       {/* Image */}
-      <div className={`relative ${reverse ? 'md:col-start-1' : ''}`}>
+      <div className={`relative overflow-visible ${reverse ? 'md:col-start-1' : ''}`}>
         <div className="relative rounded-2xl overflow-hidden shadow-2xl">
           <img
             src={imageSrc}
             alt={imageAlt}
-            className="w-full h-[400px] object-cover object-top"
+            className="w-full h-[400px] object-cover"
+            style={{ objectPosition: imagePosition || 'center' }}
           />
           <div
             className="absolute top-0 right-0 w-24 h-24 rounded-bl-full"
@@ -200,74 +223,83 @@ export default function Services() {
 
   const services = [
     {
-      id: 'contact-center',
+      id: 'customer-support',
       number: '01',
-      title: 'Contact Center Support',
-      subtitle: 'Customer-Facing Support',
+      title: 'Customer Support',
+      subtitle: 'We Answer, Resolve & Support',
       description:
-        'Professional customer-facing support across phone, email, chat, and tickets.',
-      services: [
-        'Retention Services',
-        'Telemarketing & appointment setting',
-        'Market research & follow up ',
-        'Omnichannel customer engagement',
+        'Customer Support is the foundation of every successful customer experience. Our trained professionals represent your organization across phone, email, chat, SMS, and other communication channels—providing responsive, consistent support that reflects your brand.',
+      serviceGroups: [
+        {
+          header: 'Customer Support',
+          items: ['Live Answering Services', 'Customer Service', 'Help Desk (Tier 1)'],
+        },
+        {
+          header: 'Customer Coordination',
+          items: ['Appointment Scheduling', 'Order & Account Support', 'Message Taking'],
+        },
+        {
+          header: 'Multichannel Support',
+          items: ['Chat & Email Support', 'Overflow Call Handling'],
+        },
       ],
       result:
-        'Consistent customer experience across every channel. Faster resolution. No added headcount.',
+        'Professional support. Faster response times. More capacity without additional headcount.',
       imageSrc: '/services-contact-center.png',
-      imageAlt: 'Customer service agent handling calls professionally',
+      imageAlt: 'Customer support team handling calls and inquiries',
+      wideImage: true,
     },
     {
-      id: 'back-office',
+      id: 'customer-outreach',
       number: '02',
-      title: 'Back-Office Outsourcing',
-      subtitle: 'Operational & Administrative',
+      title: 'Customer Outreach',
+      subtitle: 'We Engage, Follow Up & Generate Opportunities',
       description:
-        'Operational support that keeps workflows, records, and processes running behind the scenes.',
-      services: [
-        'HR and payroll administration',
-        'Customer record maintenance',
-        'Ordering and fulfillment',
-        'Administrative support',
+        'Engagement services designed to support lead qualification, appointment scheduling, follow-up communications, customer outreach campaigns, and relationship-building initiatives.',
+      serviceGroups: [
+        {
+          header: 'Lead Development',
+          items: ['Lead Generation', 'Lead Qualification', 'Appointment Setting'],
+        },
+        {
+          header: 'Customer Engagement',
+          items: ['Welcome Calls', 'Customer Follow-Up', 'Customer Retention'],
+        },
+        {
+          header: 'Campaign Support',
+          items: ['Outbound Calling', 'Survey Campaigns'],
+        },
       ],
-      result: 'Less admin overhead. More focus on core operations. Processes that run smoothly behind the scenes.',
-      imageSrc: '/services-administrative.jpg',
-      imageAlt: 'Professional managing administrative tasks',
-    },
-    {
-      id: 'lead-generation',
-      number: '03',
-      title: 'Lead Generation & Customer Outreach',
-      subtitle: 'Engagement & Relationship Building',
-      description:
-        'Lead qualification, appointment setting, and outreach campaigns that keep your pipeline active.',
-      services: [
-        'Inbound lead response & qualification',
-        'Outbound prospecting & cold outreach',
-        'Pipeline management & CRM updates',
-        'Campaign performance tracking & reporting',
-      ],
-      result:
-        'More qualified leads. Better appointment show rates. Stronger customer relationships.',
+      result: 'More qualified leads. Better conversion opportunities. Stronger customer relationships.',
       imageSrc: '/services-customer-support.jpeg',
-      imageAlt: 'Contact center team providing outreach support',
+      imageAlt: 'Outreach team engaging with customers',
+      wideImage: true,
+      imagePosition: '75% center',
     },
     {
-      id: 'workforce',
-      number: '04',
-      title: 'Workforce Solutions',
-      subtitle: 'Flexible Staffing & Scaling',
+      id: 'customer-operations',
+      number: '03',
+      title: 'Customer Operations',
+      subtitle: 'We Coordinate the Workflows',
       description:
-        'Scale your team on demand without long-term hiring commitments.',
-      services: [
-        'Seasonal & surge capacity support',
-        'Dedicated team allocation',
-        'Project-based staffing models',
-        'Flexible scheduling & coverage options',
+        "We coordinate the workflows that keep customer interactions moving. Notice what isn't here: no payroll, no bookkeeping, no HR, no accounting. Instead, operational tasks that support the customer experience — exactly where our expertise lives.",
+      serviceGroups: [
+        {
+          header: 'Intake & Coordination',
+          items: ['Intake Coordination', 'Case Coordination', 'Service Request Coordination'],
+        },
+        {
+          header: 'Workflow Management',
+          items: ['Workflow Coordination', 'Dispatch Support', 'Escalation Management'],
+        },
+        {
+          header: 'Customer Records & Systems',
+          items: ['CRM Management', 'Customer Documentation'],
+        },
       ],
-      result: 'Scale coverage on demand. No long-term hiring commitments. The right people when you need them.',
-      imageSrc: '/services-custom.jpg',
-      imageAlt: 'Team collaborating on workforce solutions',
+      result: 'Less administrative overhead. More focus on core operations. Processes that run smoothly behind the scenes.',
+      imageSrc: '/services-administrative.jpg',
+      imageAlt: 'Operations team coordinating workflows',
     },
   ];
 
@@ -309,70 +341,82 @@ export default function Services() {
 
       {/* Full Screen Menu */}
       <div 
-  className={`fixed inset-0 z-[100] bg-white transition-transform duration-500 ease-out ${
-    menuOpen ? 'translate-x-0' : 'translate-x-full'
-  }`}
->
-  <div className="h-full flex flex-col p-8 md:p-16">
-    <div className="flex justify-end">
-      <button
-        onClick={() => setMenuOpen(false)}
-        className="flex items-center gap-2 text-text-primary hover:text-cobalt transition-colors"
+        className={`fixed inset-0 z-[100] bg-white transition-transform duration-500 ease-out ${
+          menuOpen ? 'translate-x-0' : 'translate-x-full'
+        }`}
       >
-        <span className="text-sm font-medium">Close</span>
-        <X size={24} />
-      </button>
-    </div>
-    <div className="flex-1 flex flex-col justify-center">
-      <nav className="space-y-6">
-        <button onClick={() => { setMenuOpen(false); navigate('/'); }} className="block text-h2 text-text-primary hover:text-cobalt transition-colors text-left">Home</button>
-        <button onClick={() => { setMenuOpen(false); navigate('/', { state: { scrollTo: 'industries' } }); }} className="block text-h2 text-text-primary hover:text-cobalt transition-colors text-left">Industries</button>
-        <button onClick={() => { setMenuOpen(false); navigate('/about'); }} className="block text-h2 text-text-primary hover:text-cobalt transition-colors text-left">How We Work</button>
-        <button onClick={() => { setMenuOpen(false); navigate('/', { state: { scrollTo: 'results' } }); }} className="block text-h2 text-text-primary hover:text-cobalt transition-colors text-left">Results</button>
-        <button onClick={() => { setMenuOpen(false); navigate('/', { state: { scrollTo: 'contact' } }); }} className="block text-h2 text-text-primary hover:text-cobalt transition-colors text-left">Contact</button>
-      </nav>
-    </div>
-    
-    {/* Bottom Row: CTA + Phone Number */}
-    <div className="pt-8 border-t border-gray-200 flex items-center justify-between">
-      <button onClick={() => { setMenuOpen(false); navigate('/#contact'); }} className="btn-primary bg-cobalt text-white">
-        Request Staffing <ArrowRight size={18} />
-      </button>
-      <a 
-        href="tel:+18886526315" 
-        className="flex items-center gap-2 text-h2 text-text-primary hover:text-cobalt transition-colors"
-      >
-        <Phone size={24} />
-        <span>(888) 652-6315</span>
-      </a>
-    </div>
-  </div>
-</div>
+        <div className="h-full flex flex-col p-8 md:p-16">
+          <div className="flex justify-end">
+            <button
+              onClick={() => setMenuOpen(false)}
+              className="flex items-center gap-2 text-text-primary hover:text-cobalt transition-colors"
+            >
+              <span className="text-sm font-medium">Close</span>
+              <X size={24} />
+            </button>
+          </div>
+          <div className="flex-1 flex flex-col justify-center">
+            <nav className="space-y-6">
+              <button onClick={() => { setMenuOpen(false); navigate('/'); }} className="block text-h2 text-text-primary hover:text-cobalt transition-colors text-left">Home</button>
+              <button onClick={() => { setMenuOpen(false); navigate('/', { state: { scrollTo: 'industries' } }); }} className="block text-h2 text-text-primary hover:text-cobalt transition-colors text-left">Industries</button>
+              <button onClick={() => { setMenuOpen(false); navigate('/about'); }} className="block text-h2 text-text-primary hover:text-cobalt transition-colors text-left">How We Work</button>
+              <button onClick={() => { setMenuOpen(false); navigate('/', { state: { scrollTo: 'results' } }); }} className="block text-h2 text-text-primary hover:text-cobalt transition-colors text-left">Results</button>
+              <button onClick={() => { setMenuOpen(false); navigate('/', { state: { scrollTo: 'contact' } }); }} className="block text-h2 text-text-primary hover:text-cobalt transition-colors text-left">Start a Conversation</button>
+            </nav>
+          </div>
+
+          {/* Bottom Row: CTA + Phone Number */}
+          <div className="pt-8 border-t border-gray-200 flex items-center justify-between">
+            <button onClick={() => { setMenuOpen(false); navigate('/#contact'); }} className="btn-primary bg-cobalt text-white">
+              Submit Inquiry <ArrowRight size={18} />
+            </button>
+            <a 
+              href="tel:+18886526315" 
+              className="flex items-center gap-2 text-h2 text-text-primary hover:text-cobalt transition-colors"
+            >
+              <Phone size={24} />
+              <span>(888) 652-6315</span>
+            </a>
+          </div>
+        </div>
+      </div>
 
       {/* Hero */}
-      <div ref={heroRef} className="pt-20 pb-24 px-6 lg:px-8 relative" style={{ backgroundColor: '#2563eb' }}>
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] gap-8 lg:gap-12 items-center">
-            <div className="relative max-w-xl">
-              <h1 className="animate-in pt-4 text-h1 text-white mb-14">
-                Support<br />That Scales<br />With Your<br />Operations
-              </h1>
-              <p className="animate-in text-body text-white/90 mb-10">
-                Business Process Outsourcing that extends your team. More capacity, same headcount. We manage the processes, you focus on growth.
-              </p>
+      <div ref={heroRef} className="pt-20 pb-32 px-6 lg:px-8 relative" style={{ backgroundColor: '#2563eb' }}>
+        <div className="max-w-7xl mx-auto relative">
+          {/* Text block — matches About page positioning */}
+          <div className="relative max-w-xl pt-8" style={{ marginLeft: '0', width: '52vw' }}>
+            <h1 className="animate-in text-h1 text-white mb-12 uppercase leading-[1.05]">
+              Customer<br />
+              Operations<br />
+              Designed<br />
+              Around Your<br />
+              Business
+            </h1>
+            <p className="animate-in text-body text-white/90" style={{ width: '38vw' }}>
+              Assistant Plus delivers customer support, outreach, and operational coordination services that integrate seamlessly with your organization. Whether you need overflow coverage, dedicated support, or ongoing operational assistance, we help you scale with confidence.
+            </p>
+          </div>
+
+          {/* Image — positioned right, closer to text */}
+          <div className="animate-in absolute hidden md:block" style={{ left: '42vw', top: '8vh', width: '38vw', height: '55vh' }}>
+            <div className="group relative rounded-2xl overflow-hidden shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)] border-4 border-white/30 h-full">
+              <img src="/services-hero.jpeg" alt="Professional support team" className="w-full h-full object-cover object-top brightness-95 contrast-105 transition-transform duration-500 group-hover:scale-105" />
+              <div className="absolute inset-0 bg-gradient-to-t from-blue-900/20 to-transparent pointer-events-none" />
             </div>
-            <div className="animate-in relative">
-              <div className="group relative rounded-2xl overflow-hidden shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)] border-4 border-white/30">
-                <img src="/services-hero.jpeg" alt="Professional support team" className="w-full h-[420px] md:h-[460px] lg:h-[500px] object-cover object-top brightness-95 contrast-105 transition-transform duration-500 group-hover:scale-105" />
-                <div className="absolute inset-0 bg-gradient-to-t from-blue-900/20 to-transparent pointer-events-none" />
-              </div>
-              <div className="absolute -top-6 -right-6 w-20 h-20 rounded-full pointer-events-none" style={{ backgroundColor: '#84cc16', opacity: 0.8 }} />
-              <div className="absolute -bottom-10 -left-20 w-16 h-16 rounded-full border-4" style={{ borderColor: 'white', opacity: 0.5 }} />
-            </div>
+            <div className="absolute -top-6 -right-6 w-20 h-20 rounded-full pointer-events-none" style={{ backgroundColor: '#84cc16', opacity: 0.8 }} />
+            <div className="absolute -bottom-8 -left-4 w-16 h-16 rounded-full border-4" style={{ borderColor: 'white', opacity: 0.5 }} />
           </div>
         </div>
 
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 animate-bounce cursor-pointer z-10"
+        {/* Mobile image */}
+        <div className="animate-in md:hidden mt-8 px-6">
+          <div className="group relative rounded-2xl overflow-hidden shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)] border-4 border-white/30">
+            <img src="/services-hero.jpeg" alt="Professional support team" className="w-full h-[300px] object-cover object-top brightness-95 contrast-105" />
+          </div>
+        </div>
+
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce cursor-pointer z-10"
              onClick={() => document.getElementById('services-list')?.scrollIntoView({ behavior: 'smooth' })}
         >
           <ArrowDown className="w-8 h-8 text-white/70 hover:text-white transition-colors" />
@@ -396,7 +440,7 @@ export default function Services() {
       <div className="bg-gray-50 border-y border-gray-200">
         <div className="max-w-6xl mx-auto px-6 py-10 text-center">
           <p className="text-gray-600 text-lg">
-            Most clients start with <span className="font-semibold text-[#1e3a8a]">Contact Center Support</span> and expand into <span className="font-semibold text-[#1e3a8a]">Back-Office</span> as operations grow.
+            Most clients start with <span className="font-semibold text-[#1e3a8a]">Customer Support</span> and expand into <span className="font-semibold text-[#1e3a8a]">Customer Operations</span> as their needs grow.
           </p>
         </div>
       </div>
@@ -429,7 +473,7 @@ export default function Services() {
             <div>
               <img src="/logo_white.png" alt="Assistant Plus" className="h-8 w-auto mb-4 block" style={{ background: 'none', backgroundColor: 'transparent' }} />
               <p className="text-white/70 text-sm leading-relaxed">
-                Professional BPO contact center and administrative support services for government agencies and growing organizations.
+                Professional customer support, outreach, and operational support services for government agencies and growing organizations.
               </p>
             </div>
             <div>

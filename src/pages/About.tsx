@@ -149,14 +149,14 @@ export default function About() {
         <button onClick={() => { setMenuOpen(false); navigate('/', { state: { scrollTo: 'industries' } }); }} className="block text-h2 text-text-primary hover:text-cobalt transition-colors text-left">Industries</button>
         <button onClick={() => { setMenuOpen(false); navigate('/services'); }} className="block text-h2 text-text-primary hover:text-cobalt transition-colors text-left">Services</button>
         <button onClick={() => { setMenuOpen(false); navigate('/', { state: { scrollTo: 'results' } }); }} className="block text-h2 text-text-primary hover:text-cobalt transition-colors text-left">Results</button>
-        <button onClick={() => { setMenuOpen(false); navigate('/', { state: { scrollTo: 'contact' } }); }} className="block text-h2 text-text-primary hover:text-cobalt transition-colors text-left">Contact</button>
+        <button onClick={() => { setMenuOpen(false); navigate('/', { state: { scrollTo: 'contact' } }); }} className="block text-h2 text-text-primary hover:text-cobalt transition-colors text-left">Start a Conversation</button>
       </nav>
     </div>
     
     {/* Bottom Row: CTA + Phone Number */}
     <div className="pt-8 border-t border-gray-200 flex items-center justify-between">
       <button onClick={() => { setMenuOpen(false); navigate('/', { state: { scrollTo: 'contact' } }); }} className="btn-primary bg-cobalt text-white">
-        Request Staffing <ArrowRight size={18} />
+        Submit Inquiry <ArrowRight size={18} />
       </button>
       <a 
         href="tel:+18886526315" 
@@ -226,7 +226,7 @@ export default function About() {
           <ContentBlock
             headline={['How We Work']}
             body={[
-              "We support organizations that need reliable customer service and administrative help. No internal team required.",
+              "We support organizations that need reliable customer service, operational coordination, and administrative support—without the need to expand internal teams.",
               "Structured support, clear processes, seamless integration. You maintain service quality while we handle the operations."
             ]}
             imageSrc="/work-team.png"
@@ -238,7 +238,7 @@ export default function About() {
           <ContentBlock
             headline={['What Makes Us', 'Different']}
             body={[
-              "Our approach comes from experience in high-volume support environments. We understand the operational demands of managing customer interactions at scale.",
+              "Our approach comes from experience managing high-volume customer support and operational environments. We understand the operational demands of managing customer interactions at scale.",
               "Consistency, professionalism, reliable communication. Every interaction. Steady, dependable, high-quality support."
             ]}
             imageSrc="/differences.png"
@@ -286,7 +286,7 @@ export default function About() {
                 <div className="relative pl-6 border-l-4 border-[#84cc16]">
                   <h3 className="text-2xl font-bold text-[#1e3a8a] mb-3">Mission</h3>
                   <p className="text-body text-gray-600">
-                    Deliver structured support through trained professionals who integrate into your operations. More capacity. Less overhead.
+                    Deliver structured customer support and operational solutions through trained professionals who integrate into your organization.
                   </p>
                 </div>
               </div>
@@ -350,7 +350,7 @@ export default function About() {
       <div style={{ backgroundColor: '#2563eb' }}>
         <div className="max-w-6xl mx-auto px-6 py-20 text-center">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Ready to Work Together?
+            Ready to Strengthen Your Operations?
           </h2>
           <p className="text-xl text-white/90 mb-10 max-w-2xl mx-auto">
             Dependable support that maintains service quality and operational efficiency.
@@ -385,7 +385,7 @@ export default function About() {
                 style={{ background: 'none', backgroundColor: 'transparent' }}
               />
               <p className="text-white/70 text-sm leading-relaxed">
-                Professional contact center and administrative support services for government agencies and growing organizations.
+                Professional customer support, outreach, and operational support services for government agencies and growing organizations.
               </p>
             </div>
             <div>
