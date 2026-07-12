@@ -381,24 +381,24 @@ export default function Services() {
         </div>
       </div>
 
-      {/* Hero */}
-      <div ref={heroRef} className="pt-20 pb-32 px-6 lg:px-8 relative" style={{ backgroundColor: '#2563eb' }}>
+      {/* Hero - MOBILE FIXES APPLIED */}
+      <div ref={heroRef} className="pt-20 pb-16 md:pb-32 px-6 lg:px-8 relative" style={{ backgroundColor: '#2563eb' }}>
         <div className="max-w-7xl mx-auto relative">
-          {/* Text block — matches About page positioning */}
-          <div className="relative max-w-xl pt-8" style={{ marginLeft: '0', width: '52vw' }}>
-            <h1 className="animate-in text-h1 text-white mb-12 uppercase leading-[1.05]">
+          {/* Text block — mobile optimized */}
+          <div className="relative max-w-xl pt-4 md:pt-8" style={{ marginLeft: '0', width: '100%' }}>
+            <h1 className="animate-in text-3xl md:text-h1 text-white mb-6 md:mb-12 uppercase leading-[1.05]">
               Customer<br />
               Operations<br />
               Designed<br />
               Around Your<br />
               Business
             </h1>
-            <p className="animate-in text-body text-white/90" style={{ width: '38vw' }}>
+            <p className="animate-in text-sm md:text-body text-white/90 mb-6 md:mb-0" style={{ width: '100%' }}>
               Assistant Plus delivers customer support, outreach, and operational coordination services that integrate seamlessly with your organization. Whether you need overflow coverage, dedicated support, or ongoing operational assistance, we help you scale with confidence.
             </p>
           </div>
 
-          {/* Image — positioned right, closer to text */}
+          {/* Desktop image — hidden on mobile */}
           <div className="animate-in absolute hidden md:block" style={{ left: '42vw', top: '8vh', width: '38vw', height: '55vh' }}>
             <div className="group relative rounded-2xl overflow-hidden shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)] border-4 border-white/30 h-full">
               <img src="/services-hero.jpeg" alt="Professional support team" className="w-full h-full object-cover object-top brightness-95 contrast-105 transition-transform duration-500 group-hover:scale-105" />
@@ -410,16 +410,17 @@ export default function Services() {
         </div>
 
         {/* Mobile image */}
-        <div className="animate-in md:hidden mt-8 px-6">
+        <div className="animate-in md:hidden mt-6 px-6">
           <div className="group relative rounded-2xl overflow-hidden shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)] border-4 border-white/30">
-            <img src="/services-hero.jpeg" alt="Professional support team" className="w-full h-[300px] object-cover object-top brightness-95 contrast-105" />
+            <img src="/services-hero.jpeg" alt="Professional support team" className="w-full h-[220px] object-cover object-top brightness-95 contrast-105" />
           </div>
         </div>
 
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce cursor-pointer z-10"
+        {/* Down arrow — higher on mobile */}
+        <div className="absolute bottom-6 md:bottom-12 left-1/2 -translate-x-1/2 animate-bounce cursor-pointer z-10"
              onClick={() => document.getElementById('services-list')?.scrollIntoView({ behavior: 'smooth' })}
         >
-          <ArrowDown className="w-8 h-8 text-white/70 hover:text-white transition-colors" />
+          <ArrowDown className="w-6 h-6 md:w-8 md:h-8 text-white/70 hover:text-white transition-colors" />
         </div>
       </div>
 
