@@ -381,19 +381,24 @@ export default function Services() {
         </div>
       </div>
 
-      {/* Hero - MOBILE FIXES APPLIED */}
+      {/* Hero - MOBILE HEADER TEXT FIX */}
       <div ref={heroRef} className="pt-20 pb-16 md:pb-32 px-6 lg:px-8 relative" style={{ backgroundColor: '#2563eb' }}>
         <div className="max-w-7xl mx-auto relative">
-          {/* Text block — mobile optimized */}
-          <div className="relative max-w-xl pt-4 md:pt-8" style={{ marginLeft: '0', width: '100%' }}>
-            <h1 className="animate-in text-3xl md:text-h1 text-white mb-6 md:mb-12 uppercase leading-[1.05]">
-              Customer<br />
-              Operations<br />
-              Designed<br />
-              Around Your<br />
-              Business
+          {/* Text block — full width on mobile, constrained on desktop */}
+          <div className="relative w-full md:max-w-xl md:pt-8 pt-4">
+            <h1 className="animate-in text-3xl md:text-h1 text-white mb-6 md:mb-12 uppercase leading-[1.05] font-bold">
+              <span className="hidden md:inline">
+                Customer<br />
+                Operations<br />
+                Designed<br />
+                Around Your<br />
+                Business
+              </span>
+              <span className="md:hidden">
+                Customer Operations Designed Around Your Business
+              </span>
             </h1>
-            <p className="animate-in text-sm md:text-body text-white/90 mb-6 md:mb-0" style={{ width: '100%' }}>
+            <p className="animate-in text-sm md:text-body text-white/90 mb-6 md:mb-0">
               Assistant Plus delivers customer support, outreach, and operational coordination services that integrate seamlessly with your organization. Whether you need overflow coverage, dedicated support, or ongoing operational assistance, we help you scale with confidence.
             </p>
           </div>
@@ -416,7 +421,7 @@ export default function Services() {
           </div>
         </div>
 
-        {/* Down arrow — higher on mobile */}
+        {/* Down arrow */}
         <div className="absolute bottom-6 md:bottom-12 left-1/2 -translate-x-1/2 animate-bounce cursor-pointer z-10"
              onClick={() => document.getElementById('services-list')?.scrollIntoView({ behavior: 'smooth' })}
         >
