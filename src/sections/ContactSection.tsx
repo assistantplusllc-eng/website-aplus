@@ -3,6 +3,8 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Send, Mail, Phone, Clock, Download, ChevronDown } from 'lucide-react';
 
+const FORM_WORKER_URL = 'https://assistant-plus-forms.assistant-plus-llc.workers.dev';
+
 gsap.registerPlugin(ScrollTrigger);
 
 export default function ContactSection() {
@@ -21,6 +23,8 @@ export default function ContactSection() {
     service: '',
     message: ''
   });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useLayoutEffect(() => {
     const section = sectionRef.current;
@@ -109,23 +113,31 @@ export default function ContactSection() {
     return () => ctx.revert();
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
 
     const form = e.target as HTMLFormElement;
+    const data = new FormData(form);
 
-    fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams(new FormData(form) as any).toString()
-    })
-      .then(() => {
+    try {
+      const response = await fetch(FORM_WORKER_URL, {
+        method: 'POST',
+        body: data,
+      });
+
+      if (response.ok) {
         alert('Thank you! We will respond within one business day.');
         setFormData({ name: '', email: '', phone: '', organization: '', service: '', message: '' });
-      })
-      .catch((error) => {
+        form.reset();
+      } else {
         alert('Something went wrong. Please try again or call us at (888) 652-6315.');
-      });
+      }
+    } catch (error) {
+      alert('Something went wrong. Please try again or call us at (888) 652-6315.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const serviceOptions = [
@@ -150,10 +162,6 @@ export default function ContactSection() {
             </p>
             <form 
               ref={formRef} 
-              name="contact" 
-              method="POST" 
-              data-netlify="true" 
-              data-netlify-honeypot="bot-field"
               onSubmit={handleSubmit}
               className="space-y-4"
             >
@@ -237,9 +245,13 @@ export default function ContactSection() {
                   required
                 />
               </div>
-              <button type="submit" className="btn-primary w-full justify-center">
+              <button 
+                type="submit" 
+                disabled={isSubmitting}
+                className="btn-primary w-full justify-center disabled:opacity-50 disabled:cursor-not-allowed"
+              >
                 <Send size={18} />
-                Submit Inquiry
+                {isSubmitting ? 'Sending...' : 'Submit Inquiry'}
               </button>
             </form>
           </div>
